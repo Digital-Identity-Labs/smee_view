@@ -1,9 +1,26 @@
-defmodule SmeeView.Displaynames do
+defmodule SmeeView.Networks do
 
-  import SmeeView.XML
-  import SweetXml, except: [sigil_x: 2, parse: 1]
 
-  alias SmeeView.Aspects.Logo
+  defmacro __using__(_params) do
+    quote do
+
+      import SmeeView.XML
+      import SweetXml, except: [sigil_x: 2, parse: 1]
+
+      alias Smee.Entity
+
+
+
+
+      defoverridable [sigil_x: 2, parse: 1]
+    end
+  end
+
+  #
+#  import SmeeView.XML
+#  import SweetXml, except: [sigil_x: 2, parse: 1]
+#
+#  alias SmeeView.Aspects.Logo
 #
 #  @idp_xmap [
 #    ~x"//md:IDPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,

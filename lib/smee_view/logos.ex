@@ -3,6 +3,7 @@ defmodule SmeeView.Logos do
   import SmeeView.XML
   import SweetXml, except: [sigil_x: 2, parse: 1]
 
+  alias Smee.Entity
   alias SmeeView.Aspects.Logo
 
   @idp_xmap [
@@ -21,29 +22,10 @@ defmodule SmeeView.Logos do
     lang: ~x"@xml:lang"s
   ]
 
-  def view(entity, role \\ :all, options \\ [])
-  def view(entity, :idp, options) do
+  def view(entity, role \\ :all, options \\ []) do
     entity
     |> Entity.xdoc()
-    |> SweetXml.xmap([idp: @idp_xmap])
-    |> Map.values()
-    |> List.flatten()
-    |> Enum.map(fn data -> Logo.new(%{data | role: :idp}) end)
-  end
-
-  def view(entity, :sp, options) do
-    entity
-    |> Entity.xdoc()
-    |> SweetXml.xmap([sp: @sp_xmap])
-    |> Map.values()
-    |> List.flatten()
-    |> Enum.map(fn data -> Logo.new(%{data | role: :sp}) end)
-  end
-
-  def view(entity, :all, options) do
-    entity
-    |> Entity.xdoc()
-    |> SweetXml.xmap([idp: @idp_xmap, sp: @sp_xmap])
+    |> SweetXml.xmap(mapper_for_role(role))
     |> Enum.map(
          fn {role, logos} ->
            Enum.map(logos, fn data -> Logo.new(Map.merge(data, %{role: role})) end)
@@ -54,6 +36,14 @@ defmodule SmeeView.Logos do
 
   #######################################################################################
 
-
+  defp mapper_for_role(role) do
+    case role do
+      :sp -> [sp: @sp_xmap]
+      :idp -> [idp: @idp_xmap]
+      :all -> [idp: @idp_xmap, sp: @sp_xmap]
+      _ -> raise "Unknown role!"
+    end
+  end
+  
 
 end

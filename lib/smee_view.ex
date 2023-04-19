@@ -3,9 +3,15 @@ defmodule SmeeView do
   Documentation for `SmeeView`.
   """
 
-  def logos(entity, options \\ []) do
+  alias SmeeView.Logos
+  alias SmeeView.Keys
 
+  def logos(entity, options \\ []) do
+    Logos.view(entity, options)
   end
 
+  def keys(entity, options \\ []) do
+    Keys.view(entity, options)
+  end
 
 end

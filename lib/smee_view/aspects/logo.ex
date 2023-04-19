@@ -8,7 +8,7 @@ defmodule SmeeView.Aspects.Logo do
     role: nil,
     height: 0,
     width: 0,
-    role: nil,
+    role: :sp,
     lang: "en",
     format: nil,
     shape: nil,
