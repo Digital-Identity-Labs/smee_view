@@ -8,6 +8,7 @@ defmodule SmeeView do
   alias SmeeView.Contacts
   alias SmeeView.Descriptions
   alias SmeeView.Domains
+  alias SmeeView.Networks
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -33,6 +34,9 @@ defmodule SmeeView do
     Domains.view(entity, :all,  options)
   end
 
+  def networks(entity, options \\ []) do
+    Networks.view(entity, :all,  options)
+  end
 
 
 end

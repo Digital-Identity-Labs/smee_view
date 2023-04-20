@@ -1,6 +1,5 @@
 defmodule SmeeView.Domains do
 
-
   use SmeeView.View, aspect: SmeeView.Aspects.Domain, roles: false
 
   @entity_xmap [
@@ -13,9 +12,6 @@ defmodule SmeeView.Domains do
     @entity_xmap
   end
 
-
   #######################################################################################
-
-
 
 end
