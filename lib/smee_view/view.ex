@@ -29,25 +29,39 @@ defmodule SmeeView.View do
         unquote(params[:aspect]).new(Map.merge(data, %{role: role}))
       end
 
-      defp xmapper_for_role(role) do
-        case role do
-          :sp -> [sp: sp_xmap]
-          :idp -> [idp: idp_xmap]
-          :all -> [idp: idp_xmap, sp: sp_xmap]
-          _ -> raise "Unknown role!"
+      unquote do
+
+        if params[:roles] do
+          quote do
+            defp xmapper_for_role(role) do
+              case role do
+                :sp -> [sp: sp_xmap]
+                :idp -> [idp: idp_xmap]
+                :all -> [idp: idp_xmap, sp: sp_xmap]
+                _ -> raise "Unknown role!"
+              end
+            end
+          end
+        else
+          quote do
+            defp xmapper_for_role(_role) do
+              [all: entity_xmap]
+            end
+          end
         end
+
       end
 
       defp idp_xmap do
-        nil
+        raise "Undefined idp_xmap()! in #{__MODULE__}"
       end
 
       defp sp_xmap do
-        nil
+        raise "Undefined sp_xmap()! in #{__MODULE__}"
       end
 
       defp entity_xmap do
-        nil
+        raise "Undefined entity_xmap()! in #{__MODULE__}"
       end
 
       defoverridable [view: 3, to_aspect: 2, idp_xmap: 0, sp_xmap: 0, entity_xmap: 0]
