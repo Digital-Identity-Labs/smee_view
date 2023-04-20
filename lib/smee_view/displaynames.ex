@@ -1,59 +1,25 @@
 defmodule SmeeView.Displaynames do
 
-  import SmeeView.XML
-  import SweetXml, except: [sigil_x: 2, parse: 1]
+  use SmeeView.View, aspect: SmeeView.Aspects.Displayname, roles: true
 
-  alias SmeeView.Aspects.Logo
-#
-#  @idp_xmap [
-#    ~x"//md:IDPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,
-#    url: ~x"./text()"s,
-#    height: ~x"string(/*/@height)"i,
-#    width: ~x"string(/*/@width)"i,
-#    lang: ~x"@xml:lang"s
-#  ]
-#
-#  @sp_xmap [
-#    ~x"//md:SPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,
-#    url: ~x"./text()"s,
-#    height: ~x"string(/*/@height)"i,
-#    width: ~x"string(/*/@width)"i,
-#    lang: ~x"@xml:lang"s
-#  ]
-#
-#  def view(entity, role \\ :all, options \\ [])
-#  def view(entity, :idp, options) do
-#    entity
-#    |> Entity.xdoc()
-#    |> SweetXml.xmap([idp: @idp_xmap])
-#    |> Map.values()
-#    |> List.flatten()
-#    |> Enum.map(fn data -> Logo.new(%{data | role: :idp}) end)
-#  end
-#
-#  def view(entity, :sp, options) do
-#    entity
-#    |> Entity.xdoc()
-#    |> SweetXml.xmap([sp: @sp_xmap])
-#    |> Map.values()
-#    |> List.flatten()
-#    |> Enum.map(fn data -> Logo.new(%{data | role: :sp}) end)
-#  end
-#
-#  def view(entity, :all, options) do
-#    entity
-#    |> Entity.xdoc()
-#    |> SweetXml.xmap([idp: @idp_xmap, sp: @sp_xmap])
-#    |> Enum.map(
-#         fn {role, logos} ->
-#           Enum.map(logos, fn data -> Logo.new(Map.merge(data, %{role: role})) end)
-#         end
-#       )
-#    |> List.flatten()
-#  end
+  @idp_xmap [
+    ~x"//md:IDPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:DisplayName"le,
+    lang: ~x"string(@xml:lang)"s,
+    text: ~x"./text()"s
+  ]
 
-  #######################################################################################
+  @sp_xmap [
+    ~x"//md:SPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:DisplayName"el,
+    lang: ~x"string(@xml:lang)"s,
+    text: ~x"./text()"s
+  ]
 
+  defp idp_xmap do
+    @idp_xmap
+  end
 
+  defp sp_xmap do
+    @sp_xmap
+  end
 
 end

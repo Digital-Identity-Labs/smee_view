@@ -12,6 +12,12 @@
           <mdui:Logo height="16" width="16">https://indiid.net/assets/images/logo-compact-tiny.png</mdui:Logo>
           <mdui:Logo height="60" width="80">https://indiid.net/assets/images/logo-compact-medium.png</mdui:Logo>
         </mdui:UIInfo>
+        <mdui:DiscoHints>
+          <mdui:IPHint>130.59.0.0/16</mdui:IPHint>
+          <mdui:IPHint>2001:620::0/96</mdui:IPHint>
+          <mdui:DomainHint>switch.ch</mdui:DomainHint>
+          <mdui:GeolocationHint>geo:47.37328,8.531126</mdui:GeolocationHint>
+        </mdui:DiscoHints>
       </Extensions>
       <KeyDescriptor>
         <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">

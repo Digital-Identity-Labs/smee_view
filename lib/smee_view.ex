@@ -6,17 +6,33 @@ defmodule SmeeView do
   alias SmeeView.Logos
   alias SmeeView.Keys
   alias SmeeView.Contacts
+  alias SmeeView.Descriptions
+  alias SmeeView.Domains
 
   def logos(entity, options \\ []) do
-    Logos.view(entity, options)
+    Logos.view(entity, :all, options)
   end
 
   def keys(entity, options \\ []) do
-    Keys.view(entity, options)
+    Keys.view(entity, :all,  options)
   end
 
   def contacts(entity, options \\ []) do
-    Contacts.view(entity, options)
+    Contacts.view(entity, :all, options)
   end
+
+  def displaynames(entity, options \\ []) do
+    Displaynames.view(entity, :all,  options)
+  end
+
+  def descriptions(entity, options \\ []) do
+    Descriptions.view(entity, :all,  options)
+  end
+
+  def domains(entity, options \\ []) do
+    Domains.view(entity, :all,  options)
+  end
+
+
 
 end
