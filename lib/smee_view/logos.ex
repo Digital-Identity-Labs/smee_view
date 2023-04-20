@@ -1,6 +1,6 @@
 defmodule SmeeView.Logos do
 
-  use SmeeView.View, aspect: SmeeView.Aspects.Logo, roles: true
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Logo, roles: true
 
   @idp_xmap [
     ~x"//md:IDPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,

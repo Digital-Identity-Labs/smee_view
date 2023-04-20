@@ -1,6 +1,6 @@
 defmodule SmeeView.Descriptions do
 
-  use SmeeView.View, aspect: SmeeView.Aspects.Description, roles: true
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Description, roles: true
 
   @idp_xmap [
     ~x"//md:IDPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Description"le,

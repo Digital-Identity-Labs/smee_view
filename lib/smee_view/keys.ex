@@ -1,6 +1,6 @@
 defmodule SmeeView.Keys do
 
-  use SmeeView.View, aspect: SmeeView.Aspects.Key, roles: true
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Key, roles: true
 
   @idp_xmap [
     ~x"//md:IDPSSODescriptor/md:KeyDescriptor"el,

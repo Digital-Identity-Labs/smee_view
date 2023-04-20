@@ -1,4 +1,4 @@
-defmodule SmeeView.View do
+defmodule SmeeView.ViewCommon do
 
   defmacro __using__(params) do
 

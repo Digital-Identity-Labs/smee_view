@@ -1,6 +1,6 @@
 defmodule SmeeView.Networks do
 
-  use SmeeView.View, aspect: SmeeView.Aspects.Network, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Network, roles: false
 
   @entity_xmap [
     ~x"//mdui:DiscoHints/mdui:IPHint"le,

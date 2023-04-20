@@ -1,6 +1,6 @@
 defmodule SmeeView.Domains do
 
-  use SmeeView.View, aspect: SmeeView.Aspects.Domain, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Domain, roles: false
 
   @entity_xmap [
     ~x"//mdui:DiscoHints/mdui:DomainHint"le,

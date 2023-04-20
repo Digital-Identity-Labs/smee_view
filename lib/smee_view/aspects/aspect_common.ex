@@ -1,4 +1,4 @@
-defmodule SmeeView.Aspects.Aspect do
+defmodule SmeeView.Aspects.AspectCommon do
 
   alias Smee.Entity
 

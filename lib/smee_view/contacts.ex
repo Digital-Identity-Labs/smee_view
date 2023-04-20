@@ -1,6 +1,6 @@
 defmodule SmeeView.Contacts do
 
-  use SmeeView.View, aspect: SmeeView.Aspects.Contact, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Contact, roles: false
 
   @entity_xmap [
     ~x"//md:ContactPerson"l,
