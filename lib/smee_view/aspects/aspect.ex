@@ -15,7 +15,7 @@ defmodule SmeeView.Aspects.Aspect do
 
       #######################################################################################
 
-      defoverridable [normalize: 1]
+     # defoverridable [normalize: 1]
     end
   end
 

@@ -11,20 +11,14 @@ defmodule SmeeView.Aspects.Contact do
     type: nil,
     givenname: nil,
     surname: nil,
-    company: nil
+    company: nil,
+    role: nil,
   ]
 
   def new(data, options \\ []) do
     struct(%Contact{}, data)
-    |> struct(
-         email: nil,
-         phone: nil,
-         type: nil,
-         givenname: nil,
-         surname: nil,
-         company: nil
-       )
   end
+
 
 
   #######################################################################################

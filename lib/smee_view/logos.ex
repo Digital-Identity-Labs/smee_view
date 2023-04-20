@@ -1,10 +1,6 @@
 defmodule SmeeView.Logos do
 
-  import SmeeView.XML
-  import SweetXml, except: [sigil_x: 2, parse: 1]
-
-  alias Smee.Entity
-  alias SmeeView.Aspects.Logo
+  use SmeeView.View, aspect: SmeeView.Aspects.Logo, roles: true
 
   @idp_xmap [
     ~x"//md:IDPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,
@@ -22,28 +18,12 @@ defmodule SmeeView.Logos do
     lang: ~x"@xml:lang"s
   ]
 
-  def view(entity, role \\ :all, options \\ []) do
-    entity
-    |> Entity.xdoc()
-    |> SweetXml.xmap(mapper_for_role(role))
-    |> Enum.map(
-         fn {role, logos} ->
-           Enum.map(logos, fn data -> Logo.new(Map.merge(data, %{role: role})) end)
-         end
-       )
-    |> List.flatten()
+  defp idp_xmap do
+    @idp_xmap
   end
 
-  #######################################################################################
-
-  defp mapper_for_role(role) do
-    case role do
-      :sp -> [sp: @sp_xmap]
-      :idp -> [idp: @idp_xmap]
-      :all -> [idp: @idp_xmap, sp: @sp_xmap]
-      _ -> raise "Unknown role!"
-    end
+  defp sp_xmap do
+    @sp_xmap
   end
-  
 
 end

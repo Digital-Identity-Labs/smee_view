@@ -1,56 +1,32 @@
 defmodule SmeeView.Contacts do
-#
-#  import SmeeView.XML
-#  import SweetXml, except: [sigil_x: 2, parse: 1]
-#
-#  alias SmeeView.Aspects.Logo
-#
-#  @idp_xmap [
-#    ~x"//md:IDPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,
-#    url: ~x"./text()"s,
-#    height: ~x"string(/*/@height)"i,
-#    width: ~x"string(/*/@width)"i,
-#    lang: ~x"@xml:lang"s
-#  ]
-#
-#  @sp_xmap [
-#    ~x"//md:SPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,
-#    url: ~x"./text()"s,
-#    height: ~x"string(/*/@height)"i,
-#    width: ~x"string(/*/@width)"i,
-#    lang: ~x"@xml:lang"s
-#  ]
-#
-#  def view(entity, role \\ :all, options \\ [])
-#  def view(entity, :idp, options) do
-#    entity
-#    |> Entity.xdoc()
-#    |> SweetXml.xmap([idp: @idp_xmap])
-#    |> Map.values()
-#    |> List.flatten()
-#    |> Enum.map(fn data -> Logo.new(%{data | role: :idp}) end)
-#  end
-#
-#  def view(entity, :sp, options) do
-#    entity
-#    |> Entity.xdoc()
-#    |> SweetXml.xmap([sp: @sp_xmap])
-#    |> Map.values()
-#    |> List.flatten()
-#    |> Enum.map(fn data -> Logo.new(%{data | role: :sp}) end)
-#  end
-#
-#  def view(entity, :all, options) do
-#    entity
-#    |> Entity.xdoc()
-#    |> SweetXml.xmap([idp: @idp_xmap, sp: @sp_xmap])
-#    |> Enum.map(
-#         fn {role, logos} ->
-#           Enum.map(logos, fn data -> Logo.new(Map.merge(data, %{role: role})) end)
-#         end
-#       )
-#    |> List.flatten()
-#  end
+
+  use SmeeView.View, aspect: SmeeView.Aspects.Contact, roles: false
+
+  @idp_xmap [~x"//md:ContactPerson"l,
+    type: ~x"string(@contactType)"s,
+    givenname: ~x"string(//md:GivenName[1])"s,
+    surname:    ~x"string(//md:SurName[1])"s,
+    email: ~x"string(//md:EmailAddress[1])"s,
+    company: ~x"string(//md:Company[1])"s,
+    phone: ~x"string(//md:TelephoneNumber[1])"s
+  ]
+
+  @sp_xmap [~x"//md:ContactPerson"l,
+    type: ~x"string(@contactType)"s,
+    givenname: ~x"string(//md:GivenName[1])"s,
+    surname:    ~x"string(//md:SurName[1])"s,
+    email: ~x"string(//md:EmailAddress[1])"s,
+    company: ~x"string(//md:Company[1])"s,
+    phone: ~x"string(//md:TelephoneNumber[1])"s
+  ]
+
+  defp idp_xmap do
+    @idp_xmap
+  end
+
+  defp sp_xmap do
+    @idp_xmap
+  end
 
   #######################################################################################
 
