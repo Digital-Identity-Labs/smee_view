@@ -10,6 +10,7 @@ defmodule SmeeView do
   alias SmeeView.Domains
   alias SmeeView.Networks
   alias SmeeView.Geolocations
+  alias SmeeView.Keywords
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -41,6 +42,10 @@ defmodule SmeeView do
 
   def geolocations(entity, options \\ []) do
     Geolocations.view(entity, :all,  options)
+  end
+
+  def keywords(entity, options \\ []) do
+    Keywords.view(entity, :all,  options)
   end
 
 end
