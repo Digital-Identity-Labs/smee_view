@@ -8,42 +8,25 @@ defmodule SmeeView.Aspects.Logo do
     role: nil,
     height: 0,
     width: 0,
-    role: :sp,
     lang: "en",
-    format: nil,
-    shape: nil,
-    size: nil,
-    pixels: 0,
-    tls: false,
-    data: false
   ]
 
   def new(data, options \\ []) do
     struct(%Logo{}, data)
-    |> struct(
-         lang: calc_lang(data),
-         shape: calc_shape(data),
-         format: calc_format(data),
-         size: calc_size(data),
-         pixels: calc_pixels(data),
-         tls: calc_tls(data),
-         data: calc_data(data)
-       )
   end
 
-  #######################################################################################
 
-  defp calc_lang(data) do
-    case data[:lang] do
+  def lang(logo) do
+    case logo.lang do
       nil -> default_lang()
       "" -> default_lang()
       otherwise -> otherwise
     end
   end
 
-  defp calc_shape(details) do
-    height = details[:height]
-    width = details[:width]
+  def shape(logo) do
+    height = logo.height
+    width = logo.width
     cond do
       Enum.member?(75..85, width) && Enum.member?(55..65, height) -> "default"
       width == height -> :square
@@ -52,8 +35,8 @@ defmodule SmeeView.Aspects.Logo do
     end
   end
 
-  defp calc_size(details) do
-    pixels = calc_pixels(details)
+  def size(logo) do
+    pixels = pixels(logo)
     cond do
       pixels <= (16 * 16) -> :tiny
       pixels <= (32 * 32) -> :small
@@ -66,20 +49,20 @@ defmodule SmeeView.Aspects.Logo do
     end
   end
 
-  defp calc_pixels(details) do
-    details[:width] * details[:height]
+  def pixels(logo) do
+    logo.width * logo.height
   end
 
-  defp calc_tls(details) do
-    String.starts_with?(String.downcase(details[:url]), "https:")
+  def tls?(logo) do
+    String.starts_with?(String.downcase(logo.url), "https:")
   end
 
-  defp calc_data(details) do
-    String.starts_with?(String.downcase(details[:url]), "data:")
+  def data?(logo) do
+    String.starts_with?(String.downcase(logo.url), "data:")
   end
 
-  defp calc_format(details) do
-    case String.downcase(Path.extname(details[:url])) do
+  def format(logo) do
+    case String.downcase(Path.extname(logo.url)) do
       ".jpg" -> :jpeg
       ".jpeg" -> :jpeg
       ".png" -> :png
@@ -88,6 +71,8 @@ defmodule SmeeView.Aspects.Logo do
       _ -> :uknown
     end
   end
+
+  #######################################################################################
 
   defp default_lang() do
     "en"
