@@ -1,4 +1,4 @@
-defmodule SmeeView.Entities do
+defmodule SmeeView.Entity do
 #
 #  import SmeeView.XML
 #  import SweetXml, except: [sigil_x: 2, parse: 1]

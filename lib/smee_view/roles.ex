@@ -1,4 +1,4 @@
-defmodule SmeeView.Organization do
+defmodule SmeeView.Roles do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Organization, roles: false, one: true
 
