@@ -14,6 +14,9 @@ defmodule SmeeView do
   alias SmeeView.PublicationPath
   alias SmeeView.Registration
   alias SmeeView.RegistrationPolicies
+  alias SmeeView.Scopes
+  alias SmeeView.NameIDFormats
+  alias SmeeView.IdP
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -61,6 +64,18 @@ defmodule SmeeView do
 
   def registration_policies(entity, options \\ []) do
     RegistrationPolicies.view(entity, :all, options)
+  end
+
+  def scopes(entity, options \\ []) do
+    Scopes.view(entity, :all, options)
+  end
+
+  def nameid_formats(entity, options \\ []) do
+    NameIDFormats.view(entity, :all, options)
+  end
+
+  def idp(entity, options \\ []) do
+    IdP.view(entity, :all, options)
   end
 
 end

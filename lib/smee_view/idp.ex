@@ -1,10 +1,10 @@
 defmodule SmeeView.IdP do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Organization, roles: false, one: true
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.IdP, roles: false, one: true
 
   @entity_xmap [
-    ~x"//md:Organization"l,
-    exists: ~x"/"
+    ~x"//md:IDPSSODescriptor"l,
+    protocols: ~x"string(@protocolSupportEnumeration)"s,
   ]
 
   defp entity_xmap do
@@ -15,9 +15,16 @@ defmodule SmeeView.IdP do
     Map.merge(
       aspect_data,
       %{
-        displaynames: SmeeView.OrganizationDisplaynames.view(entity, role),
-        names: SmeeView.OrganizationNames.view(entity, role),
-        urls: SmeeView.OrganizationURLs.view(entity, role)
+        scopes: SmeeView.Scopes.view(entity, :idp),
+        logos: SmeeView.Logos.view(entity, :idp),
+        displaynames: SmeeView.Displaynames.view(entity, :idp),
+        networks: SmeeView.Networks.view(entity, :idp),
+        geolocations: SmeeView.Geolocations.view(entity, :idp),
+        domains: SmeeView.Domains.view(entity, :idp),
+        keywords: SmeeView.Keywords.view(entity, :idp),
+        keys: SmeeView.Keys.view(entity, :idp),
+        nameid_formats: SmeeView.NameIDFormats.view(entity, :idp),
+        services: []
       }
     )
   end

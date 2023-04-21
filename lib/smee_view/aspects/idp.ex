@@ -1,38 +1,42 @@
 defmodule SmeeView.Aspects.IdP do
-
   alias __MODULE__
   alias Smee.Entity
 
   defstruct [
-    url: nil,
-    role: nil,
-    height: 0,
-    width: 0,
-    role: nil,
-    lang: "en",
-    format: nil,
-    shape: nil,
-    size: nil,
-    pixels: 0,
-    tls: false,
-    data: false
+    protocols: [],
+    scopes: [],
+    logos: [],
+    displaynames: [],
+    networks: [],
+    geolocations: [],
+    domains: [],
+    keywords: [],
+    keys: [],
+    nameid_formats: [],
+    services: []
   ]
 
   def new(data, options \\ []) do
+    data = Map.merge(data, %{protocols: parse_protocols(data[:protocols])})
     struct(%IdP{}, data)
-    |> struct(
-#         lang: calc_lang(data),
-#         shape: calc_shape(data),
-#         format: calc_format(data),
-#         size: calc_size(data),
-#         pixels: calc_pixels(data),
-#         tls: calc_tls(data),
-#         data: calc_data(data)
-       )
   end
 
-
   #######################################################################################
+
+
+  ## Move to Utils?
+  defp parse_protocols(words) when is_nil(words) do
+    []
+  end
+
+  defp parse_protocols(words) when is_list(words) do
+    words
+  end
+
+  defp parse_protocols(words) when is_binary(words) do
+    words
+    |> String.split(" ")
+  end
 
 
 end
