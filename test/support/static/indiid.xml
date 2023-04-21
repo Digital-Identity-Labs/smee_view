@@ -3,6 +3,10 @@
       <mdrpi:RegistrationInfo xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" registrationAuthority="http://ukfederation.org.uk" registrationInstant="2014-11-07T16:35:40Z">
         <mdrpi:RegistrationPolicy xml:lang="en">http://ukfederation.org.uk/doc/mdrps-20130902</mdrpi:RegistrationPolicy>
       </mdrpi:RegistrationInfo>
+
+        <mdrpi:PublicationPath>
+          <mdrpi:Publication publisher="urn:mace:switch.ch:SWITCHaai" publicationId="k3klsoi"/>
+        </mdrpi:PublicationPath>
     </Extensions>
     <IDPSSODescriptor protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
       <Extensions>
