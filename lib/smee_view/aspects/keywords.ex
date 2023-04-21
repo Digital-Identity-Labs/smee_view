@@ -15,6 +15,7 @@ defmodule SmeeView.Aspects.Keywords do
     struct(%Keywords{lang: data[:lang], words: words})
   end
 
+  ## Move to Utils?
   defp parse_keywords(words) when is_nil(words) do
     []
   end
