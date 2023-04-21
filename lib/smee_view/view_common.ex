@@ -24,6 +24,7 @@ defmodule SmeeView.ViewCommon do
                         aspects,
                         fn aspect_data ->
                           cascade_views(entity, aspect_data, role)
+                          |> trim_aspect_data()
                           |> to_aspect(role)
                         end
                       )
@@ -48,6 +49,12 @@ defmodule SmeeView.ViewCommon do
 
       defp cascade_views(entity, data, role) do
         data
+      end
+
+      defp trim_aspect_data(data) do
+        data
+        |> Enum.reject(fn {k, v} -> (v == "" || is_nil(v)) end)
+        |> Map.new()
       end
 
       defp to_aspect(data, role) do

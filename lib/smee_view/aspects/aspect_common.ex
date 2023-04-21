@@ -4,6 +4,18 @@ defmodule SmeeView.Aspects.AspectCommon do
 
   defmacro __using__(_params) do
     quote do
+      # idp?
+      # sp?
+      # language?
+      # to_string
+      # composite?
+      # singleton?
+      # best
+
+
+
+
+      #######################################################################################
 
       defp normalize(value) when is_nil(value) or value == "" do
         nil
@@ -12,8 +24,6 @@ defmodule SmeeView.Aspects.AspectCommon do
       defp normalize(value) do
         "#{value}"
       end
-
-      #######################################################################################
 
      # defoverridable [normalize: 1]
     end
