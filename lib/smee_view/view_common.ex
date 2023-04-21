@@ -16,20 +16,30 @@ defmodule SmeeView.ViewCommon do
         single = unquote(params[:one])
 
         list = entity
-        |> Entity.xdoc()
-        |> SweetXml.xmap(xmapper_for_role(role))
-        |> Enum.map(
-             fn {role, logos} ->
-               Enum.map(logos, fn data -> to_aspect(data, role) end)
-             end
-           )
-        |> List.flatten()
+               |> Entity.xdoc()
+               |> SweetXml.xmap(xmapper_for_role(role))
+               |> Enum.map(
+                    fn {role, logos} ->
+                      Enum.map(
+                        logos,
+                        fn data ->
+                          cascade_views(entity, data, role)
+                          |> to_aspect(role)
+                        end
+                      )
+                    end
+                  )
+               |> List.flatten()
 
         if single, do: List.first(list), else: list
 
       end
 
       #######################################################################################
+
+      defp cascade_views(entity, data, role) do
+        data
+      end
 
       defp to_aspect(data, role) do
         unquote(params[:aspect]).new(Map.merge(data, %{role: role}))
@@ -70,7 +80,7 @@ defmodule SmeeView.ViewCommon do
         raise "Undefined entity_xmap()! in #{__MODULE__}"
       end
 
-      defoverridable [view: 3, to_aspect: 2, idp_xmap: 0, sp_xmap: 0, entity_xmap: 0]
+      defoverridable [view: 3, to_aspect: 2, idp_xmap: 0, sp_xmap: 0, entity_xmap: 0, cascade_views: 3]
 
     end
   end

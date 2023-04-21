@@ -5,14 +5,13 @@ defmodule SmeeView.Aspects.Registration do
 
   defstruct [
     authority: nil,
-    instant: nil
+    instant: nil,
+    policies: []
   ]
 
   def new(data, options \\ []) do
     struct(%Registration{}, data)
   end
-
-
 
   #######################################################################################
 

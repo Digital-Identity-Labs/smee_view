@@ -13,6 +13,7 @@ defmodule SmeeView do
   alias SmeeView.Keywords
   alias SmeeView.PublicationPath
   alias SmeeView.Registration
+  alias SmeeView.RegistrationPolicies
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -56,6 +57,10 @@ defmodule SmeeView do
 
   def registration(entity, options \\ []) do
     Registration.view(entity, :all, options)
+  end
+
+  def registration_policies(entity, options \\ []) do
+    RegistrationPolicies.view(entity, :all, options)
   end
 
 end

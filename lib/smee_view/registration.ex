@@ -12,5 +12,10 @@ defmodule SmeeView.Registration do
     @entity_xmap
   end
 
+  defp cascade_views(entity, data, role) do
+    Map.merge(data, %{
+      policies: SmeeView.RegistrationPolicies.view(entity, :all)
+    })
+  end
 
 end
