@@ -11,13 +11,15 @@ defmodule SmeeView do
   alias SmeeView.Networks
   alias SmeeView.Geolocations
   alias SmeeView.Keywords
+  alias SmeeView.PublicationPath
+  alias SmeeView.Registration
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
   end
 
   def keys(entity, options \\ []) do
-    Keys.view(entity, :all,  options)
+    Keys.view(entity, :all, options)
   end
 
   def contacts(entity, options \\ []) do
@@ -25,27 +27,35 @@ defmodule SmeeView do
   end
 
   def displaynames(entity, options \\ []) do
-    Displaynames.view(entity, :all,  options)
+    Displaynames.view(entity, :all, options)
   end
 
   def descriptions(entity, options \\ []) do
-    Descriptions.view(entity, :all,  options)
+    Descriptions.view(entity, :all, options)
   end
 
   def domains(entity, options \\ []) do
-    Domains.view(entity, :all,  options)
+    Domains.view(entity, :all, options)
   end
 
   def networks(entity, options \\ []) do
-    Networks.view(entity, :all,  options)
+    Networks.view(entity, :all, options)
   end
 
   def geolocations(entity, options \\ []) do
-    Geolocations.view(entity, :all,  options)
+    Geolocations.view(entity, :all, options)
   end
 
   def keywords(entity, options \\ []) do
-    Keywords.view(entity, :all,  options)
+    Keywords.view(entity, :all, options)
+  end
+
+  def publication_path(entity, options \\ []) do
+    Publications.view(entity, :all, options)
+  end
+
+  def registration(entity, options \\ []) do
+    Registration.view(entity, :all, options)
   end
 
 end

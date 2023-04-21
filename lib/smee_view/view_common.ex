@@ -2,7 +2,7 @@ defmodule SmeeView.ViewCommon do
 
   defmacro __using__(params) do
 
-    params = Keyword.merge([roles: false, aspect: SmeeView.Aspects.Contact], params)
+    params = Keyword.merge([roles: false, aspect: SmeeView.Aspects.Contact, one: false], params)
 
     quote do
 
@@ -12,7 +12,10 @@ defmodule SmeeView.ViewCommon do
       alias Smee.Entity
 
       def view(entity, role \\ :all, options \\ []) do
-        entity
+
+        single = unquote(params[:one])
+
+        list = entity
         |> Entity.xdoc()
         |> SweetXml.xmap(xmapper_for_role(role))
         |> Enum.map(
@@ -21,6 +24,9 @@ defmodule SmeeView.ViewCommon do
              end
            )
         |> List.flatten()
+
+        if single, do: List.first(list), else: list
+
       end
 
       #######################################################################################
