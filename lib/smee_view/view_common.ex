@@ -17,13 +17,13 @@ defmodule SmeeView.ViewCommon do
 
         list = entity
                |> Entity.xdoc()
-               |> SweetXml.xmap(xmapper_for_role(role))
+               |> extract_data_from_xml(xmapper_for_role(role))
                |> Enum.map(
-                    fn {role, logos} ->
+                    fn {role, aspects} ->
                       Enum.map(
-                        logos,
-                        fn data ->
-                          cascade_views(entity, data, role)
+                        aspects,
+                        fn aspect_data ->
+                          cascade_views(entity, aspect_data, role)
                           |> to_aspect(role)
                         end
                       )
@@ -36,6 +36,15 @@ defmodule SmeeView.ViewCommon do
       end
 
       #######################################################################################
+
+      ## Move to Utils?
+      defp extract_data_from_xml(xdoc, xmap) do
+        if Enum.all?(Keyword.values(xmap), fn v -> is_nil(v) end) do
+          [all: []]
+        else
+          SweetXml.xmap(xdoc, xmap)
+        end
+      end
 
       defp cascade_views(entity, data, role) do
         data
