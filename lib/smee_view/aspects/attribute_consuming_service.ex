@@ -5,7 +5,10 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
 
   defstruct [
     default: false,
-    index: nil
+    index: nil,
+    requested_attributes: [],
+    service_descriptions: [],
+    service_names: []
   ]
 
   def new(data, options \\ []) do

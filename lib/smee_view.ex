@@ -27,6 +27,9 @@ defmodule SmeeView do
   alias SmeeView.NameidMappingServices
   alias SmeeView.SingleLogoutServices
   alias SmeeView.SingleSignonServices
+  alias SmeeView.RequestedAttributes
+  alias SmeeView.ServiceDescriptions
+  alias SmeeView.ServiceNames
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -141,6 +144,18 @@ defmodule SmeeView do
       SingleSignonServices.view(entity, :all, options)
     ]
     |> List.flatten()
+  end
+
+  def requested_attributes(entity, options \\ []) do
+    RequestedAttributes.view(entity, :all, options)
+  end
+
+  def service_descriptions(entity, options \\ []) do
+    ServiceDescriptions.view(entity, :all, options)
+  end
+
+  def service_names(entity, options \\ []) do
+    ServiceNames.view(entity, :all, options)
   end
 
 end
