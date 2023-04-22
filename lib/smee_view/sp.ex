@@ -22,6 +22,8 @@ defmodule SmeeView.SP do
         keywords: SmeeView.Keywords.view(entity, :sp),
         keys: SmeeView.Keys.view(entity, :sp),
         services: SmeeView.services(entity, :sp),
+        request_initiators: SmeeView.RequestInitiators.view(entity, :sp),
+        discovery_responses: SmeeView.DiscoveryResponses.view(entity, :sp),
       }
     )
   end

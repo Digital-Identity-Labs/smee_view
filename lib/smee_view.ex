@@ -30,6 +30,8 @@ defmodule SmeeView do
   alias SmeeView.RequestedAttributes
   alias SmeeView.ServiceDescriptions
   alias SmeeView.ServiceNames
+  alias SmeeView.RequestInitiators
+  alias SmeeView.DiscoveryResponses
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -147,15 +149,23 @@ defmodule SmeeView do
   end
 
   def requested_attributes(entity, options \\ []) do
-    RequestedAttributes.view(entity, :all, options)
+    RequestedAttributes.view(entity, :sp, options)
   end
 
   def service_descriptions(entity, options \\ []) do
-    ServiceDescriptions.view(entity, :all, options)
+    ServiceDescriptions.view(entity, :sp, options)
   end
 
   def service_names(entity, options \\ []) do
-    ServiceNames.view(entity, :all, options)
+    ServiceNames.view(entity, :sp, options)
+  end
+
+  def request_initiators(entity, options \\ []) do
+    RequestInitiators.view(entity, :sp, options)
+  end
+
+  def discovery_responses(entity, options \\ []) do
+    DiscoveryResponses.view(entity, :sp, options)
   end
 
 end
