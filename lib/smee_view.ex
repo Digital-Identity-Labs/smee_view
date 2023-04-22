@@ -17,6 +17,7 @@ defmodule SmeeView do
   alias SmeeView.Scopes
   alias SmeeView.NameIDFormats
   alias SmeeView.IdP
+  alias SmeeView.SP
   alias SmeeView.ArtifactResolutionServices
   alias SmeeView.AssertionConsumerServices
   alias SmeeView.AssertionIDRequestServices
@@ -85,6 +86,10 @@ defmodule SmeeView do
 
   def idp(entity, options \\ []) do
     IdP.view(entity, :all, options)
+  end
+
+  def sp(entity, options \\ []) do
+    SP.view(entity, :all, options)
   end
 
   def artifact_resolution_services(entity, options \\ []) do

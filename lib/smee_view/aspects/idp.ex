@@ -4,6 +4,7 @@ defmodule SmeeView.Aspects.IdP do
 
   defstruct [
     protocols: [],
+    want_authn_requests_signed: false,
     scopes: [],
     logos: [],
     displaynames: [],
@@ -17,7 +18,13 @@ defmodule SmeeView.Aspects.IdP do
   ]
 
   def new(data, options \\ []) do
-    data = Map.merge(data, %{protocols: parse_protocols(data[:protocols])})
+    data = Map.merge(
+      data,
+      %{
+        protocols: parse_protocols(data[:protocols]),
+        want_authn_requests_signed: parse_boolean(data[:want_authn_requests_signed])
+      }
+    )
     struct(%IdP{}, data)
   end
 
@@ -38,5 +45,14 @@ defmodule SmeeView.Aspects.IdP do
     |> String.split(" ")
   end
 
+  defp parse_boolean(value) do
+    case value do
+      "TRUE" -> true
+      "true" -> true
+      "1" -> true
+      1 -> true
+      _ -> false
+    end
+  end
 
 end

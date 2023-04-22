@@ -5,6 +5,7 @@ defmodule SmeeView.IdP do
   @entity_xmap [
     ~x"//md:IDPSSODescriptor"l,
     protocols: ~x"string(@protocolSupportEnumeration)"s,
+    want_authn_requests_signed: ~x"string(@WantAuthnRequestsSigned)"s,
   ]
 
   defp entity_xmap do
@@ -24,7 +25,7 @@ defmodule SmeeView.IdP do
         keywords: SmeeView.Keywords.view(entity, :idp),
         keys: SmeeView.Keys.view(entity, :idp),
         nameid_formats: SmeeView.NameIDFormats.view(entity, :idp),
-        services: []
+        services:  SmeeView.services(entity, :idp),
       }
     )
   end

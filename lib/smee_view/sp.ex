@@ -1,10 +1,12 @@
 defmodule SmeeView.SP do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Organization, roles: false, one: true
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.SP, roles: false, one: true
 
   @entity_xmap [
-    ~x"//md:Organization"l,
-    exists: ~x"/"
+    ~x"//md:SPSSODescriptor"l,
+    protocols: ~x"string(@protocolSupportEnumeration)"s,
+    authn_requests_signed: ~x"string(@AuthnRequestsSigned)"s,
+    want_assertions_signed: ~x"string(@WantAssertionsSigned)"s,
   ]
 
   defp entity_xmap do
@@ -15,9 +17,11 @@ defmodule SmeeView.SP do
     Map.merge(
       aspect_data,
       %{
-        displaynames: SmeeView.OrganizationDisplaynames.view(entity, role),
-        names: SmeeView.OrganizationNames.view(entity, role),
-        urls: SmeeView.OrganizationURLs.view(entity, role)
+        logos: SmeeView.Logos.view(entity, :sp),
+        displaynames: SmeeView.Displaynames.view(entity, :sp),
+        keywords: SmeeView.Keywords.view(entity, :sp),
+        keys: SmeeView.Keys.view(entity, :sp),
+        services:  SmeeView.services(entity, :sp),
       }
     )
   end
