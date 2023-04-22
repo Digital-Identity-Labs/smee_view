@@ -1,4 +1,4 @@
-defmodule SmeeView.Aspects.SingleLogoutServices do
+defmodule SmeeView.SingleLogoutServices do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.SingleLogoutService, roles: false
 

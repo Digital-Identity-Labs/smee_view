@@ -1,4 +1,4 @@
-defmodule SmeeView.Aspects.AttributeConsumingServices do
+defmodule SmeeView.AttributeConsumingServices do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AssertionConsumerService, roles: false
 

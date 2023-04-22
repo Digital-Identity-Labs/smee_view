@@ -1,4 +1,4 @@
-defmodule SmeeView.Aspects.SingleSignonServices do
+defmodule SmeeView.SingleSignonServices do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.SingleSignonService, roles: false
 

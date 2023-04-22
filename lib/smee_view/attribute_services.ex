@@ -1,4 +1,4 @@
-defmodule SmeeView.Aspects.AttributeServices do
+defmodule SmeeView.AttributeServices do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AttributeService, roles: false
 

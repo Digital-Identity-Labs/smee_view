@@ -1,4 +1,4 @@
-defmodule SmeeView.Aspects.ManageNameidServices do
+defmodule SmeeView.ManageNameidServices do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.ManageNameidService, roles: false
 

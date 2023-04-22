@@ -1,4 +1,4 @@
-defmodule SmeeView.Aspects.NameidMappingServices do
+defmodule SmeeView.NameidMappingServices do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.NameidMappingService, roles: false
 

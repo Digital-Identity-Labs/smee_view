@@ -1,4 +1,4 @@
-defmodule SmeeView.Aspects.AssertionIDRequestServices do
+defmodule SmeeView.AssertionIDRequestServices do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AssertionIDRequestService, roles: false
 
