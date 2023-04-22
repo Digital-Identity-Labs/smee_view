@@ -18,6 +18,14 @@ defmodule SmeeView do
   alias SmeeView.NameIDFormats
   alias SmeeView.IdP
   alias SmeeView.ArtifactResolutionServices
+  alias SmeeView.AssertionConsumerServices
+  alias SmeeView.AssertionIDRequestServices
+  alias SmeeView.AttributeConsumingServices
+  alias SmeeView.AttributeServices
+  alias SmeeView.ManageNameidServices
+  alias SmeeView.NameidMappingServices
+  alias SmeeView.SingleLogoutServices
+  alias SmeeView.SingleSignonServices
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -79,8 +87,55 @@ defmodule SmeeView do
     IdP.view(entity, :all, options)
   end
 
-  def artifact_resolution_service(entity, options \\ []) do
+  def artifact_resolution_services(entity, options \\ []) do
     ArtifactResolutionServices.view(entity, :all, options)
+  end
+
+  def assertion_consumer_services(entity, options \\ []) do
+    AssertionConsumerServices.view(entity, :all, options)
+  end
+
+  def assertion_id_request_services(entity, options \\ []) do
+    AssertionIDRequestServices.view(entity, :all, options)
+  end
+
+  def attribute_consuming_services(entity, options \\ []) do
+    AttributeConsumingServices.view(entity, :all, options)
+  end
+
+  def attribute_services(entity, options \\ []) do
+    AttributeServices.view(entity, :all, options)
+  end
+
+  def manage_nameid_services(entity, options \\ []) do
+    ManageNameidServices.view(entity, :all, options)
+  end
+
+  def nameid_mapping_services(entity, options \\ []) do
+    NameidMappingServices.view(entity, :all, options)
+  end
+
+  def single_logout_services(entity, options \\ []) do
+    SingleLogoutServices.view(entity, :all, options)
+  end
+
+  def single_signon_services(entity, options \\ []) do
+    SingleSignonServices.view(entity, :all, options)
+  end
+
+  def services(entity, options \\ []) do
+    [
+      ArtifactResolutionServices.view(entity, :all, options),
+      AssertionConsumerServices.view(entity, :all, options),
+      AssertionIDRequestServices.view(entity, :all, options),
+      AttributeConsumingServices.view(entity, :all, options),
+      AttributeServices.view(entity, :all, options),
+      ManageNameidServices.view(entity, :all, options),
+      NameidMappingServices.view(entity, :all, options),
+      SingleLogoutServices.view(entity, :all, options),
+      SingleSignonServices.view(entity, :all, options)
+    ]
+    |> List.flatten()
   end
 
 end
