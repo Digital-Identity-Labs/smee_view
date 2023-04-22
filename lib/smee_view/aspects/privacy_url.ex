@@ -2,6 +2,7 @@ defmodule SmeeView.Aspects.PrivacyURL do
 
   alias __MODULE__
   alias SmeeView.Utils
+  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     lang: "en",

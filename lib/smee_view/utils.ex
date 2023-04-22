@@ -1,5 +1,21 @@
 defmodule SmeeView.Utils do
 
+  def normalize(value) when is_nil(value) or value == "" do
+    nil
+  end
+
+  def normalize(value) when is_atom(value) or is_binary(value) do
+    "#{value}"
+  end
+
+  def default_lang() do
+    "en"
+  end
+
+  def default_text() do
+    ""
+  end
+
   def parse_keywords(words) when is_nil(words) do
     []
   end

@@ -2,6 +2,7 @@ defmodule SmeeView.Aspects.Registration do
 
   alias __MODULE__
   alias SmeeView.Utils
+  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     authority: nil,

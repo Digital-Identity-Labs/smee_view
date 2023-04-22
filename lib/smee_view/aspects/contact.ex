@@ -2,6 +2,7 @@ defmodule SmeeView.Aspects.Contact do
 
   alias __MODULE__
   alias SmeeView.Utils
+  use SmeeView.Aspects.AspectCommon
 
   @types ~w(technical support administrative billing other)
 

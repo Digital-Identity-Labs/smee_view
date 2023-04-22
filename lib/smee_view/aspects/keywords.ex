@@ -3,6 +3,9 @@ defmodule SmeeView.Aspects.Keywords do
   alias __MODULE__
   alias SmeeView.Utils
 
+  import SmeeView.Aspects.AspectTools.Text, except: [text: 1]
+  use SmeeView.Aspects.AspectCommon
+
   defstruct [
     lang: "en",
     words: []
@@ -15,7 +18,14 @@ defmodule SmeeView.Aspects.Keywords do
     struct(%Keywords{lang: data[:lang], words: words})
   end
 
+  def text(aspect) do
+    aspect.words
+    |> Enum.join(" ")
+  end
 
+  def words(aspect) do
+    aspect.words || []
+  end
 
 end
 

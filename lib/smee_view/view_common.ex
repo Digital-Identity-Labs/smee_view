@@ -11,6 +11,7 @@ defmodule SmeeView.ViewCommon do
 
       alias Smee.Entity
 
+      @doc "Docs for view function - do they appear?"
       def view(entity, role \\ :all, options \\ []) do
 
         single = unquote(params[:one])

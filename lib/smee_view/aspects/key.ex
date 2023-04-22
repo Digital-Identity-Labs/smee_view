@@ -2,6 +2,7 @@ defmodule SmeeView.Aspects.Key do
 
   alias __MODULE__
   alias SmeeView.Utils
+  use SmeeView.Aspects.AspectCommon
 
   @pem_header "-----BEGIN CERTIFICATE-----"
   @pem_footer "-----END CERTIFICATE-----"

@@ -2,6 +2,7 @@ defmodule SmeeView.Aspects.IdP do
 
   alias __MODULE__
   alias SmeeView.Utils
+  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     protocols: [],
