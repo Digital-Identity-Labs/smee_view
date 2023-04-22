@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.ServiceName do
 
   alias __MODULE__
-  alias Smee.Entity
+  alias SmeeView.Utils
 
   defstruct [
     lang: "en",

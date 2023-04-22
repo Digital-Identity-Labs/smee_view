@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.RequestedAttribute do
 
   alias __MODULE__
-  alias Smee.Entity
+  alias SmeeView.Utils
 
   defstruct [
     friendly_name: nil,

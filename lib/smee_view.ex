@@ -6,6 +6,7 @@ defmodule SmeeView do
   alias SmeeView.Logos
   alias SmeeView.Keys
   alias SmeeView.Contacts
+  alias SmeeView.Displaynames
   alias SmeeView.Descriptions
   alias SmeeView.Domains
   alias SmeeView.Networks

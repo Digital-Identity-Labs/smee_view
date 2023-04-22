@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.EncryptionMethod do
 
   alias __MODULE__
-  alias Smee.Entity
+  alias SmeeView.Utils
 
   defstruct [
     algorithm: nil

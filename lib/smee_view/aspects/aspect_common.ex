@@ -1,18 +1,9 @@
 defmodule SmeeView.Aspects.AspectCommon do
 
-  alias Smee.Entity
+  alias SmeeView.Utils
 
   defmacro __using__(_params) do
     quote do
-      # idp?
-      # sp?
-      # language?
-      # to_string
-      # composite?
-      # singleton?
-      # best
-
-
 
 
       #######################################################################################

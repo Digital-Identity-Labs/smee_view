@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Geolocation do
 
   alias __MODULE__
-  alias Smee.Entity
+  alias SmeeView.Utils
 
   defstruct [
     geolocation: nil
