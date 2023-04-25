@@ -26,4 +26,6 @@ defmodule SmeeView.Logos do
     @sp_xmap
   end
 
+
+
 end

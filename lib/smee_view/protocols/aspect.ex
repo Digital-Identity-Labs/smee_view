@@ -1,9 +1,13 @@
 defprotocol SmeeView.Protocols.Aspect do
 
+  alias SmeeView.Utils
+
   @doc "idp?"
-  def idp?(data)
+  def idp?(aspect)
 
   @doc "sp?"
-  def sp?(data)
+  def sp?(aspect)
+
+  def lang?(aspect, lang \\ Utils.default_lang())
 
 end
