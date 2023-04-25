@@ -1,59 +1,32 @@
 defmodule SmeeView.Entity do
-#
-#  import SmeeView.XML
-#  import SweetXml, except: [sigil_x: 2, parse: 1]
-#
-#  alias SmeeView.Aspects.Logo
-#
-#  @idp_xmap [
-#    ~x"//md:IDPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,
-#    url: ~x"./text()"s,
-#    height: ~x"string(/*/@height)"i,
-#    width: ~x"string(/*/@width)"i,
-#    lang: ~x"@xml:lang"s
-#  ]
-#
-#  @sp_xmap [
-#    ~x"//md:SPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,
-#    url: ~x"./text()"s,
-#    height: ~x"string(/*/@height)"i,
-#    width: ~x"string(/*/@width)"i,
-#    lang: ~x"@xml:lang"s
-#  ]
-#
-#  def view(entity, role \\ :all, options \\ [])
-#  def view(entity, :idp, options) do
-#    entity
-#    |> Entity.xdoc()
-#    |> SweetXml.xmap([idp: @idp_xmap])
-#    |> Map.values()
-#    |> List.flatten()
-#    |> Enum.map(fn data -> Logo.new(%{data | role: :idp}) end)
-#  end
-#
-#  def view(entity, :sp, options) do
-#    entity
-#    |> Entity.xdoc()
-#    |> SweetXml.xmap([sp: @sp_xmap])
-#    |> Map.values()
-#    |> List.flatten()
-#    |> Enum.map(fn data -> Logo.new(%{data | role: :sp}) end)
-#  end
-#
-#  def view(entity, :all, options) do
-#    entity
-#    |> Entity.xdoc()
-#    |> SweetXml.xmap([idp: @idp_xmap, sp: @sp_xmap])
-#    |> Enum.map(
-#         fn {role, logos} ->
-#           Enum.map(logos, fn data -> Logo.new(Map.merge(data, %{role: role})) end)
-#         end
-#       )
-#    |> List.flatten()
-#  end
 
-  #######################################################################################
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Entity, roles: false, one: true
 
+  @entity_xmap [
+    ~x"//md:EntityDescriptor"el,
+    valid_until: ~x"string(@validUntil)"s,
+    entity_id: ~x"string(@entityID)"s,
+    id: ~x"string(@ID)"s,
+    cache_duration: ~x"string(@cacheDuration)"s,
+  ]
 
+  defp entity_xmap do
+    @entity_xmap
+  end
+
+  defp cascade_views(entity, aspect_data, role) do
+
+    Map.merge(
+      aspect_data,
+      %{
+        registration: SmeeView.Registration.view(entity, :all),
+        publications: SmeeView.PublicationPath.view(entity, :all),
+        idp: SmeeView.IdP.view(entity, :idp),
+        sp: SmeeView.SP.view(entity, :sp),
+        organization: SmeeView.Organization.view(entity, :all),
+        contacts: SmeeView.Contacts.view(entity, :all),
+      }
+    )
+  end
 
 end
