@@ -12,6 +12,10 @@ defmodule SmeeView.Utils do
     "en"
   end
 
+  def fallback_lang() do
+    "en"
+  end
+
   def default_text() do
     ""
   end
