@@ -2,8 +2,9 @@ defmodule SmeeView.Aspects.Displayname do
 
   alias __MODULE__
   alias SmeeView.Utils
+  alias SmeeView.Aspects.AspectTools
+
   use SmeeView.Aspects.AspectCommon
-  import SmeeView.Aspects.AspectTools.Text
 
   defstruct [
     lang: "en",
