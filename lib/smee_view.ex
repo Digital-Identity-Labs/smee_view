@@ -3,36 +3,38 @@ defmodule SmeeView do
   Documentation for `SmeeView`.
   """
 
-  alias SmeeView.Logos
-  alias SmeeView.Keys
-  alias SmeeView.Contacts
-  alias SmeeView.Displaynames
-  alias SmeeView.Descriptions
-  alias SmeeView.Domains
-  alias SmeeView.Networks
-  alias SmeeView.Geolocations
-  alias SmeeView.Keywords
-  alias SmeeView.PublicationPath
-  alias SmeeView.Registration
-  alias SmeeView.RegistrationPolicies
-  alias SmeeView.Scopes
-  alias SmeeView.NameIDFormats
-  alias SmeeView.IdP
-  alias SmeeView.SP
   alias SmeeView.ArtifactResolutionServices
   alias SmeeView.AssertionConsumerServices
   alias SmeeView.AssertionIDRequestServices
   alias SmeeView.AttributeConsumingServices
   alias SmeeView.AttributeServices
+  alias SmeeView.Contacts
+  alias SmeeView.Descriptions
+  alias SmeeView.DiscoveryResponses
+  alias SmeeView.Displaynames
+  alias SmeeView.Domains
+  alias SmeeView.Entity
+  alias SmeeView.EntityAttributes
+  alias SmeeView.Geolocations
+  alias SmeeView.IdP
+  alias SmeeView.Keys
+  alias SmeeView.Keywords
+  alias SmeeView.Logos
   alias SmeeView.ManageNameidServices
+  alias SmeeView.NameIDFormats
   alias SmeeView.NameidMappingServices
-  alias SmeeView.SingleLogoutServices
-  alias SmeeView.SingleSignonServices
+  alias SmeeView.Networks
+  alias SmeeView.PublicationPath
+  alias SmeeView.Registration
+  alias SmeeView.RegistrationPolicies
+  alias SmeeView.RequestInitiators
   alias SmeeView.RequestedAttributes
+  alias SmeeView.SP
+  alias SmeeView.Scopes
   alias SmeeView.ServiceDescriptions
   alias SmeeView.ServiceNames
-  alias SmeeView.RequestInitiators
-  alias SmeeView.DiscoveryResponses
+  alias SmeeView.SingleLogoutServices
+  alias SmeeView.SingleSignonServices
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -167,6 +169,14 @@ defmodule SmeeView do
 
   def discovery_responses(entity, options \\ []) do
     DiscoveryResponses.view(entity, :sp, options)
+  end
+
+  def entity_attributes(entity, options \\ []) do
+    EntityAttributes.view(entity, :all, options)
+  end
+
+  def entity(entity, options \\ []) do
+    Entity.view(entity, :all, options)
   end
 
 end

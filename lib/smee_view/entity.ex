@@ -21,6 +21,7 @@ defmodule SmeeView.Entity do
       %{
         registration: SmeeView.Registration.view(entity, :all),
         publications: SmeeView.PublicationPath.view(entity, :all),
+        entity_attributes: SmeeView.EntityAttributes.view(entity, :all),
         idp: SmeeView.IdP.view(entity, :idp),
         sp: SmeeView.SP.view(entity, :sp),
         organization: SmeeView.Organization.view(entity, :all),

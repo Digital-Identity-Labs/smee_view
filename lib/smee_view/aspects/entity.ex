@@ -17,7 +17,8 @@ defmodule SmeeView.Aspects.Entity do
     idp: nil,
     sp: nil,
     organization: nil,
-    contacts: []
+    contacts: [],
+    entity_attributes: []
 
   ]
 
