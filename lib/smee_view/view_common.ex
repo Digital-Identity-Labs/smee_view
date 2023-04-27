@@ -1,8 +1,13 @@
 defmodule SmeeView.ViewCommon do
 
+  @moduledoc false
+
   defmacro __using__(params) do
 
-    params = Keyword.merge([roles: false, aspect: SmeeView.Aspects.Contact, one: false], params)
+    params = Keyword.merge(
+      [roles: false, aspect: SmeeView.Aspects.Contact, one: false],
+      params
+    ) # Make a fake generic aspect instead
 
     quote do
 
@@ -11,8 +16,17 @@ defmodule SmeeView.ViewCommon do
 
       alias Smee.Entity
 
+      def view(list, role \\ :all, options \\ [])
+      def view(list, role, options) when is_list(list) do
+        list
+        |> Enum.filter(fn st -> is_struct(st) end)
+        |> Enum.map(fn st -> if st.__struct__ != unquote(params[:aspect]), do: dissolve_struct(st), else: st end)
+        |> Enum.filter(fn aspect -> is_struct(aspect) end)
+        |> Enum.filter(fn aspect -> if aspect.__struct__ == unquote(params[:aspect]), do: true, else: false end)
+      end
+
       @doc "Docs for view function - do they appear?"
-      def view(entity, role \\ :all, options \\ []) do
+      def view(%Entity{} = entity, role, options) do
 
         single = unquote(params[:one])
 
@@ -37,7 +51,23 @@ defmodule SmeeView.ViewCommon do
 
       end
 
+      def view(structure, role, options) when is_struct(structure) do
+        structure
+        |> dissolve_struct()
+        |> Enum.filter(fn aspect -> is_struct(aspect) end)
+        |> Enum.filter(fn aspect -> if aspect.__struct__ == unquote(params[:aspect]), do: true, else: false end)
+      end
+
       #######################################################################################
+
+
+      defp dissolve_struct(struct) do
+        struct
+        |> Map.from_struct()
+        |> Map.to_list()
+        |> Keyword.values()
+        |> List.flatten()
+      end
 
       ## Move to Utils?
       defp extract_data_from_xml(xdoc, xmap) do
