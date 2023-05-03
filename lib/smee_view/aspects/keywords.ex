@@ -2,7 +2,7 @@ defmodule SmeeView.Aspects.Keywords do
 
   alias __MODULE__
   alias SmeeView.Utils
-  alias SmeeView.Aspects.AspectTools
+
 
   defstruct [
     lang: "en",

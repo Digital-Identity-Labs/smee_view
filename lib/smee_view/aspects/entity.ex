@@ -2,7 +2,7 @@ defmodule SmeeView.Aspects.Entity do
 
   alias __MODULE__
   alias SmeeView.Utils
-  alias SmeeView.Aspects.AspectTools
+
 
   defstruct [
     entity_id: nil,
