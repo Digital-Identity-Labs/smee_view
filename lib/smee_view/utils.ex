@@ -1,5 +1,7 @@
 defmodule SmeeView.Utils do
 
+  @moduledoc false
+
   def normalize(value) when is_nil(value) or value == "" do
     nil
   end

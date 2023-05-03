@@ -60,7 +60,6 @@ defmodule SmeeView.ViewCommon do
 
       #######################################################################################
 
-
       defp dissolve_struct(struct) do
         struct
         |> Map.from_struct()
@@ -98,9 +97,9 @@ defmodule SmeeView.ViewCommon do
           quote do
             defp xmapper_for_role(role) do
               case role do
-                :sp -> [sp: sp_xmap]
-                :idp -> [idp: idp_xmap]
-                :all -> [idp: idp_xmap, sp: sp_xmap]
+                :sp -> [sp: sp_xmap()]
+                :idp -> [idp: idp_xmap()]
+                :all -> [idp: idp_xmap(), sp: sp_xmap()]
                 _ -> raise "Unknown role!"
               end
             end
@@ -108,7 +107,7 @@ defmodule SmeeView.ViewCommon do
         else
           quote do
             defp xmapper_for_role(_role) do
-              [all: entity_xmap]
+              [all: entity_xmap()]
             end
           end
         end

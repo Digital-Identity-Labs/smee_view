@@ -16,4 +16,6 @@ defmodule SmeeView.Aspects.EntityAttribute do
     struct(%EntityAttribute{}, data)
   end
 
+
+
 end

@@ -1,5 +1,8 @@
 defmodule SmeeView.AspectFilter do
 
+  @moduledoc false
+
+
   alias SmeeView.Utils
 
 #  def idp(enum, bool \\ true) do

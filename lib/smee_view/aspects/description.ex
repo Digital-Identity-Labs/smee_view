@@ -5,7 +5,7 @@ defmodule SmeeView.Aspects.Description do
   alias SmeeView.Aspects.AspectTools
   use SmeeView.Aspects.AspectCommon
 
-  import SmeeView.Aspects.AspectTools.Text
+  #import SmeeView.Aspects.AspectTools.Text
 
   defstruct [
     lang: "en",
@@ -16,9 +16,11 @@ defmodule SmeeView.Aspects.Description do
     struct(%Description{}, data)
   end
 
-  @doc "overloading the docs for lang?"
+
   defdelegate lang?(aspect), to: AspectTools.Text
+
   defdelegate lang(aspect), to: AspectTools.Text
+
   defdelegate text(aspect), to: AspectTools.Text
 
 end

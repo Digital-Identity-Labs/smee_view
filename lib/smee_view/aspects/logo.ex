@@ -22,8 +22,8 @@ defmodule SmeeView.Aspects.Logo do
 
   def lang(logo) do
     case logo.lang do
-      nil -> default_lang()
-      "" -> default_lang()
+      nil -> Utils.default_lang()
+      "" -> Utils.default_lang()
       otherwise -> otherwise
     end
   end
@@ -78,8 +78,5 @@ defmodule SmeeView.Aspects.Logo do
 
   #######################################################################################
 
-  defp default_lang() do
-    "en"
-  end
 
 end

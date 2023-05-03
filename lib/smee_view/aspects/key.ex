@@ -19,7 +19,7 @@ defmodule SmeeView.Aspects.Key do
   ]
 
   def new(data, options \\ []) do
-    struct(%Key{pem: wrap_pem(data[:pem]), use: normalize_use(data[:use]), role: data[:role]})
+    struct(%Key{pem: wrap_pem(data[:pem]), use: Utils.normalize(data[:use]), role: data[:role]})
   end
 
   def type(key) do
@@ -87,14 +87,6 @@ defmodule SmeeView.Aspects.Key do
   end
 
   #######################################################################################
-
-  defp normalize_use(value) when is_nil(value) or value == "" do
-    nil
-  end
-
-  defp normalize_use(value) do
-    "#{value}"
-  end
 
   defp extract_subject(
          %{

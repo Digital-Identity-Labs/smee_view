@@ -179,4 +179,6 @@ defmodule SmeeView do
     Entity.view(entity, :all, options)
   end
 
+  ###
+
 end

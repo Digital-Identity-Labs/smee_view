@@ -10,4 +10,6 @@ defprotocol SmeeView.Protocols.Aspect do
 
   def lang?(aspect, lang \\ Utils.default_lang())
 
+  def composite?(aspect)
+
 end
