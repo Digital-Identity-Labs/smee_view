@@ -19,3 +19,7 @@ defmodule SmeeView.Aspects.Publication do
 
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.Publication do
+  def to_string(a), do: "#{a.publisher} #{a.publication_id}"
+end

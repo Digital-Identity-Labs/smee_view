@@ -16,3 +16,7 @@ defmodule SmeeView.Aspects.SingleLogoutService do
 
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.SingleLogoutService do
+  def to_string(a), do: a.location
+end

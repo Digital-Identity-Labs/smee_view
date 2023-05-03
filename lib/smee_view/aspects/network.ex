@@ -18,5 +18,5 @@ defmodule SmeeView.Aspects.Network do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Network do
-  def to_string(n), do: n.network
+  def to_string(a), do: a.network
 end

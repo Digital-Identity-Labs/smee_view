@@ -15,3 +15,7 @@ defmodule SmeeView.Aspects.OrganizationURL do
 
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.OrganizationURL do
+  def to_string(a), do: a.url
+end

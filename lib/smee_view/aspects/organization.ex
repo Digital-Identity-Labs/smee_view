@@ -19,3 +19,7 @@ defmodule SmeeView.Aspects.Organization do
 
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.Organization do
+  def to_string(a), do: "Organization"
+end

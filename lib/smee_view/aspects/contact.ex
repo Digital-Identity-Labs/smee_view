@@ -18,10 +18,35 @@ defmodule SmeeView.Aspects.Contact do
 
   use SmeeView.Aspects.AspectCommon
 
+  def displayname(contact) do
+    name = [contact.givenname, contact.surname]
+           |> Enum.join(" ")
+           |> String.trim()
+
+    if is_nil(contact.company), do: name, else: "#{name} (#{contact.company})"
+
+  end
+
+  def name_addr(contact) do
+    "\"#{displayname(contact)}\" <#{contact.email}>"
+  end
+
+  def email_url(contact) do
+    "mailto:#{contact.email}"
+  end
+
+  def phone_url(contact) do
+    "tel:#{contact.phone}"
+  end
+
   #######################################################################################
 
   defp prepare_data(data, options \\ []) do
     Map.merge(data, %{email: Utils.normalize_email(data[:email])})
   end
 
+end
+
+defimpl String.Chars, for: SmeeView.Aspects.Contact do
+  def to_string(a), do: SmeeView.Aspects.Contact.name_addr(a)
 end

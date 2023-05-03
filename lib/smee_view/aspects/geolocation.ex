@@ -18,5 +18,5 @@ defmodule SmeeView.Aspects.Geolocation do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Geolocation do
-  def to_string(gl), do: gl.geolocation
+  def to_string(a), do: a.geolocation
 end

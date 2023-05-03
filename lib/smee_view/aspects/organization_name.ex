@@ -17,3 +17,7 @@ defmodule SmeeView.Aspects.OrganizationName do
 
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.OrganizationName do
+  def to_string(a), do: a.text
+end

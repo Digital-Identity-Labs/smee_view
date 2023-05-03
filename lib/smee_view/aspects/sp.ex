@@ -32,3 +32,7 @@ defmodule SmeeView.Aspects.SP do
   end
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.SP do
+  def to_string(a), do: "SP"
+end

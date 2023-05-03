@@ -8,10 +8,14 @@ defmodule SmeeView.Aspects.InformationURL do
 
   defstruct [
     lang: "en",
-    text: nil
+    url: nil
   ]
 
   use SmeeView.Aspects.AspectCommon
 
 
+end
+
+defimpl String.Chars, for: SmeeView.Aspects.InformationURL do
+  def to_string(a), do: a.url
 end

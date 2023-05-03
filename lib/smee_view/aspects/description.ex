@@ -22,3 +22,7 @@ defmodule SmeeView.Aspects.Description do
   defdelegate text(aspect), to: AspectTools.Text
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.Description do
+  def to_string(a), do: a.text
+end

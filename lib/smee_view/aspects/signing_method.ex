@@ -17,3 +17,7 @@ defmodule SmeeView.Aspects.SigningMethod do
 
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.SigningMethod do
+  def to_string(a), do: a.algorithm
+end

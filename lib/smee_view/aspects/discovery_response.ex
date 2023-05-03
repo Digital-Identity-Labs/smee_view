@@ -16,3 +16,7 @@ defmodule SmeeView.Aspects.DiscoveryResponse do
 
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.DiscoveryResponse do
+  def to_string(a), do: a.location
+end

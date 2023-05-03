@@ -4,8 +4,6 @@ defmodule SmeeView.Aspects.Entity do
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
 
-
-
   defstruct [
     entity_id: nil,
     id: false,
@@ -25,8 +23,8 @@ defmodule SmeeView.Aspects.Entity do
 
   #######################################################################################
 
+end
 
-
-
-
+defimpl String.Chars, for: SmeeView.Aspects.Entity do
+  def to_string(a), do: a.entity_id
 end

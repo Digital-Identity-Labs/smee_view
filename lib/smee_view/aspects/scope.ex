@@ -14,3 +14,7 @@ defmodule SmeeView.Aspects.Scope do
   use SmeeView.Aspects.AspectCommon
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.Scope do
+  def to_string(a), do: a.domain
+end

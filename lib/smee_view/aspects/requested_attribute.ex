@@ -15,3 +15,7 @@ defmodule SmeeView.Aspects.RequestedAttribute do
   use SmeeView.Aspects.AspectCommon
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.RequestedAttribute do
+  def to_string(a), do: a.friendly_name
+end

@@ -14,3 +14,7 @@ defmodule SmeeView.Aspects.AssertionConsumerService do
   use SmeeView.Aspects.AspectCommon
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.AssertionConsumerService do
+  def to_string(a), do: a.location
+end

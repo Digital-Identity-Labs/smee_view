@@ -15,3 +15,7 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
   use SmeeView.Aspects.AspectCommon
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.AttributeConsumingService do
+  def to_string(a), do: a.location
+end

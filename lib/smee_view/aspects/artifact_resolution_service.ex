@@ -13,3 +13,8 @@ defmodule SmeeView.Aspects.ArtifactResolutionService do
   use SmeeView.Aspects.AspectCommon
 
 end
+
+
+defimpl String.Chars, for: SmeeView.Aspects.ArtifactResolutionService do
+  def to_string(a), do: a.location
+end

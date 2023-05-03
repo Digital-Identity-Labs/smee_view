@@ -20,5 +20,5 @@ defmodule SmeeView.Aspects.Domain do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Domain do
-  def to_string(d), do: d.domain
+  def to_string(a), do: a.domain
 end

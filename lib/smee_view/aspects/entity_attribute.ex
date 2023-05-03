@@ -17,3 +17,8 @@ defmodule SmeeView.Aspects.EntityAttribute do
 
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.EntityAttribute do
+  def to_string(a), do: a.values
+                        |> Enum.join("; ")
+end

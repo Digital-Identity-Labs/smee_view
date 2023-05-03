@@ -74,3 +74,7 @@ defmodule SmeeView.Aspects.Logo do
 
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.Logo do
+  def to_string(a), do: a.url
+end

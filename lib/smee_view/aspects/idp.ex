@@ -37,3 +37,7 @@ defmodule SmeeView.Aspects.IdP do
   end
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.IdP do
+  def to_string(a), do: "IdP"
+end

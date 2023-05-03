@@ -12,3 +12,7 @@ defmodule SmeeView.Aspects.AssertionIDRequestService do
   use SmeeView.Aspects.AspectCommon
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.AssertionIDRequestService do
+  def to_string(a), do: a.location
+end

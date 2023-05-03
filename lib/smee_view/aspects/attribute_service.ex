@@ -12,3 +12,7 @@ defmodule SmeeView.Aspects.AttributeService do
   use SmeeView.Aspects.AspectCommon
 
 end
+
+defimpl String.Chars, for: SmeeView.Aspects.AttributeService do
+  def to_string(a), do: a.location
+end

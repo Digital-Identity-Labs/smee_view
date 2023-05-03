@@ -8,10 +8,14 @@ defmodule SmeeView.Aspects.PrivacyURL do
 
   defstruct [
     lang: "en",
-    text: nil
+    url: nil
   ]
 
   use SmeeView.Aspects.AspectCommon
 
 
+end
+
+defimpl String.Chars, for: SmeeView.Aspects.PrivacyURL do
+  def to_string(a), do: a.url
 end
