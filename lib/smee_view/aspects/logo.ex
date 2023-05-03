@@ -2,7 +2,6 @@ defmodule SmeeView.Aspects.Logo do
 
   alias __MODULE__
   alias SmeeView.Utils
-  alias SmeeView.Aspects.AspectTools
 
   defstruct [
     url: nil,
@@ -12,15 +11,11 @@ defmodule SmeeView.Aspects.Logo do
     lang: "en",
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:lang, :url]
 
-  def lang(logo) do
-    case logo.lang do
-      nil -> Utils.default_lang()
-      "" -> Utils.default_lang()
-      otherwise -> otherwise
-    end
-  end
+#  def test(aspect) do
+#    lang(aspect)
+#  end
 
   def shape(logo) do
     height = logo.height

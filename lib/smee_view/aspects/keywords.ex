@@ -4,14 +4,12 @@ defmodule SmeeView.Aspects.Keywords do
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
 
-  import SmeeView.Aspects.AspectTools.Text, except: [text: 1]
-
   defstruct [
     lang: "en",
     words: []
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:lang]
 
   def text(aspect) do
     aspect.words

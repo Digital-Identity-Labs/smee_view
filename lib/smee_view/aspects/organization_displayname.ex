@@ -5,15 +5,12 @@ defmodule SmeeView.Aspects.OrganizationDisplayname do
   alias SmeeView.Aspects.AspectTools
 
 
-
-  import SmeeView.Aspects.AspectTools.Text
-
   defstruct [
     lang: "en",
     text: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:lang, :text]
 
 
 end

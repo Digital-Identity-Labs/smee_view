@@ -4,22 +4,12 @@ defmodule SmeeView.Aspects.Description do
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
 
-  #import SmeeView.Aspects.AspectTools.Text
-
   defstruct [
     lang: "en",
     text: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon
-
-
-
-  defdelegate lang?(aspect), to: AspectTools.Text
-
-  defdelegate lang(aspect), to: AspectTools.Text
-
-  defdelegate text(aspect), to: AspectTools.Text
+  use SmeeView.Aspects.AspectCommon, features: [:lang, :text]
 
 end
 

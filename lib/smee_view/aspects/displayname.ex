@@ -4,14 +4,12 @@ defmodule SmeeView.Aspects.Displayname do
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
 
-
   defstruct [
     lang: "en",
     text: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon
-
+  use SmeeView.Aspects.AspectCommon, features: [:lang, :text]
 
 end
 
