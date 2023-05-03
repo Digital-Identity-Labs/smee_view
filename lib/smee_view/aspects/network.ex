@@ -5,15 +5,13 @@ defmodule SmeeView.Aspects.Network do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     network: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%Network{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
   #######################################################################################
 

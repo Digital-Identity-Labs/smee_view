@@ -4,15 +4,13 @@ defmodule SmeeView.Aspects.Displayname do
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     lang: "en",
     text: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%Displayname{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
 end

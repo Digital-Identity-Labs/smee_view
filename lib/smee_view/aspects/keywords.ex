@@ -7,12 +7,14 @@ defmodule SmeeView.Aspects.Keywords do
 
 
   import SmeeView.Aspects.AspectTools.Text, except: [text: 1]
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     lang: "en",
     words: []
   ]
+
+  use SmeeView.Aspects.AspectCommon
+
 
   def new(data, options \\ []) do
 

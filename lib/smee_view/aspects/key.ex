@@ -5,18 +5,19 @@ defmodule SmeeView.Aspects.Key do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   @pem_header "-----BEGIN CERTIFICATE-----"
   @pem_footer "-----END CERTIFICATE-----"
 
-  @enforce_keys [:pem]
   defstruct [
     type: :public,
     pem: nil,
     use: nil,
     role: nil
   ]
+
+  use SmeeView.Aspects.AspectCommon
+
 
   def new(data, options \\ []) do
     struct(%Key{pem: wrap_pem(data[:pem]), use: Utils.normalize(data[:use]), role: data[:role]})

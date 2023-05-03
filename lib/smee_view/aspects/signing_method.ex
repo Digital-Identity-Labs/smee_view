@@ -5,15 +5,13 @@ defmodule SmeeView.Aspects.SigningMethod do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     algorithm: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%SigningMethod{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
   #######################################################################################
 

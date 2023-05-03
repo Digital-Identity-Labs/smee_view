@@ -3,8 +3,6 @@ defmodule SmeeView.Aspects.AssertionConsumerService do
   alias __MODULE__
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
-  use SmeeView.Aspects.AspectCommon
-
 
   defstruct [
     binding: nil,
@@ -13,8 +11,7 @@ defmodule SmeeView.Aspects.AssertionConsumerService do
     default: false
   ]
 
-  def new(data, options \\ []) do
-    struct(%AssertionConsumerService{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
 end

@@ -5,15 +5,14 @@ defmodule SmeeView.Aspects.Domain do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     domain: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%Domain{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
+
 
   #######################################################################################
 

@@ -5,7 +5,6 @@ defmodule SmeeView.Aspects.Organization do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     displaynames: [],
@@ -13,9 +12,8 @@ defmodule SmeeView.Aspects.Organization do
     urls: []
   ]
 
-  def new(data, options \\ []) do
-    struct(%Organization{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
   #######################################################################################
 

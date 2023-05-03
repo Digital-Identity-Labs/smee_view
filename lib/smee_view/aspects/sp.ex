@@ -4,7 +4,6 @@ defmodule SmeeView.Aspects.SP do
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     protocols: [],
@@ -16,6 +15,8 @@ defmodule SmeeView.Aspects.SP do
     keys: [],
     services: []
   ]
+
+  use SmeeView.Aspects.AspectCommon
 
   def new(data, options \\ []) do
     data = Map.merge(

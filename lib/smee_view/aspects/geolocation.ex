@@ -5,15 +5,13 @@ defmodule SmeeView.Aspects.Geolocation do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     geolocation: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%Geolocation{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
   #######################################################################################
 

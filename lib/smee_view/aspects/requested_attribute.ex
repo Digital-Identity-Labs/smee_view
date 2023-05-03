@@ -5,7 +5,6 @@ defmodule SmeeView.Aspects.RequestedAttribute do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     friendly_name: nil,
@@ -13,8 +12,6 @@ defmodule SmeeView.Aspects.RequestedAttribute do
     name_format: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%RequestedAttribute{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
 
 end

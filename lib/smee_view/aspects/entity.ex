@@ -5,7 +5,6 @@ defmodule SmeeView.Aspects.Entity do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     entity_id: nil,
@@ -21,6 +20,9 @@ defmodule SmeeView.Aspects.Entity do
     entity_attributes: []
 
   ]
+
+  use SmeeView.Aspects.AspectCommon
+
 
   def new(data, options \\ []) do
 

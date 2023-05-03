@@ -3,7 +3,6 @@ defmodule SmeeView.Aspects.Description do
   alias __MODULE__
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
-  use SmeeView.Aspects.AspectCommon
 
   #import SmeeView.Aspects.AspectTools.Text
 
@@ -12,9 +11,8 @@ defmodule SmeeView.Aspects.Description do
     text: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%Description{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
 
   defdelegate lang?(aspect), to: AspectTools.Text

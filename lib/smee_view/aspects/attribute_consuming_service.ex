@@ -3,7 +3,6 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
   alias __MODULE__
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     default: false,
@@ -13,8 +12,7 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
     service_names: []
   ]
 
-  def new(data, options \\ []) do
-    struct(%AttributeConsumingService{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
 end

@@ -7,15 +7,13 @@ defmodule SmeeView.Aspects.OrganizationName do
 
 
   import SmeeView.Aspects.AspectTools.Text
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     lang: "en",
     text: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%OrganizationName{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
 end

@@ -4,9 +4,6 @@ defmodule SmeeView.Aspects.Logo do
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
 
-
-  use SmeeView.Aspects.AspectCommon
-
   defstruct [
     url: nil,
     role: nil,
@@ -15,10 +12,7 @@ defmodule SmeeView.Aspects.Logo do
     lang: "en",
   ]
 
-  def new(data, options \\ []) do
-    struct(%Logo{}, data)
-  end
-
+  use SmeeView.Aspects.AspectCommon
 
   def lang(logo) do
     case logo.lang do

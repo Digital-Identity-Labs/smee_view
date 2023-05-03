@@ -4,7 +4,6 @@ defmodule SmeeView.Aspects.Contact do
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
 
-  use SmeeView.Aspects.AspectCommon
 
   @types ~w(technical support administrative billing other)
 
@@ -16,6 +15,8 @@ defmodule SmeeView.Aspects.Contact do
     surname: nil,
     company: nil
   ]
+
+  use SmeeView.Aspects.AspectCommon
 
   def new(data, options \\ []) do
     data = Map.merge(data, %{email: normalize_email(data[:email])})

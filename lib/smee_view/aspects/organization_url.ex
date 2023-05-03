@@ -5,15 +5,13 @@ defmodule SmeeView.Aspects.OrganizationURL do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     lang: "en",
     url: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%OrganizationURL{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
 end

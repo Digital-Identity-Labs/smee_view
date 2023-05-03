@@ -5,15 +5,13 @@ defmodule SmeeView.Aspects.EncryptionMethod do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     algorithm: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%EncryptionMethod{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
   #######################################################################################
 

@@ -5,16 +5,14 @@ defmodule SmeeView.Aspects.RegistrationPolicy do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     lang: "en",
     url: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%RegistrationPolicy{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
   #######################################################################################
 

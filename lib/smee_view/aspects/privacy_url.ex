@@ -5,15 +5,13 @@ defmodule SmeeView.Aspects.PrivacyURL do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     lang: "en",
     text: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%PrivacyURL{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
 end

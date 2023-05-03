@@ -5,15 +5,13 @@ defmodule SmeeView.Aspects.ManageNameidService do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   defstruct [
     binding: nil,
     location: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%ManageNameidService{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
 end

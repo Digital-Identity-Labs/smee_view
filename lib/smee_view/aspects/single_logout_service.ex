@@ -5,7 +5,6 @@ defmodule SmeeView.Aspects.SingleLogoutService do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
 
   defstruct [
@@ -13,8 +12,7 @@ defmodule SmeeView.Aspects.SingleLogoutService do
     location: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%SingleLogoutService{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
 end

@@ -5,7 +5,6 @@ defmodule SmeeView.Aspects.OrganizationDisplayname do
   alias SmeeView.Aspects.AspectTools
 
 
-  use SmeeView.Aspects.AspectCommon
 
   import SmeeView.Aspects.AspectTools.Text
 
@@ -14,8 +13,7 @@ defmodule SmeeView.Aspects.OrganizationDisplayname do
     text: nil
   ]
 
-  def new(data, options \\ []) do
-    struct(%OrganizationDisplayname{}, data)
-  end
+  use SmeeView.Aspects.AspectCommon
+
 
 end
