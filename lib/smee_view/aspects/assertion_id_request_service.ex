@@ -11,5 +11,4 @@ defmodule SmeeView.Aspects.AssertionIDRequestService do
 
   use SmeeView.Aspects.AspectCommon
 
-
 end

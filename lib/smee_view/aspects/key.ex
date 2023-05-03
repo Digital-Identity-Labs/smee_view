@@ -18,11 +18,6 @@ defmodule SmeeView.Aspects.Key do
 
   use SmeeView.Aspects.AspectCommon
 
-
-  def new(data, options \\ []) do
-    struct(%Key{pem: wrap_pem(data[:pem]), use: Utils.normalize(data[:use]), role: data[:role]})
-  end
-
   def type(key) do
     key.type
   end
@@ -88,6 +83,17 @@ defmodule SmeeView.Aspects.Key do
   end
 
   #######################################################################################
+
+  defp prepare_data(data, options \\ []) do
+    Map.merge(
+      data,
+      %{
+        pem: wrap_pem(data[:pem]),
+        use: Utils.normalize(data[:use]),
+        role: data[:role]
+      }
+    )
+  end
 
   defp extract_subject(
          %{

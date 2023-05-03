@@ -14,5 +14,4 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
 
   use SmeeView.Aspects.AspectCommon
 
-
 end

@@ -18,8 +18,10 @@ defmodule SmeeView.Aspects.SP do
 
   use SmeeView.Aspects.AspectCommon
 
-  def new(data, options \\ []) do
-    data = Map.merge(
+  #######################################################################################
+
+  defp prepare_data(data, options \\ []) do
+    Map.merge(
       data,
       %{
         protocols: Utils.parse_protocols(data[:protocols]),
@@ -27,10 +29,6 @@ defmodule SmeeView.Aspects.SP do
         want_assertions_signed: Utils.parse_boolean(data[:want_assertions_signed])
       }
     )
-    struct(%SP{}, data)
   end
-
-  #######################################################################################
-
 
 end

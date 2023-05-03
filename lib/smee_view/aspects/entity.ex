@@ -23,18 +23,9 @@ defmodule SmeeView.Aspects.Entity do
 
   use SmeeView.Aspects.AspectCommon
 
-
-  def new(data, options \\ []) do
-
-    data = Map.merge(
-      data,
-      %{
-      }
-    )
-    struct(%Entity{}, data)
-  end
-
   #######################################################################################
+
+
 
 
 

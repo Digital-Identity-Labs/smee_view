@@ -4,14 +4,11 @@ defmodule SmeeView.Aspects.AttributeService do
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
 
-
   defstruct [
     binding: nil,
     location: nil
   ]
 
   use SmeeView.Aspects.AspectCommon
-
-
 
 end

@@ -10,6 +10,14 @@ defmodule SmeeView.Utils do
     "#{value}"
   end
 
+  def normalize_email("mailto:" <> email) do
+    email
+  end
+
+  def normalize_email(email) do
+    email
+  end
+
   def default_lang() do
     "en"
   end

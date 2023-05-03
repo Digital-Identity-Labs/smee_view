@@ -24,19 +24,16 @@ defmodule SmeeView.Aspects.IdP do
   use SmeeView.Aspects.AspectCommon
 
 
-  def new(data, options \\ []) do
-    data = Map.merge(
+  #######################################################################################
+
+  defp prepare_data(data, options \\ []) do
+    Map.merge(
       data,
       %{
         protocols: Utils.parse_protocols(data[:protocols]),
         want_authn_requests_signed: Utils.parse_boolean(data[:want_authn_requests_signed])
       }
     )
-    struct(%IdP{}, data)
   end
-
-  #######################################################################################
-
-
 
 end

@@ -18,17 +18,10 @@ defmodule SmeeView.Aspects.Contact do
 
   use SmeeView.Aspects.AspectCommon
 
-  def new(data, options \\ []) do
-    data = Map.merge(data, %{email: normalize_email(data[:email])})
-    struct(%Contact{}, data)
-  end
-
-
   #######################################################################################
 
-  defp normalize_email(email) do
-    email
-    |> String.replace_leading("mailto:", "")
+  defp prepare_data(data, options \\ []) do
+    Map.merge(data, %{email: Utils.normalize_email(data[:email])})
   end
 
 end

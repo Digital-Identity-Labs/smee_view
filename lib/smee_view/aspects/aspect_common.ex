@@ -9,7 +9,7 @@ defmodule SmeeView.Aspects.AspectCommon do
     quote do
 
       def new(data, options \\ []) do
-        struct(%__MODULE__{}, data)
+        struct(%__MODULE__{}, prepare_data(data, options))
       end
 
 
@@ -20,7 +20,11 @@ defmodule SmeeView.Aspects.AspectCommon do
 
       #######################################################################################
 
-      defoverridable [composite?: 1, new: 2]
+      defp prepare_data(data, options \\ []) do
+        data
+      end
+
+      defoverridable [composite?: 1, new: 2, prepare_data: 2]
 
 
     end

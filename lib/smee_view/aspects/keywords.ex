@@ -4,8 +4,6 @@ defmodule SmeeView.Aspects.Keywords do
   alias SmeeView.Utils
   alias SmeeView.Aspects.AspectTools
 
-
-
   import SmeeView.Aspects.AspectTools.Text, except: [text: 1]
 
   defstruct [
@@ -14,14 +12,6 @@ defmodule SmeeView.Aspects.Keywords do
   ]
 
   use SmeeView.Aspects.AspectCommon
-
-
-  def new(data, options \\ []) do
-
-    words = Utils.parse_keywords(data[:text])
-
-    struct(%Keywords{lang: data[:lang], words: words})
-  end
 
   def text(aspect) do
     aspect.words
@@ -32,8 +22,21 @@ defmodule SmeeView.Aspects.Keywords do
     aspect.words || []
   end
 
+
+  defp prepare_data(data, options \\ []) do
+    Map.merge(
+      data,
+      %{
+        words: Utils.parse_keywords(data[:text]),
+        lang: data[:lang]
+      }
+    )
+  end
+
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Keywords do
-  def to_string(k), do: k.words |> Enum.join(", ")
+  def to_string(k),
+      do: k.words
+          |> Enum.join(", ")
 end
