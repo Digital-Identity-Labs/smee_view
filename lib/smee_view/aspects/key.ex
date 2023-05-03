@@ -163,8 +163,10 @@ defmodule SmeeView.Aspects.Key do
 
   defp unflatten_pem(pem_text) do
     pem_text
-    #    |> Enum.chunk_every(64)
-    #    |> Enum.join("\n")
+    |> String.replace(~r/\s+/, "")
+    |> String.codepoints()
+    |> Enum.chunk_every(64)
+    |> Enum.join("\n")
   end
 
   defp wrap_pem(@pem_header <> _ = pem_text) do
