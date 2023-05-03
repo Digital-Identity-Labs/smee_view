@@ -5,9 +5,14 @@ defmodule SmeeView.ViewCommon do
   defmacro __using__(params) do
 
     params = Keyword.merge(
-      [roles: false, aspect: SmeeView.Aspects.Contact, one: false],
+      [
+        roles: false,
+        aspect: SmeeView.Aspects.Null,
+        one: false,
+        features: []
+      ],
       params
-    ) # Make a fake generic aspect instead
+    ) 
 
     quote do
 
