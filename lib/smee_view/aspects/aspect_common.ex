@@ -5,7 +5,13 @@ defmodule SmeeView.Aspects.AspectCommon do
   alias __MODULE__
   alias SmeeView.Utils
 
-  defmacro __using__(_params) do
+  defmacro __using__(params) do
+
+    params = Keyword.merge(
+      [composite: false],
+      params
+    ) # Make a fake generic aspect instead
+
     quote do
 
       def new(data, options \\ []) do
@@ -13,8 +19,8 @@ defmodule SmeeView.Aspects.AspectCommon do
       end
 
 
-      def composite?(aspect) do
-        false
+      def composite?() do
+        unquote(params[:composite])
       end
 
 
@@ -24,7 +30,7 @@ defmodule SmeeView.Aspects.AspectCommon do
         data
       end
 
-      defoverridable [composite?: 1, new: 2, prepare_data: 2]
+      defoverridable [composite?: 0, new: 2, prepare_data: 2]
 
 
     end
