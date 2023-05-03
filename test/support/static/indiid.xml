@@ -56,6 +56,22 @@ KWGyy5xzC8UqFyDtOLUnJicnPOfmZWzGEjnWYZWCYseTmdxPAZRDIlB+z+ZXQu41
       <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://indiid.net/idp/profile/SAML2/POST/SSO"/>
       <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://indiid.net/idp/profile/SAML2/POST-SimpleSign/SSO"/>
       <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://indiid.net/idp/profile/SAML2/Redirect/SSO"/>
+      <saml:Attribute
+              NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+              Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6"
+              FriendlyName="eduPersonPrincipalName">
+      </saml:Attribute>
+      <saml:Attribute
+              NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+              Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.1"
+              FriendlyName="eduPersonAffiliation">
+        <saml:AttributeValue>member</saml:AttributeValue>
+        <saml:AttributeValue>student</saml:AttributeValue>
+        <saml:AttributeValue>faculty</saml:AttributeValue>
+        <saml:AttributeValue>employee</saml:AttributeValue>
+        <saml:AttributeValue>staff</saml:AttributeValue>
+      </saml:Attribute>
+
     </IDPSSODescriptor>
     <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
       <Extensions>

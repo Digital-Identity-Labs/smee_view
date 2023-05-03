@@ -62,6 +62,11 @@ entity
 ```
 
 
+## Refs
+
+https://www.oasis-open.org/committees/download.php/51890/SAML%20MD%20simplified%20overview.pdf
+
+
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/smee_view>.

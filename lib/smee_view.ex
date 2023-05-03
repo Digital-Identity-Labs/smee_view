@@ -8,6 +8,7 @@ defmodule SmeeView do
   alias SmeeView.AssertionIDRequestServices
   alias SmeeView.AttributeConsumingServices
   alias SmeeView.AttributeServices
+  alias SmeeView.Attributes
   alias SmeeView.Contacts
   alias SmeeView.Descriptions
   alias SmeeView.DiscoveryResponses
@@ -179,6 +180,10 @@ defmodule SmeeView do
     Entity.view(entity, :all, options)
   end
 
+  def attributes(entity, options \\ []) do
+    Attributes.view(entity, :idp, options)
+  end
+  
   ###
 
 end

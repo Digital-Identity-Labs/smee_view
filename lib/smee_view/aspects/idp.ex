@@ -18,7 +18,8 @@ defmodule SmeeView.Aspects.IdP do
     keywords: [],
     keys: [],
     nameid_formats: [],
-    services: []
+    services: [],
+    attributes: []
   ]
 
   use SmeeView.Aspects.AspectCommon
