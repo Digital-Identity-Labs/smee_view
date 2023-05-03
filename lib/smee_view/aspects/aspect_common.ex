@@ -25,14 +25,6 @@ defmodule SmeeView.Aspects.AspectCommon do
         unquote(params[:composite])
       end
 
-      #      def lang(aspect) do
-      #        case aspect.lang do
-      #          nil -> SmeeView.Utils.default_lang()
-      #          "" -> SmeeView.Utils.default_lang()
-      #          otherwise -> otherwise
-      #        end
-      #      end
-
       unquote do
 
         if Enum.member?(params[:features], :lang) do
@@ -121,56 +113,6 @@ defmodule SmeeView.Aspects.AspectCommon do
 
       end
 
-
-      #        if Enum.member?(params[:features], :text) do
-      #          quote do
-      #
-      #            def text(aspect) do
-      #              aspect.text || SmeeView.Utils.default_text()
-      #            end
-      #
-      #          end
-      #
-      #        end
-      #
-      #        if Enum.member?(params[:features], :url) do
-      #          quote do
-      #
-      #            def url(aspect) do
-      #              aspect.url
-      #            end
-      #
-      #            def valid?(aspect) do
-      #              case URI.new(aspect.uri) do
-      #                {:ok, _} -> true
-      #                {:error, _} -> false
-      #              end
-      #            end
-      #
-      #          end
-      #
-      #        end
-      #
-      #        if Enum.member?(params[:features], :endpoint) do
-      #          quote do
-      #
-      #            def url(aspect) do
-      #              aspect.location
-      #            end
-      #
-      #            def valid?(aspect) do
-      #              case URI.new(aspect.location) do
-      #                {:ok, _} -> true
-      #                {:error, _} -> false
-      #              end
-      #            end
-      #
-      #          end
-
-      #     end
-
-
-
       #######################################################################################
 
       defp prepare_data(data, options \\ []) do
@@ -178,8 +120,7 @@ defmodule SmeeView.Aspects.AspectCommon do
       end
 
       defoverridable [composite?: 0, new: 2, prepare_data: 2]
-
-
+      
     end
 
   end
