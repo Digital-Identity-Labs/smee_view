@@ -11,7 +11,7 @@ defmodule SmeeView.Aspects.DiscoveryResponse do
     location: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:endpoint]
 
 
 

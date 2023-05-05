@@ -10,7 +10,7 @@ defmodule SmeeView.Aspects.ArtifactResolutionService do
     index: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:endpoint]
 
 end
 

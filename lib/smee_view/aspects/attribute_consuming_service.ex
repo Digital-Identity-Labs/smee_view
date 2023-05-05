@@ -12,7 +12,7 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
     service_names: []
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:endpoint]
 
 end
 

@@ -74,6 +74,24 @@ defmodule SmeeView.Aspects.AspectCommon do
 
       unquote do
 
+        if Enum.member?(params[:features], :algo) do
+          quote do
+
+            @doc "Returns the name/text for this algorithm"
+            def algorithm(aspect) do
+              aspect.algorithm
+            end
+
+            defoverridable [algorithm: 1]
+
+          end
+
+        end
+
+      end
+
+      unquote do
+
         if Enum.member?(params[:features], :attr) do
           quote do
 
@@ -102,7 +120,7 @@ defmodule SmeeView.Aspects.AspectCommon do
               String.starts_with?(aspect.name_format, "urn:oasis:names:tc:SAML:2.0")
             end
 
-            defoverridable [saml1: 1, saml2: 2, name_format: 1, friendly_name: 1, name: 1]
+            defoverridable [saml1?: 1, saml2?: 1, name_format: 1, friendly_name: 1, name: 1]
 
           end
 
@@ -176,7 +194,7 @@ defmodule SmeeView.Aspects.AspectCommon do
               end
             end
 
-            defoverridable [endpoint: 1, valid?: 1, endpoint: 1, binding: 1, index: 1]
+            defoverridable [endpoint: 1, valid?: 1, binding: 1, index: 1]
 
           end
 

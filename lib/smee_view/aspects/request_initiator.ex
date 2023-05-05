@@ -11,7 +11,7 @@ defmodule SmeeView.Aspects.RequestInitiator do
     location: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:endpoint]
 
 end
 

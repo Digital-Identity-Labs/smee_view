@@ -10,7 +10,7 @@ defmodule SmeeView.Aspects.SigningMethod do
     algorithm: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:algo]
 
 
   #######################################################################################

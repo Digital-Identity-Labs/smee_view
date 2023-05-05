@@ -10,7 +10,7 @@ defmodule SmeeView.Aspects.Attribute do
     name_format: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:attr]
 
 end
 

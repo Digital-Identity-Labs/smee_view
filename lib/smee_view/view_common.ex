@@ -12,7 +12,7 @@ defmodule SmeeView.ViewCommon do
         features: []
       ],
       params
-    ) 
+    )
 
     quote do
 
@@ -62,6 +62,69 @@ defmodule SmeeView.ViewCommon do
         |> Enum.filter(fn aspect -> is_struct(aspect) end)
         |> Enum.filter(fn aspect -> if aspect.__struct__ == unquote(params[:aspect]), do: true, else: false end)
       end
+
+      unquote do
+
+        if Enum.member?(params[:features], :lang) do
+          quote do
+
+
+
+
+            #defoverridable [lang: 1, lang?: 2]
+
+          end
+
+        end
+
+      end
+
+      unquote do
+
+        if Enum.member?(params[:features], :text) do
+          quote do
+
+
+
+           # defoverridable [text: 1]
+
+          end
+
+        end
+
+      end
+
+      unquote do
+
+        if Enum.member?(params[:features], :url) do
+          quote do
+
+
+
+
+            #defoverridable [url: 1, valid?: 1]
+
+          end
+
+        end
+
+      end
+
+      unquote do
+
+        if Enum.member?(params[:features], :endpoint) do
+          quote do
+
+
+
+           # defoverridable [url: 1, valid?: 1]
+
+          end
+
+        end
+
+      end
+
 
       #######################################################################################
 

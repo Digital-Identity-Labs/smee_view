@@ -11,7 +11,7 @@ defmodule SmeeView.Aspects.RegistrationPolicy do
     url: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:lang, :url]
 
 
   #######################################################################################

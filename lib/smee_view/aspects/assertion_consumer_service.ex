@@ -11,7 +11,7 @@ defmodule SmeeView.Aspects.AssertionConsumerService do
     default: false
   ]
 
-  use SmeeView.Aspects.AspectCommon
+  use SmeeView.Aspects.AspectCommon, features: [:endpoint]
 
 end
 
