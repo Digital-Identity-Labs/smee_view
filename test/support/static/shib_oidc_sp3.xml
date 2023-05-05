@@ -1,0 +1,95 @@
+<md:EntityDescriptor
+        xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+        xmlns:oidcmd="urn:mace:shibboleth:metadata:oidc:1.0"
+        entityID="mockSamlClientId">
+  <md:SPSSODescriptor protocolSupportEnumeration="http://openid.net/specs/openid-connect-core-1_0.html">
+    <md:Extensions>
+      <oidcmd:OAuthRPExtensions
+              grant_types="authorization_code"
+              response_types="code"
+              token_endpoint_auth_method="private_key_jwt"
+              scopes="openid profile" />
+    </md:Extensions>
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>mockX509RSA</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509Certificate>
+            MIIEQDCCAqigAwIBAgIVAIarXvdvyS47KJR7U40FlTufyD8vMA0GCSqGSIb3DQEB
+            CwUAMCAxHjAcBgNVBAMMFWxvY2FsaG9zdC5sb2NhbGRvbWFpbjAeFw0xOTA2MTcx
+            MTI5MTJaFw0zOTA2MTcxMTI5MTJaMCAxHjAcBgNVBAMMFWxvY2FsaG9zdC5sb2Nh
+            bGRvbWFpbjCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBALXysGFnoBFh
+            oasd5uMecp9OTBjvztntPUVmHfm4R3AcItEMEZEN/pETcX/wgKdo4qCBq4PrZITa
+            T8Salgl0XL6qF1Wia3JNA7Hh/OaoQEUsbsHgsjLMKt6MJh8vIaE1o8loL7Ay4WmZ
+            Cr3wc8ZS6CpMsv+qbxkyfl1h7MTydETnQhg/X83bj+BjJSh7QeFU0d0SWK1dN2/D
+            nFoGOfuTfVqeDRIwMxKlR5G//8N202sLaG28NljaHhLn3jHXeiGpCQ+Q2X90dkFb
+            EKb6sQ6SlDUAzm9MwLYjglDyOhXpUqOnvD67nggLb4Gn/4k+g5wtdfr7unOJYcHK
+            w7JGnI8Gd0lJMd6B3SpkhUOWgKv/D6HIBArhqSEmXuTyy8FewyYuo1XkIw/Lu3bB
+            9qoBojM1tygoGlKi7R7e719J+DSkhyGbMyQ59leoN97iGGgqjUWS5mew8zSNviyz
+            4uGqvxmLWU9UTH1YhlARsBF1bMiMnwLz7dF74AaAkC4pN3BYzDMyHQIDAQABo3Ew
+            bzAdBgNVHQ4EFgQUwKUd9D1Qymu2oBEVTscrAhP+sIUwTgYDVR0RBEcwRYIVbG9j
+            YWxob3N0LmxvY2FsZG9tYWluhixodHRwczovL2xvY2FsaG9zdC5sb2NhbGRvbWFp
+            bi9pZHAvc2hpYmJvbGV0aDANBgkqhkiG9w0BAQsFAAOCAYEAEYqh54a+j5OuR1UB
+            /AT9k2xXVwHiqQXAC/2un8O5BWAOeOq9+0gLJO5yaJp5c9GjPXRJmnDfGP9HFF6R
+            CjngtRCm1gV/fpj97IRQS5oroaeTWPQ9ZD5+ogs5DNt6UZeJ2GqpfA5mOytNg3cM
+            OP1B5QnA1apOaG4FHTegJR7WOIXkkAjEJUy6R+5Q6At7DdK/SRrP5onVPFv2HgGF
+            E9v9iX/uQepDizS5F2oi6LZCl1/b38gxA8BFL7VZu53JQguaA7SrnP+dBOErT/yh
+            Qcx3e9wE2ms8H1qISIdl3e7gvLi5jEyDWC9Agde6EjjvVVJAF7jR0puQ39mBfoxP
+            moVdHJQmCt3V7Ew9tYZUpG3rjp4YNXOiM+QhtwhHWT94q9uJKUQ6JvbxgLNDs5KM
+            3PENx2C60TPFne9nRRIMVDavU4wwY7GdCgeo8PiZ5zxI0ZCkxh38ODePtKQrxJ7i
+            E0J1BE2LIxa1T7KY0XKpsH0iI2dNfZfNpNp4v/HiDb4svYgq</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>mockX509EC</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509Certificate>
+            MIIBKDCBzgIJAOYlspXlaqguMAoGCCqGSM49BAMCMBwxCzAJBgNVBAYTAkZJMQ0w
+            CwYDVQQDDAR0ZXN0MB4XDTE5MTEwMTA4Mjg0OVoXDTIwMTAzMTA4Mjg0OVowHDEL
+            MAkGA1UEBhMCRkkxDTALBgNVBAMMBHRlc3QwWTATBgcqhkjOPQIBBggqhkjOPQMB
+            BwNCAARCUOlFMtRj3MIbdCzXmoGz4giDwjzPoX4AxMehhlXmPOodQhLDdvDqx3KE
+            hqadzIIsKHRQPDycscpHWpPbaQ2VMAoGCCqGSM49BAMCA0kAMEYCIQCVykSuUjlX
+            j4lxI6YqgYVuuhL2rG4hIrXw/pCey7eF2gIhAOSSaS025lQWy09W4NlnO28OkHoI
+            +Hbap7+DQlhbbr2d</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>mockRSA</ds:KeyName>
+        <ds:KeyValue>
+          <ds:RSAKeyValue>
+            <ds:Modulus>
+              AMP1p7GwPH64UPvBKD4DK0I6SDY7dtFPzL7L5qAIEJwIBBeDmLfVY/f9mLzDuDb19XzQxc6GEcjj
+              K8qRe7JAD3CE1IXXD0hKSOJ7H+chWS84iv7UNukbHHBO1oaRgfHh7vbX7HnpYMoqKK75rfiQqD9e
+              XOa2FLiH1QvnhLGKJcN+OKujetTgAhxE7ski9Gtfhhbt1qCEl7XtaUCLLexyrwWxx+NRxFgMU+nt
+              IZQ+T8ii+JQSWnRh14PGc+K9o1dp+vjse62hFprVQhhcbAKAkWpbup77NvvuTZ2+AtUhOuNHrH2I
+              X3jHeSWH7EzTGkPLGS6bFnYJQBqWv0POytfSyMM=</ds:Modulus>
+            <ds:Exponent>AQAB</ds:Exponent>
+          </ds:RSAKeyValue>
+        </ds:KeyValue>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>mockJwkId</ds:KeyName>
+        <oidcmd:JwksData>
+          ewogICJrdHkiOiAiUlNBIiwKICAiZSI6ICJBUUFCIiwKICAia2lkIjogIm1vY2siLAogICJhbGci
+          OiAiUlMyNTYiLAogICJuIjogInBKcHRScnpyRlhEUnBaWkdpRmc1eW9KeVRPMlphUENSNEcwbjEx
+          aUVSclBTdlVYX202Qmdvak5qVEZISk1pa19pbGhtVzY0Q3JLdGlMdklRTFF6VWV5RXdDZHdYZVB3
+          UVpNeEV4VDJPV2thQy1DV0ZJNHR4X2VFWGRkUGtja1NMRERhMEVQd3dzWktQUFhoRTNWNTBfZ3pW
+          VDJZQVRvRE9fMmoyeGpWcHFzU0dFc0xpYjZqLW52dFpVVV9CMHNHeUppR1ZzMkpUTmhCTVNrT2tR
+          Zks2NkNCcW1sbzBuUE5NYVIxbWl2dG5JUG1aNnJKVHcwUDVZZ0dFS1hmZjBsa25Ib25ZVmRsVktw
+          c0Q4VW5hY0JzdFlyeUhsM0NQR2Uyc3RmR2ExZ3N6NEdIVGVfRnlWVk04UlNoQ2dYVVo3MTdoenpf
+          ekdQaVhDQkw0ZktEek5ZUXpIUSIKfQo=</oidcmd:JwksData>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:NameIDFormat>urn:mace:shibboleth:metadata:oidc:1.0:nameid-format:public</md:NameIDFormat>
+    <md:AssertionConsumerService
+            Binding="https://tools.ietf.org/html/rfc6749#section-3.1.2"
+            Location="https://example.org/cb"
+            index="1"/>
+  </md:SPSSODescriptor>
+</md:EntityDescriptor>
