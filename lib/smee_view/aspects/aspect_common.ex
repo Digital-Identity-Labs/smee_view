@@ -17,10 +17,12 @@ defmodule SmeeView.Aspects.AspectCommon do
 
     quote do
 
+      @doc "Returns a new aspect of this type"
       def new(data, options \\ []) do
         struct(%__MODULE__{}, prepare_data(data, options))
       end
 
+      @doc "Does this aspect contain various other types of aspect?"
       def composite?() do
         unquote(params[:composite])
       end
@@ -29,7 +31,8 @@ defmodule SmeeView.Aspects.AspectCommon do
 
         if Enum.member?(params[:features], :lang) do
           quote do
-            @doc "Lang is here"
+
+            @doc "Return the language of this aspect"
             def lang(aspect) do
               case aspect.lang do
                 nil -> SmeeView.Utils.default_lang()
@@ -38,7 +41,7 @@ defmodule SmeeView.Aspects.AspectCommon do
               end
             end
 
-            @doc "Lang? is here"
+            @doc "Is the aspect using this language?"
             def lang?(aspect, lang \\ SmeeView.Utils.default_lang()) do
               aspect.lang == lang
             end
@@ -55,6 +58,8 @@ defmodule SmeeView.Aspects.AspectCommon do
 
         if Enum.member?(params[:features], :text) do
           quote do
+
+            @doc "Returns the text for the aspect"
             def text(aspect) do
               aspect.text || SmeeView.Utils.default_text()
             end
@@ -69,20 +74,69 @@ defmodule SmeeView.Aspects.AspectCommon do
 
       unquote do
 
+        if Enum.member?(params[:features], :attr) do
+          quote do
+
+            @doc "Returns the human-readable name for this attribute"
+            def friendly_name(aspect) do
+              aspect.friendly_name
+            end
+
+            @doc "Returns the technical name for this attribute"
+            def name(aspect) do
+              aspect.name
+            end
+
+            @doc "Returns for technical name format for this attribute"
+            def name_format(aspect) do
+              aspect.name_format
+            end
+
+            @doc "Is this a SAML1 attribute?"
+            def saml1?(aspect) do
+              String.starts_with?(aspect.name_format, "urn:mace:shibboleth:1.0")
+            end
+
+            @doc "Is this a SAML2 attribute?"
+            def saml2?(aspect) do
+              String.starts_with?(aspect.name_format, "urn:oasis:names:tc:SAML:2.0")
+            end
+
+            defoverridable [saml1: 1, saml2: 2, name_format: 1, friendly_name: 1, name: 1]
+
+          end
+
+        end
+
+      end
+
+      unquote do
+
         if Enum.member?(params[:features], :url) do
           quote do
-                        def url(aspect) do
-                          aspect.url
-                        end
 
-                        def valid?(aspect) do
-                          case URI.new(aspect.uri) do
-                            {:ok, _} -> true
-                            {:error, _} -> false
-                          end
-                        end
+            @doc "Returns the URL for this aspect, as a text binary"
+            def url(aspect) do
+              aspect.url
+            end
 
-            defoverridable [url: 1, valid?: 1]
+            @doc "Returns the URL for this aspect as a parsed URI struct"
+            def parsed!(aspect) do
+              case URI.new(aspect.uri) do
+                {:ok, uri} -> uri
+                {:error, _} -> raise "Unable to parse #{aspect.uri}!"
+              end
+            end
+
+            @doc "Is this a valid URL?"
+            def valid?(aspect) do
+              case URI.new(aspect.uri) do
+                {:ok, _} -> true
+                {:error, _} -> false
+              end
+            end
+
+            defoverridable [url: 1, valid?: 1, parsed!: 1]
 
           end
 
@@ -94,10 +148,27 @@ defmodule SmeeView.Aspects.AspectCommon do
 
         if Enum.member?(params[:features], :endpoint) do
           quote do
-            def url(aspect) do
+
+            @doc "Returns the endpoint URL for this endpoint/service"
+            def endpoint(aspect) do
               aspect.location
             end
 
+            @doc "Returns the binding type for this endpoint/service"
+            def binding(aspect) do
+              aspect.binding
+            end
+
+            @doc "Returns the index type for this endpoint/service"
+            def index(%{index: index}) do
+              index
+            end
+
+            def index(aspect) do
+              nil
+            end
+
+            @doc "Is the URL for this endpoint/service valid?"
             def valid?(aspect) do
               case URI.new(aspect.location) do
                 {:ok, _} -> true
@@ -105,7 +176,7 @@ defmodule SmeeView.Aspects.AspectCommon do
               end
             end
 
-            defoverridable [url: 1, valid?: 1]
+            defoverridable [endpoint: 1, valid?: 1, endpoint: 1, binding: 1, index: 1]
 
           end
 
@@ -120,7 +191,7 @@ defmodule SmeeView.Aspects.AspectCommon do
       end
 
       defoverridable [composite?: 0, new: 2, prepare_data: 2]
-      
+
     end
 
   end
