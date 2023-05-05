@@ -3,7 +3,7 @@ defmodule SmeeView.Aspects.Null do
   @moduledoc false
 
   alias __MODULE__
-  
+
   defstruct [
     text: ""
   ]

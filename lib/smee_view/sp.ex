@@ -4,7 +4,6 @@ defmodule SmeeView.SP do
 
   @entity_xmap [
     ~x"//md:SPSSODescriptor"l,
-    protocols: ~x"string(@protocolSupportEnumeration)"s,
     authn_requests_signed: ~x"string(@AuthnRequestsSigned)"s,
     want_assertions_signed: ~x"string(@WantAssertionsSigned)"s,
   ]
@@ -18,6 +17,7 @@ defmodule SmeeView.SP do
       aspect_data,
       %{
         logos: SmeeView.Logos.view(entity, :sp),
+        protocols: SmeeView.Protocols.view(entity, :sp),
         displaynames: SmeeView.Displaynames.view(entity, :sp),
         keywords: SmeeView.Keywords.view(entity, :sp),
         keys: SmeeView.Keys.view(entity, :sp),

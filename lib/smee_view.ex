@@ -25,16 +25,17 @@ defmodule SmeeView do
   alias SmeeView.NameIDFormats
   alias SmeeView.NameidMappingServices
   alias SmeeView.Networks
+  alias SmeeView.Protocols
   alias SmeeView.PublicationPath
   alias SmeeView.Registration
   alias SmeeView.RegistrationPolicies
   alias SmeeView.RequestInitiators
   alias SmeeView.RequestedAttributes
-  alias SmeeView.Services
   alias SmeeView.SP
   alias SmeeView.Scopes
   alias SmeeView.ServiceDescriptions
   alias SmeeView.ServiceNames
+  alias SmeeView.Services
   alias SmeeView.SingleLogoutServices
   alias SmeeView.SingleSignonServices
 
@@ -92,6 +93,10 @@ defmodule SmeeView do
 
   def nameid_formats(entity, options \\ []) do
     NameIDFormats.view(entity, :all, options)
+  end
+
+  def protocols(entity, options \\ []) do
+    Protocols.view(entity, :all, options)
   end
 
   def idp(entity, options \\ []) do

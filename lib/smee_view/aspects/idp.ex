@@ -3,9 +3,6 @@ defmodule SmeeView.Aspects.IdP do
   alias __MODULE__
   alias SmeeView.Utils
 
-
-
-
   defstruct [
     protocols: [],
     want_authn_requests_signed: false,
@@ -31,7 +28,6 @@ defmodule SmeeView.Aspects.IdP do
     Map.merge(
       data,
       %{
-        protocols: Utils.parse_protocols(data[:protocols]),
         want_authn_requests_signed: Utils.parse_boolean(data[:want_authn_requests_signed])
       }
     )
