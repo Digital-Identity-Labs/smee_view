@@ -93,13 +93,16 @@ defmodule SmeeView.MixProject do
       SmeeView.AssertionIDRequestServices,
       SmeeView.AttributeConsumingServices,
       SmeeView.AttributeServices,
+      SmeeView.Attributes,
       SmeeView.Contacts,
       SmeeView.Descriptions,
       SmeeView.DiscoHints,
+      SmeeView.DiscoUI,
       SmeeView.DiscoveryResponses,
       SmeeView.Displaynames,
       SmeeView.Domains,
       SmeeView.Entity,
+      SmeeView.EntityAttributes,
       SmeeView.EntityFilter,
       SmeeView.Geolocations,
       SmeeView.IdP,
@@ -115,6 +118,7 @@ defmodule SmeeView.MixProject do
       SmeeView.OrganizationNames,
       SmeeView.OrganizationURLs,
       SmeeView.PublicationPath,
+      SmeeView.Protocols,
       SmeeView.Registration,
       SmeeView.RegistrationPolicies,
       SmeeView.RequestInitiators,
@@ -126,8 +130,7 @@ defmodule SmeeView.MixProject do
       SmeeView.ServiceNames,
       SmeeView.Services,
       SmeeView.SingleLogoutServices,
-      SmeeView.SingleSignonServices,
-      SmeeView.UI
+      SmeeView.SingleSignonServices
     ]
   end
 
@@ -138,6 +141,7 @@ defmodule SmeeView.MixProject do
       SmeeView.Aspects.AspectTools.Text,
       SmeeView.Aspects.AssertionConsumerService,
       SmeeView.Aspects.AssertionIDRequestService,
+      SmeeView.Aspects.Attribute,
       SmeeView.Aspects.AttributeConsumingService,
       SmeeView.Aspects.AttributeService,
       SmeeView.Aspects.Contact,
@@ -148,6 +152,7 @@ defmodule SmeeView.MixProject do
       SmeeView.Aspects.Domain,
       SmeeView.Aspects.EncryptionMethod,
       SmeeView.Aspects.Entity,
+      SmeeView.Aspects.EntityAttribute,
       SmeeView.Aspects.Geolocation,
       SmeeView.Aspects.IdP,
       SmeeView.Aspects.InformationURL,
@@ -163,6 +168,7 @@ defmodule SmeeView.MixProject do
       SmeeView.Aspects.OrganizationName,
       SmeeView.Aspects.OrganizationURL,
       SmeeView.Aspects.PrivacyURL,
+      SmeeView.Aspects.Protocol,
       SmeeView.Aspects.Publication,
       SmeeView.Aspects.Registration,
       SmeeView.Aspects.RegistrationPolicy,
