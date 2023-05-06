@@ -29,6 +29,73 @@ defmodule SmeeView.Aspects.AspectCommon do
 
       unquote do
 
+        if params[:roles] do
+          quote do
+
+            @doc "Role for this aspect"
+            def role(%{role: role}) when is_nil(role) or role == :all do
+              :all
+            end
+
+            def role(%{role: role}) do
+              role
+            end
+
+            def role(_) do
+              :all
+            end
+
+            @doc "Is this aspect relevant to the IdP role?"
+            def idp?(%{role: :sp}) do
+              false
+            end
+
+            def idp?(_) do
+              true
+            end
+
+            @doc "Is this aspect relevant to the SP role?"
+            def sp?(%{role: :idp}) do
+              false
+            end
+
+            def sp?(_) do
+              true
+            end
+
+            defoverridable [sp?: 1, idp?: 1]
+
+          end
+
+        else
+
+          quote do
+
+            @doc "Role for this aspect"
+            def role(aspect) do
+              :all
+            end
+
+            @doc "Is this aspect relevant to the IdP role?"
+            def idp?(aspect) do
+              true
+            end
+
+            @doc "Is this aspect relevant to the SP role?"
+            def sp?(aspect) do
+              true
+            end
+
+            defoverridable [sp?: 1, idp?: 1]
+
+          end
+
+        end
+
+      end
+
+      unquote do
+
         if Enum.member?(params[:features], :lang) do
           quote do
 
