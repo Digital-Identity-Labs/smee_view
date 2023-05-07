@@ -7,11 +7,16 @@ defmodule SmeeView.Aspects.AssertionConsumerService do
   defstruct [
     binding: nil,
     location: nil,
-    index: nil,
+    index: 1,
     default: false
   ]
 
   use SmeeView.Aspects.AspectCommon, features: [:endpoint]
+
+  defp prepare_data(data, _options \\ []) do
+    Map.merge(data, %{index: Utils.normalize_index(data[:index])})
+  end
+
 
 end
 

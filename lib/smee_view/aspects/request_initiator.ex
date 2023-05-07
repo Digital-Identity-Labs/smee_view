@@ -8,10 +8,15 @@ defmodule SmeeView.Aspects.RequestInitiator do
 
   defstruct [
     binding: nil,
-    location: nil
+    location: nil,
+    index: 1
   ]
 
   use SmeeView.Aspects.AspectCommon, features: [:endpoint]
+
+  defp prepare_data(data, _options \\ []) do
+    Map.merge(data, %{index: Utils.normalize_index(data[:index])})
+  end
 
 end
 

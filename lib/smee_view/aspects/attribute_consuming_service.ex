@@ -3,16 +3,19 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
   alias __MODULE__
   alias SmeeView.Utils
 
-
   defstruct [
     default: false,
-    index: nil,
+    index: 1,
     requested_attributes: [],
     service_descriptions: [],
     service_names: []
   ]
 
   use SmeeView.Aspects.AspectCommon, features: [:endpoint]
+
+  defp prepare_data(data, _options \\ []) do
+    Map.merge(data, %{index: Utils.normalize_index(data[:index])})
+  end
 
 end
 

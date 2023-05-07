@@ -6,10 +6,16 @@ defmodule SmeeView.Aspects.AssertionIDRequestService do
 
   defstruct [
     binding: nil,
-    location: nil
+    location: nil,
+    index: 0
   ]
 
   use SmeeView.Aspects.AspectCommon, features: [:endpoint]
+
+  ## Does not, cannot, have index - just here for indexing consistency
+  defp prepare_data(data, _options \\ []) do
+    Map.merge(data, %{index: 0})
+  end
 
 end
 
