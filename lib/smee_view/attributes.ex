@@ -1,6 +1,6 @@
 defmodule SmeeView.Attributes do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Attribute, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Attribute, roles: false, features: [:attr]
 
   @entity_xmap [
     ~x"//md:IDPSSODescriptor/saml:Attribute"el,

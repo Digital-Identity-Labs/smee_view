@@ -1,6 +1,6 @@
 defmodule SmeeView.RequestedAttributes do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.RequestedAttribute, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.RequestedAttribute, roles: false, features: [:attr]
 
   @entity_xmap [
     ~x"//md:SPSSODescriptor/AttributeConsumingService/RequestedAttribute"le,
