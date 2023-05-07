@@ -11,7 +11,7 @@ defmodule SmeeView.Aspects.Logo do
     lang: "en",
   ]
 
-  use SmeeView.Aspects.AspectCommon, features: [:lang, :url]
+  use SmeeView.Aspects.AspectCommon, features: [:lang, :url], roles: true
 
 #  def test(aspect) do
 #    lang(aspect)
