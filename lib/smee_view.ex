@@ -38,6 +38,9 @@ defmodule SmeeView do
   alias SmeeView.Services
   alias SmeeView.SingleLogoutServices
   alias SmeeView.SingleSignonServices
+  alias SmeeView.DigestMethods
+  alias SmeeView.SigningMethods
+  alias SmeeView.EncryptionMethods
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -178,6 +181,21 @@ defmodule SmeeView do
   def attributes(entity, options \\ []) do
     Attributes.view(entity, :idp, options)
   end
+
+  def signing_methods(entity, options \\ []) do
+    SigningMethods.view(entity, :all, options)
+  end
+
+
+  def digest_methods(entity, options \\ []) do
+    DigestMethods.view(entity, :qll, options)
+  end
+
+
+  def encryption_methods(entity, options \\ []) do
+    EncryptionMethods.view(entity, :all, options)
+  end
+
 
   ###
 

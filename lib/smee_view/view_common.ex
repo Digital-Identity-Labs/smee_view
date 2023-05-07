@@ -204,6 +204,29 @@ defmodule SmeeView.ViewCommon do
 
       unquote do
 
+        if Enum.member?(params[:features], :algo) do
+          quote do
+
+            @doc "Returns filtered list of only valid URLs"
+            def truncate(aspects) do
+              aspects
+              |> Enum.map(
+                   fn aspect ->
+                     unquote(params[:aspect]).truncate(aspect)
+                   end
+                 )
+            end
+
+            defoverridable [truncate: 1]
+
+          end
+
+        end
+
+      end
+
+      unquote do
+
         if Enum.member?(params[:features], :endpoint) do
           quote do
 

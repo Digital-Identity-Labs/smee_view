@@ -150,7 +150,13 @@ defmodule SmeeView.Aspects.AspectCommon do
               aspect.algorithm
             end
 
-            defoverridable [algorithm: 1]
+            @doc "Removes the namespace for the algorithm, leaving a smaller, friendlier, potentially colliding name"
+            def truncate(aspect) do
+               [_, short] = String.split(aspect.algorithm, "#", parts: 2)
+               short
+            end
+
+            defoverridable [algorithm: 1, truncate: 1]
 
           end
 
