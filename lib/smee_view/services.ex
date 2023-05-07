@@ -1,5 +1,7 @@
 defmodule SmeeView.Services do
 
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Null, roles: false, features: [:endpoint]
+
   def view(entity, role \\ :all, options \\ []) do
     [
       SmeeView.ArtifactResolutionServices.view(entity, role, options),
