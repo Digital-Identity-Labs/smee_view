@@ -1,6 +1,6 @@
 defmodule SmeeView.RequestInitiators do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.RequestInitiator, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.RequestInitiator, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:SPSSODescriptor/Extensions/init:RequestInitiator"le,

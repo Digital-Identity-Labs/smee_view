@@ -1,6 +1,6 @@
 defmodule SmeeView.SingleSignonServices do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.SingleSignonService, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.SingleSignonService, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:IDPSSODescriptor/SingleSignOnService"le,

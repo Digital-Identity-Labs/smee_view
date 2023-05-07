@@ -1,6 +1,6 @@
 defmodule SmeeView.NameidMappingServices do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.NameidMappingService, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.NameidMappingService, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:IDPSSODescriptor/NameIDMappingService"le,

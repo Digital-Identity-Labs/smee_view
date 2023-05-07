@@ -1,6 +1,6 @@
 defmodule SmeeView.AttributeConsumingServices do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AttributeConsumingService, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AttributeConsumingService, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:SPSSODescriptor/AttributeConsumingService"le,

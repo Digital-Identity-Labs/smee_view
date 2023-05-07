@@ -1,6 +1,6 @@
 defmodule SmeeView.DiscoveryResponses do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.DiscoveryResponse, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.DiscoveryResponse, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:SPSSODescriptor/Extensions/idpdisc:DiscoveryResponse"le,

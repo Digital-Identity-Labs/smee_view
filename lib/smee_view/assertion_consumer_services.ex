@@ -1,6 +1,6 @@
 defmodule SmeeView.AssertionConsumerServices do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AssertionConsumerService, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AssertionConsumerService, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:SPSSODescriptor/AssertionConsumerService"le,

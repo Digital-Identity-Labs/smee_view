@@ -1,6 +1,6 @@
 defmodule SmeeView.AttributeServices do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AttributeService, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AttributeService, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:IDPSSODescriptor/AttributeService"le,

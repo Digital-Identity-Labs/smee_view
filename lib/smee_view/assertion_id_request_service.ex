@@ -1,6 +1,6 @@
 defmodule SmeeView.AssertionIDRequestServices do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AssertionIDRequestService, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.AssertionIDRequestService, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:IDPSSODescriptor/AssertionIDRequestService"le,

@@ -1,6 +1,6 @@
 defmodule SmeeView.ManageNameidServices do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.ManageNameidService, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.ManageNameidService, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:IDPSSODescriptor/ManageNameIDService"le,

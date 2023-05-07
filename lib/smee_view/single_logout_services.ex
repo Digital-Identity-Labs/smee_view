@@ -1,6 +1,6 @@
 defmodule SmeeView.SingleLogoutServices do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.SingleLogoutService, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.SingleLogoutService, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:IDPSSODescriptor/SingleLogoutService"le,

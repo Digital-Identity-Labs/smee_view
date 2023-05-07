@@ -1,6 +1,6 @@
 defmodule SmeeView.ArtifactResolutionServices do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.ArtifactResolutionService, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.ArtifactResolutionService, roles: false, features: [:endpoint]
 
   @entity_xmap [
     ~x"//md:IDPSSODescriptor/ArtifactResolutionService"le,
