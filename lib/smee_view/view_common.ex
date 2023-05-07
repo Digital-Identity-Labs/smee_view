@@ -20,6 +20,7 @@ defmodule SmeeView.ViewCommon do
       import SweetXml, except: [sigil_x: 2, parse: 1]
 
       alias Smee.Entity
+      alias SmeeView.Utils
 
       def view(list, role \\ :all, options \\ [])
       def view(list, role, options) when is_list(list) do
@@ -63,15 +64,60 @@ defmodule SmeeView.ViewCommon do
         |> Enum.filter(fn aspect -> if aspect.__struct__ == unquote(params[:aspect]), do: true, else: false end)
       end
 
+      @doc "Returns only aspects suitable for IdP role (whether or not it exists)"
+      def idp(aspects) do
+        aspects
+        |> Enum.filter(
+             fn aspect ->
+               unquote(params[:aspect]).idp?(aspect)
+             end
+           )
+      end
+
+      @doc "Returns only aspects suitable for IdP role (whether or not it exists)"
+      def sp(aspects) do
+        aspects
+        |> Enum.filter(
+             fn aspect ->
+               unquote(params[:aspect]).sp?(aspect)
+             end
+           )
+      end
+
       unquote do
 
         if Enum.member?(params[:features], :lang) do
           quote do
 
+            @doc "Returns a list of all languages used in the view"
+            def langs(aspects) do
+              aspects
+              |> Enum.map(
+                   fn aspect ->
+                     unquote(params[:aspect]).lang(aspect)
+                   end
+                 )
+            end
 
+            @doc "Returns the first aspect with matching language, or failing that, the default language, or English"
+            def pick(aspects, lang \\ Utils.default_lang()) do
+              select_by_lang(aspects, lang) || select_by_lang(aspects, Utils.default_lang()) || select_by_lang(
+                aspects,
+                Utils.default_lang()
+              ) || List.first(aspects)
+            end
 
+            defp select_by_lang(aspects, lang) do
+              aspects
+              |> Enum.find(
+                   nil,
+                   fn aspect ->
+                     unquote(params[:aspect]).lang(aspect) == String.downcase("#{lang}")
+                   end
+                 )
+            end
 
-            #defoverridable [lang: 1, lang?: 2]
+            defoverridable [langs: 1, pick: 2]
 
           end
 
@@ -84,9 +130,48 @@ defmodule SmeeView.ViewCommon do
         if Enum.member?(params[:features], :text) do
           quote do
 
+            @doc "Returns maximum width of text in the view, as an integer"
+            def max_size(aspects) do
+              aspects
+              |> Enum.max_by(fn a -> String.length(a.text) end, &>=/2, fn -> struct(%SmeeView.Aspects.Null{}) end)
+              |> Map.get(:text)
+              |> String.length()
+            end
 
+            defoverridable [max_size: 1]
 
-           # defoverridable [text: 1]
+          end
+
+        end
+
+      end
+
+      unquote do
+
+        if Enum.member?(params[:features], :attr) do
+          quote do
+
+            @doc "Returns only SAML1 attributes"
+            def saml1(aspects) do
+              aspects
+              |> Enum.filter(
+                   fn aspect ->
+                     unquote(params[:aspect]).saml1?(aspect)
+                   end
+                 )
+            end
+
+            @doc "Returns only SAML2 attributes"
+            def saml2(aspects) do
+              aspects
+              |> Enum.filter(
+                   fn aspect ->
+                     unquote(params[:aspect]).saml2?(aspect)
+                   end
+                 )
+            end
+
+            defoverridable [saml1: 1, saml2: 1]
 
           end
 
@@ -99,10 +184,17 @@ defmodule SmeeView.ViewCommon do
         if Enum.member?(params[:features], :url) do
           quote do
 
+            @doc "Returns filtered list of only valid URLs"
+            def valid(aspects) do
+              aspects
+              |> Enum.filter(
+                   fn aspect ->
+                     unquote(params[:aspect]).valid?(aspect)
+                   end
+                 )
+            end
 
-
-
-            #defoverridable [url: 1, valid?: 1]
+            defoverridable [valid: 1]
 
           end
 
@@ -115,16 +207,39 @@ defmodule SmeeView.ViewCommon do
         if Enum.member?(params[:features], :endpoint) do
           quote do
 
+            @doc "Returns all bindings present in the view"
+            def bindings(aspects) do
+              aspects
+              |> Enum.map(
+                   fn aspect ->
+                     unquote(params[:aspect]).binding(aspect)
+                   end
+                 )
+            end
 
+            @doc "Returns all services matching the specified binding"
+            def binding(aspects, binding) do
+              aspects
+              |> Enum.filter(
+                   fn aspect ->
+                     unquote(params[:aspect]).binding(aspect) == binding
+                   end
+                 )
+            end
 
-           # defoverridable [url: 1, valid?: 1]
+            @doc "Sorts the services - only really has an impact if services have an index value set"
+            def sort(aspects) do
+              aspects
+              |> Enum.sort_by(&(&1.index), :asc)
+            end
+
+            defoverridable [bindings: 1, binding: 2, sort: 1]
 
           end
 
         end
 
       end
-
 
       #######################################################################################
 
