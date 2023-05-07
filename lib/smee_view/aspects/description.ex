@@ -6,10 +6,11 @@ defmodule SmeeView.Aspects.Description do
 
   defstruct [
     lang: "en",
-    text: nil
+    text: nil,
+    role: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon, features: [:lang, :text]
+  use SmeeView.Aspects.AspectCommon, features: [:lang, :text], roles: true
 
 end
 

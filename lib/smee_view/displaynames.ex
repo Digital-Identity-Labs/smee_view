@@ -1,6 +1,6 @@
 defmodule SmeeView.Displaynames do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Displayname, roles: true
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Displayname, roles: true, features: [:lang, :text]
 
   @idp_xmap [
     ~x"//md:IDPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:DisplayName"le,
