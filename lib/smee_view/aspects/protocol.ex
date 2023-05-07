@@ -8,7 +8,7 @@ defmodule SmeeView.Aspects.Protocol do
     uri: nil
   ]
 
-  use SmeeView.Aspects.AspectCommon, features: [:prid]
+  use SmeeView.Aspects.AspectCommon, features: [:prid], roles: true
 
 end
 
