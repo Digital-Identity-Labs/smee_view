@@ -17,6 +17,8 @@ defmodule SmeeView.SP do
       aspect_data,
       %{
         logos: SmeeView.Logos.view(entity, :sp),
+        privacy_urls: SmeeView.PrivacyURLs.view(entity, :sp),
+        information_urls: SmeeView.InformationURLs.view(entity, :sp),
         protocols: SmeeView.Protocols.view(entity, :sp),
         displaynames: SmeeView.Displaynames.view(entity, :sp),
         keywords: SmeeView.Keywords.view(entity, :sp),

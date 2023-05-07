@@ -41,6 +41,11 @@ defmodule SmeeView do
   alias SmeeView.DigestMethods
   alias SmeeView.SigningMethods
   alias SmeeView.EncryptionMethods
+  alias SmeeView.OrganizationURLs
+  alias SmeeView.PrivacyURLs
+  alias SmeeView.InformationURLs
+  alias SmeeView.DiscoUI
+  alias SmeeView.DiscoHints
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -186,16 +191,33 @@ defmodule SmeeView do
     SigningMethods.view(entity, :all, options)
   end
 
-
   def digest_methods(entity, options \\ []) do
     DigestMethods.view(entity, :qll, options)
   end
-
 
   def encryption_methods(entity, options \\ []) do
     EncryptionMethods.view(entity, :all, options)
   end
 
+  def organization_urls(entity, options \\ []) do
+    OrganizationURLs.view(entity, :all, options)
+  end
+
+  def information_urls(entity, options \\ []) do
+    InformationURLs.view(entity, :all, options)
+  end
+
+  def privacy_urls(entity, options \\ []) do
+    PrivacyURLs.view(entity, :all, options)
+  end
+
+  def disco_ui(entity, options \\ []) do
+    DiscoUI.view(entity, :all, options)
+  end
+
+  def disco_hints(entity, options \\ []) do
+    DiscoHints.view(entity, :all, options)
+  end
 
   ###
 

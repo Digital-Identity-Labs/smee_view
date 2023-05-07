@@ -1,4 +1,4 @@
-defmodule SmeeView.Aspects.Organization do
+defmodule SmeeView.Aspects.DiscoUI do
 
   alias __MODULE__
   alias SmeeView.Utils
@@ -6,7 +6,11 @@ defmodule SmeeView.Aspects.Organization do
   defstruct [
     displaynames: [],
     names: [],
-    urls: []
+    logos: [],
+    privacy_urls: [],
+    information_urls: [],
+    keywords: [],
+    organization: [],
   ]
 
   use SmeeView.Aspects.AspectCommon
@@ -15,6 +19,6 @@ defmodule SmeeView.Aspects.Organization do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.DiscoHints do
-  def to_string(a), do: "Organization"
+defimpl String.Chars, for: SmeeView.Aspects.DiscoUI do
+  def to_string(a), do: "Disco UI"
 end

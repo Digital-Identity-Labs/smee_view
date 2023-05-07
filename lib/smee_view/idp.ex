@@ -21,6 +21,8 @@ defmodule SmeeView.IdP do
         networks: SmeeView.Networks.view(entity, :idp),
         geolocations: SmeeView.Geolocations.view(entity, :idp),
         domains: SmeeView.Domains.view(entity, :idp),
+        privacy_urls: SmeeView.PrivacyURLs.view(entity, :idp),
+        information_urls: SmeeView.InformationURLs.view(entity, :idp),
         keywords: SmeeView.Keywords.view(entity, :idp),
         keys: SmeeView.Keys.view(entity, :idp),
         nameid_formats: SmeeView.NameIDFormats.view(entity, :idp),

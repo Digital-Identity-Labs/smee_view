@@ -1,6 +1,6 @@
 defmodule SmeeView.OrganizationURLs do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.OrganizationURL, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.OrganizationURL, roles: false, features: [:url, :lang]
 
   @entity_xmap [
     ~x"//md:Organization/md:OrganizationURL"le,

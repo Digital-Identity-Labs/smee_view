@@ -1,9 +1,10 @@
 defmodule SmeeView.DiscoHints do
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Organization, roles: false, one: true
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.DiscoHints, roles: false, one: true
+
 
   @entity_xmap [
-    ~x"//md:Organization"l,
+    ~x"//md:Extensions"l,
     exists: ~x"/"
   ]
 
@@ -11,13 +12,15 @@ defmodule SmeeView.DiscoHints do
     @entity_xmap
   end
 
-  defp cascade_views(entity, aspect_data, role) do
+  defp cascade_views(entity, aspect_data, _role) do
     Map.merge(
       aspect_data,
       %{
-        displaynames: SmeeView.OrganizationDisplaynames.view(entity, role),
-        names: SmeeView.OrganizationNames.view(entity, role),
-        urls: SmeeView.OrganizationURLs.view(entity, role)
+        scopes: SmeeView.Scopes.view(entity, :idp),
+        networks: SmeeView.Networks.view(entity, :idp),
+        geolocations: SmeeView.Geolocations.view(entity, :idp),
+        keywords: SmeeView.Keywords.view(entity, :idp),
+        domains: SmeeView.Domains.view(entity, :idp)
       }
     )
   end
