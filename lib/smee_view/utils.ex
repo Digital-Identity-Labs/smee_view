@@ -18,8 +18,21 @@ defmodule SmeeView.Utils do
     email
   end
 
+  def normalize_index(index) when is_nil(index) do
+    0
+  end
+
+  def normalize_index(index) when is_integer(index) do
+    index
+  end
+
+  def normalize_index(index) do
+    {int, _} = Integer.parse("#{index}")
+    int
+  end
+
   def default_lang() do
-    "en"
+    Application.get_env(:smee_view, :defaultlang, "en")
   end
 
   def fallback_lang() do
@@ -66,6 +79,7 @@ defmodule SmeeView.Utils do
       _ -> false
     end
   end
+
 
   #######################################################################################
 
