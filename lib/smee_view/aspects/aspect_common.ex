@@ -11,6 +11,7 @@ defmodule SmeeView.Aspects.AspectCommon do
       [
         composite: false,
         features: [],
+        roles: false
       ],
       params
     )
