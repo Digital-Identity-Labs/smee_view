@@ -34,8 +34,6 @@ defmodule SmeeView.ViewCommon do
       @doc "Docs for view function - do they appear?"
       def view(%Entity{} = entity, role, options) do
 
-        single = unquote(params[:one])
-
         list = entity
                |> Entity.xdoc()
                |> extract_data_from_xml(xmapper_for_role(role))
@@ -53,7 +51,18 @@ defmodule SmeeView.ViewCommon do
                   )
                |> List.flatten()
 
-        if single, do: List.first(list), else: list
+        unquote do
+
+          if params[:one] do
+            quote do
+              List.first(list)
+            end
+          else
+            quote do
+              list
+            end
+          end
+        end
 
       end
 
@@ -289,7 +298,8 @@ defmodule SmeeView.ViewCommon do
 
       defp trim_aspect_data(data) do
         data
-        |> Enum.reject(fn {k, v} -> (v == "" || is_nil(v)) end)
+        |> Enum.reject(fn {k, v} -> (v == "") end)
+        |> Enum.reject(fn {k, v} -> (is_nil(v)) end)
         |> Map.new()
       end
 

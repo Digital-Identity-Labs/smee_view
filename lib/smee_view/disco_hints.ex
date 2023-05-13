@@ -2,7 +2,6 @@ defmodule SmeeView.DiscoHints do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.DiscoHints, roles: false, one: true
 
-
   @entity_xmap [
     ~x"//md:Extensions"l,
     exists: ~x"/"
