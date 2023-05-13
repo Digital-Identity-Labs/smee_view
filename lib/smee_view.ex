@@ -42,7 +42,6 @@ defmodule SmeeView do
   alias SmeeView.Scopes
   alias SmeeView.ServiceDescriptions
   alias SmeeView.ServiceNames
-  alias SmeeView.Services
   alias SmeeView.SigningMethods
   alias SmeeView.SingleLogoutServices
   alias SmeeView.SingleSignonServices
@@ -152,7 +151,18 @@ defmodule SmeeView do
   end
 
   def services(entity, options \\ []) do
-    Services.view(entity, :all, options)
+    [
+      SmeeView.ArtifactResolutionServices.view(entity, :all, options),
+      SmeeView.AssertionConsumerServices.view(entity, :all, options),
+      SmeeView.AssertionIDRequestServices.view(entity, :all, options),
+      SmeeView.AttributeConsumingServices.view(entity, :all, options),
+      SmeeView.AttributeServices.view(entity, :all, options),
+      SmeeView.ManageNameidServices.view(entity, :all, options),
+      SmeeView.NameidMappingServices.view(entity, :all, options),
+      SmeeView.SingleLogoutServices.view(entity, :all, options),
+      SmeeView.SingleSignonServices.view(entity, :all, options)
+    ]
+    |> List.flatten()
   end
 
   def requested_attributes(entity, options \\ []) do
