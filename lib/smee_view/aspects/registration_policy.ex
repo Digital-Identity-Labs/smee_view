@@ -4,7 +4,10 @@ defmodule SmeeView.Aspects.RegistrationPolicy do
   alias SmeeView.Utils
 
 
-
+  @type t :: %__MODULE__{
+               lang: binary(),
+               url: binary(),
+             }
 
   defstruct [
     lang: "en",

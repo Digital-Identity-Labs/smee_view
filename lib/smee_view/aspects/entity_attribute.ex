@@ -3,7 +3,10 @@ defmodule SmeeView.Aspects.EntityAttribute do
   alias __MODULE__
   alias SmeeView.Utils
 
-
+  @type t :: %__MODULE__{
+               name: binary(),
+               values: list()
+             }
 
 
   defstruct [
@@ -12,9 +15,6 @@ defmodule SmeeView.Aspects.EntityAttribute do
   ]
 
   use SmeeView.Aspects.AspectCommon
-
-
-
 
 end
 

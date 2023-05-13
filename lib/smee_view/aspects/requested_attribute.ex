@@ -3,8 +3,11 @@ defmodule SmeeView.Aspects.RequestedAttribute do
   alias __MODULE__
   alias SmeeView.Utils
 
-
-
+  @type t :: %__MODULE__{
+               friendly_name: binary(),
+               name: binary(),
+               name_format: binary()
+             }
 
   defstruct [
     friendly_name: nil,

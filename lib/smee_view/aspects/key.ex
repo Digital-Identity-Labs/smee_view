@@ -3,7 +3,12 @@ defmodule SmeeView.Aspects.Key do
   alias __MODULE__
   alias SmeeView.Utils
 
-
+  @type t :: %__MODULE__{
+               type: atom(),
+               pem: binary(),
+               use: atom(),
+               role: atom()
+             }
 
 
   @pem_header "-----BEGIN CERTIFICATE-----"

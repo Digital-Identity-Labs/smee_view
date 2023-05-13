@@ -4,7 +4,10 @@ defmodule SmeeView.Aspects.Scope do
   alias SmeeView.Utils
 
 
-
+  @type t :: %__MODULE__{
+               regex: boolean(),
+               domain: binary()
+             }
 
   defstruct [
     regex: false,

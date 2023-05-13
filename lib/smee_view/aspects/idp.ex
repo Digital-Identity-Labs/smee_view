@@ -2,7 +2,21 @@ defmodule SmeeView.Aspects.IdP do
 
   alias __MODULE__
   alias SmeeView.Utils
-
+  @type t :: %__MODULE__{
+               protocols: list(),
+               want_authn_requests_signed: boolean(),
+               scopes: list(),
+               logos: list(),
+               displaynames: list(),
+               networks: list(),
+               geolocations: list(),
+               domains: list(),
+               keywords: list(),
+               keys: list(),
+               nameid_formats: list(),
+               services: list(),
+               attributes: list(),
+             }
   defstruct [
     protocols: [],
     want_authn_requests_signed: false,

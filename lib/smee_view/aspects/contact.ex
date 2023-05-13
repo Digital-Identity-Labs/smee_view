@@ -3,9 +3,16 @@ defmodule SmeeView.Aspects.Contact do
   alias __MODULE__
   alias SmeeView.Utils
 
-
-
   @types ~w(technical support administrative billing other)
+
+  @type t :: %__MODULE__{
+               email: binary(),
+               phone: binary(),
+               type: binary(),
+               givenname: binary(),
+               surname: binary(),
+               company: binary()
+             }
 
   defstruct [
     email: nil,

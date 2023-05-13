@@ -2,11 +2,16 @@ defmodule SmeeView.Aspects.Displayname do
 
   alias __MODULE__
   alias SmeeView.Utils
-
+  @type t :: %__MODULE__{
+               lang: binary(),
+               text: binary(),
+               role: atom()
+             }
 
   defstruct [
     lang: "en",
-    text: nil
+    text: nil,
+    role: nil
   ]
 
   use SmeeView.Aspects.AspectCommon, features: [:lang, :text]

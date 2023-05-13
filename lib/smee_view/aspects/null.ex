@@ -4,6 +4,10 @@ defmodule SmeeView.Aspects.Null do
 
   alias __MODULE__
 
+  @type t :: %__MODULE__{
+               text: binary()
+             }
+
   defstruct [
     text: ""
   ]

@@ -3,7 +3,10 @@ defmodule SmeeView.Aspects.ServiceDescription do
   alias __MODULE__
   alias SmeeView.Utils
 
-
+  @type t :: %__MODULE__{
+               lang: binary(),
+               text: binary()
+             }
 
   defstruct [
     lang: "en",
@@ -11,7 +14,6 @@ defmodule SmeeView.Aspects.ServiceDescription do
   ]
 
   use SmeeView.Aspects.AspectCommon, features: [:lang, :text]
-
 
 end
 

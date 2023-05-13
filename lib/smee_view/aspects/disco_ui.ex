@@ -2,7 +2,15 @@ defmodule SmeeView.Aspects.DiscoUI do
 
   alias __MODULE__
   alias SmeeView.Utils
-
+  @type t :: %__MODULE__{
+               displaynames: list(),
+               names: list(),
+               logos: list(),
+               privacy_urls: list(),
+               information_urls: list(),
+               keywords: list(),
+               organization: list(),
+             }
   defstruct [
     displaynames: [],
     names: [],
@@ -13,12 +21,12 @@ defmodule SmeeView.Aspects.DiscoUI do
     organization: [],
   ]
 
-  use SmeeView.Aspects.AspectCommon
+use SmeeView.Aspects.AspectCommon
 
-  #######################################################################################
+#######################################################################################
 
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.DiscoUI do
-  def to_string(a), do: "Disco UI"
-end
+                                                    def to_string(a), do: "Disco UI"
+                                                    end

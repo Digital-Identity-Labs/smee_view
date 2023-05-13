@@ -3,6 +3,14 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
   alias __MODULE__
   alias SmeeView.Utils
 
+  @type t :: %__MODULE__{
+               default: boolean(),
+               index: integer(),
+               requested_attributes: list(),
+               service_descriptions: list(),
+               service_names: list()
+             }
+
   defstruct [
     default: false,
     index: 1,

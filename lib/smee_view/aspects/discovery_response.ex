@@ -3,6 +3,12 @@ defmodule SmeeView.Aspects.DiscoveryResponse do
   alias __MODULE__
   alias SmeeView.Utils
 
+  @type t :: %__MODULE__{
+               binding: binary(),
+               location: binary(),
+               index: integer()
+             }
+
   defstruct [
     binding: nil,
     location: nil,

@@ -2,7 +2,10 @@ defmodule SmeeView.Aspects.Keywords do
 
   alias __MODULE__
   alias SmeeView.Utils
-
+  @type t :: %__MODULE__{
+               lang: binary(),
+               words: list()
+             }
 
   defstruct [
     lang: "en",

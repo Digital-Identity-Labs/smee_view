@@ -2,7 +2,11 @@ defmodule SmeeView.Aspects.Protocol do
 
   alias __MODULE__
   alias SmeeView.Utils
-
+  @type t :: %__MODULE__{
+               role: atom(),
+               uri: binary()
+             }
+             
   defstruct [
     role: nil,
     uri: nil

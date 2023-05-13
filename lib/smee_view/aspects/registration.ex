@@ -4,7 +4,11 @@ defmodule SmeeView.Aspects.Registration do
   alias SmeeView.Utils
 
 
-
+  @type t :: %__MODULE__{
+               authority: binary(),
+               instant: binary(),
+               policies: list()
+             }
 
   defstruct [
     authority: nil,
@@ -14,10 +18,7 @@ defmodule SmeeView.Aspects.Registration do
 
   use SmeeView.Aspects.AspectCommon
 
-
-
   #######################################################################################
-
 
 end
 

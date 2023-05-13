@@ -4,7 +4,11 @@ defmodule SmeeView.Aspects.SingleLogoutService do
   alias SmeeView.Utils
 
 
-
+  @type t :: %__MODULE__{
+               binding: binary(),
+               location: binary(),
+               index: integer()
+             }
 
 
   defstruct [

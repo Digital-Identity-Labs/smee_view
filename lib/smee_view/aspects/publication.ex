@@ -3,7 +3,10 @@ defmodule SmeeView.Aspects.Publication do
   alias __MODULE__
   alias SmeeView.Utils
 
-
+  @type t :: %__MODULE__{
+               publisher: binary(),
+               publication_id: binary()
+             }
 
 
   defstruct [
@@ -13,10 +16,7 @@ defmodule SmeeView.Aspects.Publication do
 
   use SmeeView.Aspects.AspectCommon
 
-
-
   #######################################################################################
-
 
 end
 

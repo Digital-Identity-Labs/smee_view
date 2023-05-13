@@ -3,6 +3,12 @@ defmodule SmeeView.Aspects.Organization do
   alias __MODULE__
   alias SmeeView.Utils
 
+  @type t :: %__MODULE__{
+               displaynames: list(),
+               names: list(),
+               urls: list(),
+             }
+
   defstruct [
     displaynames: [],
     names: [],

@@ -2,16 +2,15 @@ defmodule SmeeView.Aspects.Network do
 
   alias __MODULE__
   alias SmeeView.Utils
-
-
-
+  @type t :: %__MODULE__{
+               network: binary()
+             }
 
   defstruct [
     network: nil
   ]
 
   use SmeeView.Aspects.AspectCommon
-
 
   #######################################################################################
 

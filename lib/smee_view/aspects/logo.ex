@@ -2,6 +2,13 @@ defmodule SmeeView.Aspects.Logo do
 
   alias __MODULE__
   alias SmeeView.Utils
+  @type t :: %__MODULE__{
+               url: binary(),
+               role: atom(),
+               height: integer(),
+               width: integer(),
+               lang: binary(),
+             }
 
   defstruct [
     url: nil,
@@ -12,10 +19,6 @@ defmodule SmeeView.Aspects.Logo do
   ]
 
   use SmeeView.Aspects.AspectCommon, features: [:lang, :url], roles: true
-
-#  def test(aspect) do
-#    lang(aspect)
-#  end
 
   def shape(logo) do
     height = logo.height

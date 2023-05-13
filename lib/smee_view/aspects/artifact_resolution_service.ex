@@ -3,6 +3,11 @@ defmodule SmeeView.Aspects.ArtifactResolutionService do
   alias __MODULE__
   alias SmeeView.Utils
 
+  @type t :: %__MODULE__{
+               binding: binary(),
+               location: binary(),
+               index: integer()
+             }
 
   defstruct [
     binding: nil,
@@ -17,7 +22,6 @@ defmodule SmeeView.Aspects.ArtifactResolutionService do
   end
 
 end
-
 
 defimpl String.Chars, for: SmeeView.Aspects.ArtifactResolutionService do
   def to_string(a), do: a.location

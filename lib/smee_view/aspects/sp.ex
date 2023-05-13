@@ -3,7 +3,16 @@ defmodule SmeeView.Aspects.SP do
   alias __MODULE__
   alias SmeeView.Utils
 
-
+  @type t :: %__MODULE__{
+               protocols: list(),
+               authn_requests_signed: boolean(),
+               want_assertions_signed: boolean(),
+               logos: list(),
+               displaynames: list(),
+               keywords: list(),
+               keys: list(),
+               services: list(),
+             }
 
   defstruct [
     protocols: [],
