@@ -14,11 +14,17 @@ defmodule SmeeView.Aspects.Null do
 
   use SmeeView.Aspects.AspectCommon
 
+  ## Workaround, plan to remove
+  def binding(aspect) do
+    nil
+  end
+
   #######################################################################################
 
   defp prepare_data(_data, _options \\ []) do
     []
   end
+
 
 end
 
