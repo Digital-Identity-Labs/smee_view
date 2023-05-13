@@ -11,13 +11,18 @@ defmodule SmeeView do
   alias SmeeView.Attributes
   alias SmeeView.Contacts
   alias SmeeView.Descriptions
+  alias SmeeView.DigestMethods
+  alias SmeeView.DiscoHints
+  alias SmeeView.DiscoUI
   alias SmeeView.DiscoveryResponses
   alias SmeeView.Displaynames
   alias SmeeView.Domains
+  alias SmeeView.EncryptionMethods
   alias SmeeView.Entity
   alias SmeeView.EntityAttributes
   alias SmeeView.Geolocations
   alias SmeeView.IdP
+  alias SmeeView.InformationURLs
   alias SmeeView.Keys
   alias SmeeView.Keywords
   alias SmeeView.Logos
@@ -25,6 +30,8 @@ defmodule SmeeView do
   alias SmeeView.NameIDFormats
   alias SmeeView.NameidMappingServices
   alias SmeeView.Networks
+  alias SmeeView.OrganizationURLs
+  alias SmeeView.PrivacyURLs
   alias SmeeView.Protocols
   alias SmeeView.PublicationPath
   alias SmeeView.Registration
@@ -36,16 +43,9 @@ defmodule SmeeView do
   alias SmeeView.ServiceDescriptions
   alias SmeeView.ServiceNames
   alias SmeeView.Services
+  alias SmeeView.SigningMethods
   alias SmeeView.SingleLogoutServices
   alias SmeeView.SingleSignonServices
-  alias SmeeView.DigestMethods
-  alias SmeeView.SigningMethods
-  alias SmeeView.EncryptionMethods
-  alias SmeeView.OrganizationURLs
-  alias SmeeView.PrivacyURLs
-  alias SmeeView.InformationURLs
-  alias SmeeView.DiscoUI
-  alias SmeeView.DiscoHints
 
   def logos(entity, options \\ []) do
     Logos.view(entity, :all, options)
@@ -84,7 +84,7 @@ defmodule SmeeView do
   end
 
   def publication_path(entity, options \\ []) do
-    Publications.view(entity, :all, options)
+    PublicationPath.view(entity, :all, options)
   end
 
   def registration(entity, options \\ []) do
