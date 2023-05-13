@@ -96,16 +96,19 @@ defmodule SmeeView.MixProject do
       SmeeView.Attributes,
       SmeeView.Contacts,
       SmeeView.Descriptions,
+      SmeeView.DigestMethods,
       SmeeView.DiscoHints,
       SmeeView.DiscoUI,
       SmeeView.DiscoveryResponses,
       SmeeView.Displaynames,
       SmeeView.Domains,
+      SmeeView.EncryptionMethods,
       SmeeView.Entity,
       SmeeView.EntityAttributes,
       SmeeView.EntityFilter,
       SmeeView.Geolocations,
       SmeeView.IdP,
+      SmeeView.InformationURLs,
       SmeeView.Keys,
       SmeeView.Keywords,
       SmeeView.Logos,
@@ -117,8 +120,9 @@ defmodule SmeeView.MixProject do
       SmeeView.OrganizationDisplaynames,
       SmeeView.OrganizationNames,
       SmeeView.OrganizationURLs,
-      SmeeView.PublicationPath,
+      SmeeView.PrivacyURLs,
       SmeeView.Protocols,
+      SmeeView.PublicationPath,
       SmeeView.Registration,
       SmeeView.RegistrationPolicies,
       SmeeView.RequestInitiators,
@@ -129,6 +133,7 @@ defmodule SmeeView.MixProject do
       SmeeView.ServiceDescriptions,
       SmeeView.ServiceNames,
       SmeeView.Services,
+      SmeeView.SigningMethods,
       SmeeView.SingleLogoutServices,
       SmeeView.SingleSignonServices
     ]
@@ -147,6 +152,8 @@ defmodule SmeeView.MixProject do
       SmeeView.Aspects.Contact,
       SmeeView.Aspects.Description,
       SmeeView.Aspects.DigestMethod,
+      SmeeView.Aspects.DiscoHints,
+      SmeeView.Aspects.DiscoUI,
       SmeeView.Aspects.DiscoveryResponse,
       SmeeView.Aspects.Displayname,
       SmeeView.Aspects.Domain,
@@ -180,7 +187,7 @@ defmodule SmeeView.MixProject do
       SmeeView.Aspects.ServiceName,
       SmeeView.Aspects.SigningMethod,
       SmeeView.Aspects.SingleLogoutService,
-      SmeeView.Aspects.SingleSignonService
+      SmeeView.Aspects.SingleSignonService,
     ]
   end
 
