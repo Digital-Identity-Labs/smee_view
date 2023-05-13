@@ -19,7 +19,19 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
     service_names: []
   ]
 
-  use SmeeView.Aspects.AspectCommon, features: [:endpoint]
+  use SmeeView.Aspects.AspectCommon, features: []
+
+  ## BESPOKE
+
+  @doc "Returns the index type for this endpoint/service"
+  @spec index(aspect ::  __MODULE__.t()) :: integer()
+  def index(%{index: index}) do
+    index
+  end
+
+  def index(aspect) do
+    0
+  end
 
   defp prepare_data(data, _options \\ []) do
     Map.merge(data, %{index: Utils.normalize_index(data[:index])})
@@ -28,5 +40,5 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.AttributeConsumingService do
-  def to_string(a), do: a.location
+  def to_string(a), do: "Attribute Consuming Service #{a.index}"
 end
