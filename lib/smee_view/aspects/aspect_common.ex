@@ -42,7 +42,10 @@ defmodule SmeeView.Aspects.AspectCommon do
               entity.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.role(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.role(aspect)
             # => :idp
             ```
 
@@ -74,7 +77,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Will return `true` if the aspect has been derived from an IdP role, or is applicable to all roles.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.idp?(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.idp?(aspect)
             # => true
             ```
 
@@ -94,7 +100,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Will return `true` if the aspect has been derived from an SP role, or is applicable to all roles.
 
                     ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.sp?(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.sp?(aspect)
             # => false
             ```
             """
@@ -122,7 +131,10 @@ defmodule SmeeView.Aspects.AspectCommon do
               entity.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.role(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.role(aspect)
             # => :idp
             ```
 
@@ -138,7 +150,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Will return `true` if the aspect has been derived from an IdP role, or is applicable to all roles.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.idp?(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.idp?(aspect)
             # => true
             ```
 
@@ -154,7 +169,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Will return `true` if the aspect has been derived from an SP role, or is applicable to all roles.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.sp?(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.sp?(aspect)
             # => false
             ```
             """
@@ -182,7 +200,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             If no language code has been set for this aspect then the default language code will be returned.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.lang(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.lang(aspect)
             # => "fr"
             ```
             """
@@ -204,7 +225,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             the default language code.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.lang?(aspect, "en")
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.lang?(aspect, "en")
             # => false
             ```
             """
@@ -236,7 +260,10 @@ defmodule SmeeView.Aspects.AspectCommon do
               interpolated into another string.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.text(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.text(aspect)
             # => "Example University IdP"
             ```
 
@@ -266,7 +293,10 @@ defmodule SmeeView.Aspects.AspectCommon do
               interpolated into another string.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.algorithm(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.algorithm(aspect)
             # => "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1"
             ```
 
@@ -280,7 +310,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Removes the namespace for the algorithm, leaving a smaller, friendlier, potentially colliding name
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.truncate(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.truncate(aspect)
             # => "ecdsa-sha1"
             ```
             """
@@ -307,7 +340,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Returns the human-readable name for this attribute
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.friendly_name(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.friendly_name(aspect)
             # => "eduPersonScopedAffiliation"
             ```
             """
@@ -320,7 +356,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Returns the technical name for this attribute
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.name(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.name(aspect)
             # => "urn:oid:1.3.6.1.4.1.5923.1.1.1.9"
             ```
             """
@@ -335,7 +374,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             (It'll almost certainly be "urn:oasis:names:tc:SAML:2.0:attrname-format:uri")
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.name_format(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.name_format(aspect)
             # => "urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
             ```
             """
@@ -348,7 +390,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Is this a SAML1 attribute? Returns true if passed a SAML1 attribute.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.saml1?(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.saml1?(aspect)
             # => false
             ```
             """
@@ -361,7 +406,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Is this a SAML2 attribute? Returns true if a passed SAML2 attribute
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.saml2?(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.saml2?(aspect)
             # => true
             ```
             """
@@ -390,7 +438,10 @@ defmodule SmeeView.Aspects.AspectCommon do
               interpolated into another string.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.url(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.url(aspect)
             # => "https://idp.example.com/information"
             ```
             """
@@ -406,7 +457,10 @@ defmodule SmeeView.Aspects.AspectCommon do
               use `valid?/1` first, or just use `URI.parse/1` yourself.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.parsed!(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.parsed!(aspect)
             # => %URI{...}
             ```
             """
@@ -422,7 +476,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Is this a valid URL? Returns true if the URL can be parsed.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.valid?(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.valid?(aspect)
             # => false
             ```
             """
@@ -454,7 +511,10 @@ defmodule SmeeView.Aspects.AspectCommon do
               interpolated into another string.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.endpoint(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.endpoint(aspect)
             # => "https://test.ukfederation.org.uk/Shibboleth.sso/SAML2/POST"
             ```
             """
@@ -467,7 +527,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Returns the binding type for this endpoint/service
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.binding(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.binding(aspect)
             # => "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
             ```
             """
@@ -480,7 +543,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Returns the index type for this endpoint/service, as an integer.
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.index(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.index(aspect)
             # => 1
             ```
             """
@@ -501,7 +567,10 @@ defmodule SmeeView.Aspects.AspectCommon do
             Is the URL for this endpoint/service valid? Returns true if the endpoint URL can be parsed
 
             ```
-            #{String.split("#{__MODULE__}", ".") |> List.last()}.valid?(aspect)
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.valid?(aspect)
             # => true
             ```
             """
