@@ -1,5 +1,10 @@
 defmodule SmeeView.ArtifactResolutionServices do
 
+  @moduledoc """
+  List all any ArtifactResolutionService elements in entity metadata as ArtifactResolutionService aspects.
+
+  """
+
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.ArtifactResolutionService, roles: false, features: [:endpoint]
 
   @entity_xmap [
