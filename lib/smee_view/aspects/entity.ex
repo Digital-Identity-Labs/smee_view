@@ -33,6 +33,46 @@ defmodule SmeeView.Aspects.Entity do
 
   use SmeeView.Aspects.AspectCommon
 
+  def idp(%{idps: idps}) when is_list(idps) do
+    List.first(idps)
+  end
+
+  def idp(_) do
+    nil
+  end
+
+  def idp?(aspect) do
+    idp(aspect) != nil
+  end
+
+  def sp(%{sps: sps}) when is_list(sps) do
+    List.first(sps)
+  end
+
+  def sp(_) do
+    nil
+  end
+
+  def sp?(aspect) do
+    sp(aspect) != nil
+  end
+
+  def organization(%{organizations: organizations}) when is_list(organizations) do
+    List.first(organizations)
+  end
+
+  def organization(_) do
+    nil
+  end
+
+  def organization?(aspect) do
+    organization(aspect) != nil
+  end
+
+  def roles(aspect) do
+    [idp(aspect), sp(aspect)] |> Enum.filter(& &1)
+  end
+
   #######################################################################################
 
 end
