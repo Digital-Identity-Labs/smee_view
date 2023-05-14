@@ -9,6 +9,7 @@ defmodule SmeeView.ViewCommon do
         roles: false,
         aspect: SmeeView.Aspects.Null,
         one: false,
+        map: false,
         features: []
       ],
       params
@@ -20,57 +21,76 @@ defmodule SmeeView.ViewCommon do
       import SweetXml, except: [sigil_x: 2, parse: 1]
 
       alias Smee.Entity
+      alias Smee.Metadata
       alias SmeeView.Utils
 
-      def view(list, role \\ :all, options \\ [])
-      def view(list, role, options) when is_list(list) do
-        list
-        |> Enum.filter(fn st -> is_struct(st) end)
-        |> Enum.map(fn st -> if st.__struct__ != unquote(params[:aspect]), do: dissolve_struct(st), else: st end)
-        |> Enum.filter(fn aspect -> is_struct(aspect) end)
-        |> Enum.filter(fn aspect -> if aspect.__struct__ == unquote(params[:aspect]), do: true, else: false end)
-      end
-
       @doc "Docs for view function - do they appear?"
+      def view(list, role \\ :all, options \\ [])
       def view(%Entity{} = entity, role, options) do
-
-        list = entity
-               |> Entity.xdoc()
-               |> extract_data_from_xml(xmapper_for_role(role))
-               |> Enum.map(
-                    fn {role, aspects} ->
-                      Enum.map(
-                        aspects,
-                        fn aspect_data ->
-                          cascade_views(entity, aspect_data, role)
-                          |> trim_aspect_data()
-                          |> to_aspect(role)
-                        end
-                      )
-                    end
-                  )
-               |> List.flatten()
-
-        unquote do
-
-          if params[:one] do
-            quote do
-              List.first(list)
-            end
-          else
-            quote do
-              list
-            end
-          end
-        end
-
+        entity
+        |> Entity.xdoc()
+        |> extract_data_from_xml(xmapper_for_role(role))
+        |> Enum.map(
+             fn {role, aspects} ->
+               Enum.map(
+                 aspects,
+                 fn aspect_data ->
+                   cascade_views(entity, aspect_data, role)
+                   |> trim_aspect_data()
+                   |> to_aspect(role)
+                 end
+               )
+             end
+           )
+        |> List.flatten()
       end
 
-      def view(structure, role, options) when is_struct(structure) do
-        structure
-        |> dissolve_struct()
-        |> Enum.filter(fn aspect -> is_struct(aspect) end)
-        |> Enum.filter(fn aspect -> if aspect.__struct__ == unquote(params[:aspect]), do: true, else: false end)
+      def view(%Metadata{} = metadata, role, options) do
+        metadata
+        |> Metadata.stream_entities()
+        |> Stream.map(fn e -> view(e, role, options) end)
+        |> Enum.to_list()
+        |> List.flatten()
+      end
+
+
+      def view(things, role, options) when is_list(things) or is_map(things) do
+        things
+        |> Stream.map(fn x -> if viewable?(x), do: view(x, role, options), else: x end)
+        |> Enum.to_list()
+        |> List.flatten()
+        |> Iteraptor.reduce([], fn {k, v}, acc -> if is?(v), do: [v | acc], else: acc end, yield: :all)
+        |> Enum.reject(fn v -> is_nil(v) end)
+        |> Enum.uniq()
+      end
+
+      def prism(various, role \\ :all, options \\ [])
+      def prism(various, role, options) when is_list(various) do
+        various
+        |> Stream.map(fn x -> if prismable?(x), do: prism(x, role, options), else: x end)
+        |> Enum.to_list()
+        |> List.flatten()
+        |> Enum.uniq()
+        |> Enum.map(fn m -> Map.to_list(m) end)
+        |> Enum.to_list()
+        |> List.flatten()
+        |> Map.new()
+      end
+
+      def prism(%Entity{} = entity, role, options) do
+        view = view(entity, role, options)
+        id = entity.uri
+        %{id => view}
+      end
+
+      def prism(%Metadata{} = metadata, role, options) do
+        metadata
+        |> Metadata.stream_entities()
+        |> Stream.map(fn e -> prism(e, role, options) end)
+        |> Stream.map(fn m -> Map.to_list(m) end)
+        |> Enum.to_list()
+        |> List.flatten()
+        |> Map.new()
       end
 
       @doc "Returns only aspects suitable for IdP role (whether or not it exists)"
@@ -275,13 +295,43 @@ defmodule SmeeView.ViewCommon do
 
       #######################################################################################
 
-      defp dissolve_struct(struct) do
-        struct
-        |> Map.from_struct()
-        |> Map.to_list()
-        |> Keyword.values()
-        |> List.flatten()
+      defp is?(thing) when is_struct(thing) do
+        thing.__struct__ == unquote(params[:aspect])
       end
+
+      defp is?(thing) do
+        false
+      end
+
+      defp viewable?(%Entity{}) do
+        true
+      end
+
+      defp viewable?(%Metadata{}) do
+        true
+      end
+
+      defp viewable?(_) do
+        false
+      end
+
+      defp prismable?(data) do
+        viewable?(data)
+      end
+
+      defp map_wrap() do
+
+      end
+
+#      defp dissolve_struct(struct) do
+#        struct
+#        |> Map.from_struct()
+#        |> Map.to_list()
+#        |> Keyword.values()
+#        |> Enum.filter(fn st -> is_struct(st) end)
+#        |> Enum.map(fn st -> if st.__struct__ != unquote(params[:aspect]), do: dissolve_struct(st), else: st end)
+#        |> List.flatten()
+#      end
 
       ## Move to Utils?
       defp extract_data_from_xml(xdoc, xmap) do
