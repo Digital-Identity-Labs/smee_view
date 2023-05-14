@@ -1,4 +1,4 @@
-defmodule SmeeView.DiscoUI do
+defmodule SmeeView.DiscoUIs do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.DiscoUI, roles: false, one: true
 

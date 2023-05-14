@@ -1,4 +1,4 @@
-defmodule SmeeView.IdP do
+defmodule SmeeView.IdPs do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.IdP, roles: false, one: true
 

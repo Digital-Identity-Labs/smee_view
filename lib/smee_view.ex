@@ -45,15 +45,15 @@ defmodule SmeeView do
   alias SmeeView.Descriptions
   alias SmeeView.DigestMethods
   alias SmeeView.DiscoHints
-  alias SmeeView.DiscoUI
+  alias SmeeView.DiscoUIs
   alias SmeeView.DiscoveryResponses
   alias SmeeView.Displaynames
   alias SmeeView.Domains
   alias SmeeView.EncryptionMethods
-  alias SmeeView.Entity
+  alias SmeeView.Entities
   alias SmeeView.EntityAttributes
   alias SmeeView.Geolocations
-  alias SmeeView.IdP
+  alias SmeeView.IdPs
   alias SmeeView.InformationURLs
   alias SmeeView.Keys
   alias SmeeView.Keywords
@@ -70,7 +70,7 @@ defmodule SmeeView do
   alias SmeeView.RegistrationPolicies
   alias SmeeView.RequestInitiators
   alias SmeeView.RequestedAttributes
-  alias SmeeView.SP
+  alias SmeeView.SPs
   alias SmeeView.Scopes
   alias SmeeView.ServiceDescriptions
   alias SmeeView.ServiceNames
@@ -201,17 +201,17 @@ defmodule SmeeView do
   @doc """
   X
   """
-  @spec idp(entity ::Smee.Entity.t() | list(), options :: Keyword.t()) :: list()
-  def idp(entity, options \\ []) do
-    IdP.view(entity, :all, options)
+  @spec idps(entity ::Smee.Entity.t() | list(), options :: Keyword.t()) :: list()
+  def idps(entity, options \\ []) do
+    IdPs.view(entity, :all, options)
   end
 
   @doc """
   X
   """
-  @spec sp(entity ::Smee.Entity.t() | list(), options :: Keyword.t()) :: list()
-  def sp(entity, options \\ []) do
-    SP.view(entity, :all, options)
+  @spec sps(entity ::Smee.Entity.t() | list(), options :: Keyword.t()) :: list()
+  def sps(entity, options \\ []) do
+    SPs.view(entity, :all, options)
   end
 
   @doc """
@@ -290,7 +290,7 @@ defmodule SmeeView do
   X
   """
   @spec services(entity ::Smee.Entity.t() | list(), options :: Keyword.t()) :: list()
-  def services(entity, options \\ []) do
+  def services(entity, _role, options \\ []) do
     [
       SmeeView.ArtifactResolutionServices.view(entity, :all, options),
       SmeeView.AssertionConsumerServices.view(entity, :all, options),
@@ -356,9 +356,9 @@ defmodule SmeeView do
   @doc """
   X
   """
-  @spec entity(entity ::Smee.Entity.t() | list(), options :: Keyword.t()) :: list()
-  def entity(entity, options \\ []) do
-    Entity.view(entity, :all, options)
+  @spec entities(entity ::Smee.Entity.t() | list(), options :: Keyword.t()) :: list()
+  def entities(entity, options \\ []) do
+    Entities.view(entity, :all, options)
   end
 
   @doc """
@@ -420,8 +420,8 @@ defmodule SmeeView do
   @doc """
   X
   """
-  @spec disco_ui(entity ::Smee.Entity.t() | list(), options :: Keyword.t()) :: list()
-  def disco_ui(entity, options \\ []) do
+  @spec disco_uis(entity ::Smee.Entity.t() | list(), options :: Keyword.t()) :: list()
+  def disco_uis(entity, options \\ []) do
     DiscoUI.view(entity, :all, options)
   end
 

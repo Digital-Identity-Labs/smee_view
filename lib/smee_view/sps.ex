@@ -1,4 +1,4 @@
-defmodule SmeeView.SP do
+defmodule SmeeView.SPs do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.SP, roles: false, one: true
 

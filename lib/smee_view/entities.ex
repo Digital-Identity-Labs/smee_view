@@ -1,4 +1,4 @@
-defmodule SmeeView.Entity do
+defmodule SmeeView.Entities do
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Entity, roles: false, one: true
 
@@ -22,9 +22,9 @@ defmodule SmeeView.Entity do
         registration: SmeeView.Registration.view(entity, :all),
         publications: SmeeView.PublicationPath.view(entity, :all),
         entity_attributes: SmeeView.EntityAttributes.view(entity, :all),
-        idp: SmeeView.IdP.view(entity, :idp),
-        sp: SmeeView.SP.view(entity, :sp),
-        organization: SmeeView.Organization.view(entity, :all),
+        idps: SmeeView.IdPs.view(entity, :idp),
+        sps: SmeeView.SPs.view(entity, :sp),
+        organizations: SmeeView.Organizations.view(entity, :all),
         contacts: SmeeView.Contacts.view(entity, :all),
       }
     )

@@ -10,9 +10,9 @@ defmodule SmeeView.Aspects.Entity do
                cache_duration: binary(),
                registration: binary(),
                publications: list(),
-               idp: SmeeView.Aspects.Entity.t(),
-               sp: SmeeView.Aspects.Entity.t(),
-               organization: SmeeView.Aspects.Entity.t(),
+               idps: list(),
+               sps: list(),
+               organizations: list(),
                contacts: list(),
                entity_attributes: list()
              }
@@ -24,9 +24,9 @@ defmodule SmeeView.Aspects.Entity do
     cache_duration: nil,
     registration: nil,
     publications: [],
-    idp: nil,
-    sp: nil,
-    organization: nil,
+    idps: [],
+    sps: [],
+    organizations: nil,
     contacts: [],
     entity_attributes: []
   ]
