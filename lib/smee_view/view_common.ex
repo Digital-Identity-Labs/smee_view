@@ -53,7 +53,6 @@ defmodule SmeeView.ViewCommon do
         |> List.flatten()
       end
 
-
       def view(things, role, options) when is_list(things) or is_map(things) do
         things
         |> Stream.map(fn x -> if viewable?(x), do: view(x, role, options), else: x end)
@@ -94,8 +93,9 @@ defmodule SmeeView.ViewCommon do
       end
 
       @doc "Returns only aspects suitable for IdP role (whether or not it exists)"
-      def idp(aspects) do
-        aspects
+      def idp_filter(prism) when is_map(prism), do: prismify(prism, &idp_filter/1)
+      def idp_filter(view) when is_list(view) do
+        view
         |> Enum.filter(
              fn aspect ->
                unquote(params[:aspect]).idp?(aspect)
@@ -104,7 +104,8 @@ defmodule SmeeView.ViewCommon do
       end
 
       @doc "Returns only aspects suitable for IdP role (whether or not it exists)"
-      def sp(aspects) do
+      def sp_filter(prism) when is_map(prism), do: prismify(prism, &sp_filter/1)
+      def sp_filter(aspects) do
         aspects
         |> Enum.filter(
              fn aspect ->
@@ -119,6 +120,7 @@ defmodule SmeeView.ViewCommon do
           quote do
 
             @doc "Returns a list of all languages used in the view"
+            def langs(prism) when is_map(prism), do: prismify(prism, &langs/1)
             def langs(aspects) do
               aspects
               |> Enum.map(
@@ -126,10 +128,14 @@ defmodule SmeeView.ViewCommon do
                      unquote(params[:aspect]).lang(aspect)
                    end
                  )
+              |> Enum.uniq()
+              |> Enum.sort()
             end
 
             @doc "Returns the first aspect with matching language, or failing that, the default language, or English"
-            def pick(aspects, lang \\ Utils.default_lang()) do
+            def pick(aspects, lang \\ Utils.default_lang())
+            def pick(prism, lang) when is_map(prism), do: prismify(prism, lang, &pick/2)
+            def pick(aspects, lang) do
               select_by_lang(aspects, lang) || select_by_lang(aspects, Utils.default_lang()) || select_by_lang(
                 aspects,
                 Utils.default_lang()
@@ -160,6 +166,7 @@ defmodule SmeeView.ViewCommon do
           quote do
 
             @doc "Returns maximum width of text in the view, as an integer"
+            def max_size(prism) when is_map(prism), do: prismify(prism, &max_size/1)
             def max_size(aspects) do
               aspects
               |> Enum.max_by(fn a -> String.length(a.text) end, &>=/2, fn -> struct(%SmeeView.Aspects.Null{}) end)
@@ -181,7 +188,8 @@ defmodule SmeeView.ViewCommon do
           quote do
 
             @doc "Returns only SAML1 attributes"
-            def saml1(aspects) do
+            def saml1_filter(prism) when is_map(prism), do: prismify(prism, &saml1_filter/1)
+            def saml1_filter(aspects) do
               aspects
               |> Enum.filter(
                    fn aspect ->
@@ -191,7 +199,8 @@ defmodule SmeeView.ViewCommon do
             end
 
             @doc "Returns only SAML2 attributes"
-            def saml2(aspects) do
+            def saml2_filter(prism) when is_map(prism), do: prismify(prism, &saml2_filter/1)
+            def saml2_filter(aspects) do
               aspects
               |> Enum.filter(
                    fn aspect ->
@@ -200,7 +209,7 @@ defmodule SmeeView.ViewCommon do
                  )
             end
 
-            defoverridable [saml1: 1, saml2: 1]
+            defoverridable [saml1_filter: 1, saml2_filter: 1]
 
           end
 
@@ -214,7 +223,8 @@ defmodule SmeeView.ViewCommon do
           quote do
 
             @doc "Returns filtered list of only valid URLs"
-            def valid(aspects) do
+            def valid_filter(prism) when is_map(prism), do: prismify(prism, &valid_filter/1)
+            def valid_filter(aspects) do
               aspects
               |> Enum.filter(
                    fn aspect ->
@@ -223,7 +233,7 @@ defmodule SmeeView.ViewCommon do
                  )
             end
 
-            defoverridable [valid: 1]
+            defoverridable [valid_filter: 1]
 
           end
 
@@ -236,7 +246,8 @@ defmodule SmeeView.ViewCommon do
         if Enum.member?(params[:features], :algo) do
           quote do
 
-            @doc "Returns filtered list of only valid URLs"
+            @doc "Shortens algorithms"
+            def truncate(prism) when is_map(prism), do: prismify(prism, &truncate/1)
             def truncate(aspects) do
               aspects
               |> Enum.map(
@@ -244,6 +255,8 @@ defmodule SmeeView.ViewCommon do
                      unquote(params[:aspect]).truncate(aspect)
                    end
                  )
+              |> Enum.uniq()
+              |> Enum.sort()
             end
 
             defoverridable [truncate: 1]
@@ -260,6 +273,7 @@ defmodule SmeeView.ViewCommon do
           quote do
 
             @doc "Returns all bindings present in the view"
+            def bindings(prism) when is_map(prism), do: prismify(prism, &bindings/1)
             def bindings(aspects) do
               aspects
               |> Enum.map(
@@ -267,10 +281,13 @@ defmodule SmeeView.ViewCommon do
                      unquote(params[:aspect]).binding(aspect)
                    end
                  )
+              |> Enum.uniq()
+              |> Enum.sort()
             end
 
             @doc "Returns all services matching the specified binding"
-            def binding(aspects, binding) do
+            def binding_filter(prism, binding) when is_map(prism), do: prismify(prism, binding, &binding_filter/2)
+            def binding_filter(aspects, binding) do
               aspects
               |> Enum.filter(
                    fn aspect ->
@@ -280,12 +297,13 @@ defmodule SmeeView.ViewCommon do
             end
 
             @doc "Sorts the services - only really has an impact if services have an index value set"
+            def sort(prism) when is_map(prism), do: prismify(prism, &sort/1)
             def sort(aspects) do
               aspects
               |> Enum.sort_by(&(&1.index), :asc)
             end
 
-            defoverridable [bindings: 1, binding: 2, sort: 1]
+            defoverridable [bindings: 1, binding_filter: 2, sort: 1]
 
           end
 
@@ -319,19 +337,20 @@ defmodule SmeeView.ViewCommon do
         viewable?(data)
       end
 
-      defp map_wrap() do
-
+      defp prismify(prism, f)  do
+        prism
+        |> Enum.map(fn {e, aspects} -> {e, f.(aspects)} end)
+        |> Enum.reject(fn {k, v} -> is_nil(v) || (is_list(v) && Enum.empty?(v)) end)
+        |> Map.new()
       end
 
-#      defp dissolve_struct(struct) do
-#        struct
-#        |> Map.from_struct()
-#        |> Map.to_list()
-#        |> Keyword.values()
-#        |> Enum.filter(fn st -> is_struct(st) end)
-#        |> Enum.map(fn st -> if st.__struct__ != unquote(params[:aspect]), do: dissolve_struct(st), else: st end)
-#        |> List.flatten()
-#      end
+      defp prismify(prism, p1, f) do
+        prism
+        |> Enum.map(fn {e, aspects} -> {e, f.(aspects, p1)} end)
+        |> Enum.reject(fn {k, v} -> is_nil(v) || (is_list(v) && Enum.empty?(v)) end)
+        |> Map.new()
+      end
+
 
       ## Move to Utils?
       defp extract_data_from_xml(xdoc, xmap) do
@@ -392,7 +411,16 @@ defmodule SmeeView.ViewCommon do
         raise "Undefined entity_xmap()! in #{__MODULE__}"
       end
 
-      defoverridable [view: 3, to_aspect: 2, idp_xmap: 0, sp_xmap: 0, entity_xmap: 0, cascade_views: 3]
+      defoverridable [
+        view: 3,
+        to_aspect: 2,
+        idp_xmap: 0,
+        sp_xmap: 0,
+        entity_xmap: 0,
+        cascade_views: 3,
+        idp_filter: 1,
+        sp_filter: 1
+      ]
 
     end
   end
