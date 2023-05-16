@@ -63,6 +63,29 @@ defmodule SmeeView.ViewCommon do
         |> Enum.uniq()
       end
 
+      @doc """
+      X
+      """
+      @spec view_one(smee_data :: Smee.Entity.t(), options :: Keyword.t()) :: list()
+      def view_one(smee_data, role \\ :all, options \\ [])
+      def view_one(%Entity{} = smee_data, role, options) do
+        List.wrap(smee_data)
+        |> view(role, options)
+        |> List.first
+      end
+
+      def view_one(smee_data, role, options) when is_list(smee_data) do
+        smee_data
+        |> Enum.random()
+        |> view_one()
+      end
+
+      def view_one(%Metadata{} = smee_data, role, options) do
+        smee_data
+        |> Metadata.random_entity()
+        |> view_one()
+      end
+
       def prism(various, role \\ :all, options \\ [])
       def prism(various, role, options) when is_list(various) do
         various
@@ -397,6 +420,22 @@ defmodule SmeeView.ViewCommon do
           end
         end
 
+      end
+
+      @spec services(entity ::Smee.Entity.t() | list(), role :: atom(), options :: Keyword.t()) :: list()
+      defp services(entity, role, options \\ []) do
+        [
+          SmeeView.ArtifactResolutionServices.view(entity, role, options),
+          SmeeView.AssertionConsumerServices.view(entity, role, options),
+          SmeeView.AssertionIDRequestServices.view(entity, role, options),
+          SmeeView.AttributeConsumingServices.view(entity, role, options),
+          SmeeView.AttributeServices.view(entity, role, options),
+          SmeeView.ManageNameidServices.view(entity, role, options),
+          SmeeView.NameidMappingServices.view(entity, role, options),
+          SmeeView.SingleLogoutServices.view(entity, role, options),
+          SmeeView.SingleSignonServices.view(entity, role, options)
+        ]
+        |> List.flatten()
       end
 
       defp idp_xmap do
