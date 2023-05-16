@@ -27,10 +27,12 @@ defmodule SmeeView.IdPs do
         keys: SmeeView.Keys.view(entity, :idp),
         nameid_formats: SmeeView.NameIDFormats.view(entity, :idp),
         protocols: SmeeView.Protocols.view(entity, :idp),
-        services:  SmeeView.services(entity, :idp),
+        services:  services(entity, :idp),
         attributes:  SmeeView.Attributes.view(entity, :idp),
       }
     )
   end
+
+
 
 end

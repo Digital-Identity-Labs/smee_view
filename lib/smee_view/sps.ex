@@ -23,7 +23,7 @@ defmodule SmeeView.SPs do
         displaynames: SmeeView.Displaynames.view(entity, :sp),
         keywords: SmeeView.Keywords.view(entity, :sp),
         keys: SmeeView.Keys.view(entity, :sp),
-        services: SmeeView.services(entity, :sp),
+        services: services(entity, :sp),
         request_initiators: SmeeView.RequestInitiators.view(entity, :sp),
         discovery_responses: SmeeView.DiscoveryResponses.view(entity, :sp),
       }
