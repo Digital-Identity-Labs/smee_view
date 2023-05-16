@@ -50,7 +50,7 @@ defmodule SmeeView do
   X
   """
   @spec view_one(smee_data :: Smee.Entity.t(), options :: Keyword.t()) :: list()
-  def view_one(%Entity{} = smee_data, options \\ []) do
+  def view_one(smee_data, options \\ []) do
     smee_data
     |> Entities.view_one(:all, options)
   end

@@ -74,15 +74,15 @@ defmodule SmeeView.ViewCommon do
         |> List.first
       end
 
-      def view_one(smee_data, role, options) when is_list(smee_data) do
-        smee_data
-        |> Enum.random()
-        |> view_one()
-      end
-
       def view_one(%Metadata{} = smee_data, role, options) do
         smee_data
         |> Metadata.random_entity()
+        |> view_one()
+      end
+
+      def view_one(smee_data, role, options) when is_list(smee_data) do
+        smee_data
+        |> Enum.random()
         |> view_one()
       end
 
