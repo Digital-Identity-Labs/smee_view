@@ -99,7 +99,7 @@ defmodule SmeeView.Aspects.AspectCommon do
 
             Will return `true` if the aspect has been derived from an SP role, or is applicable to all roles.
 
-                    ```
+            ```
             #{
               String.split("#{__MODULE__}", ".")
               |> List.last()
@@ -137,7 +137,6 @@ defmodule SmeeView.Aspects.AspectCommon do
             }.role(aspect)
             # => :idp
             ```
-
             """
             @spec role(aspect :: __MODULE__.t()) :: atom()
             def role(aspect) do

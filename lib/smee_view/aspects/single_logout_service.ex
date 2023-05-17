@@ -2,8 +2,7 @@ defmodule SmeeView.Aspects.SingleLogoutService do
 
   alias __MODULE__
   alias SmeeView.Utils
-
-
+  
   @type t :: %__MODULE__{
                binding: binary(),
                location: binary(),
