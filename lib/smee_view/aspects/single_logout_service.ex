@@ -10,7 +10,6 @@ defmodule SmeeView.Aspects.SingleLogoutService do
                index: integer()
              }
 
-
   defstruct [
     binding: nil,
     location: nil,
@@ -28,4 +27,14 @@ end
 
 defimpl String.Chars, for: SmeeView.Aspects.SingleLogoutService do
   def to_string(a), do: a.location
+end
+
+defimpl Jason.Encoder, for: SmeeView.Aspects.SingleLogoutService do
+  def encode(value, opts) do
+    Jason.Encode.map(
+      Map.take(value, [:binding, :location, :index])
+      |> Map.merge(%{st: "single_logout_service"}),
+      opts
+    )
+  end
 end

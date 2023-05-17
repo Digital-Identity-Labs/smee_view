@@ -11,6 +11,7 @@ defmodule SmeeView.Aspects.DiscoHints do
                domains: list(),
              }
 
+  @derive Jason.Encoder
   defstruct [
     scopes: [],
     networks: [],

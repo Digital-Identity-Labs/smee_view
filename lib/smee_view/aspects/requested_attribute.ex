@@ -9,6 +9,7 @@ defmodule SmeeView.Aspects.RequestedAttribute do
                name_format: binary()
              }
 
+  @derive Jason.Encoder
   defstruct [
     friendly_name: nil,
     name: nil,

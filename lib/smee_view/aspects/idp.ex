@@ -17,6 +17,8 @@ defmodule SmeeView.Aspects.IdP do
                services: list(),
                attributes: list(),
              }
+
+  @derive Jason.Encoder
   defstruct [
     protocols: [],
     want_authn_requests_signed: false,

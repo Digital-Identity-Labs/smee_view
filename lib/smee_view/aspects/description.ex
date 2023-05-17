@@ -8,6 +8,7 @@ defmodule SmeeView.Aspects.Description do
                role: atom()
              }
 
+  @derive Jason.Encoder
   defstruct [
     lang: "en",
     text: nil,

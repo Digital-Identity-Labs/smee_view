@@ -8,6 +8,7 @@ defmodule SmeeView.Aspects.Null do
                text: binary()
              }
 
+  @derive Jason.Encoder
   defstruct [
     text: ""
   ]

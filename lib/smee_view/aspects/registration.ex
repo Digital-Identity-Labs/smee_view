@@ -10,6 +10,7 @@ defmodule SmeeView.Aspects.Registration do
                policies: list()
              }
 
+  @derive Jason.Encoder
   defstruct [
     authority: nil,
     instant: nil,

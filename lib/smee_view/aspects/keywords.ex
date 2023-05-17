@@ -7,6 +7,7 @@ defmodule SmeeView.Aspects.Keywords do
                words: list()
              }
 
+  @derive Jason.Encoder
   defstruct [
     lang: "en",
     words: []

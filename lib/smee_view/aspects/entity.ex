@@ -17,6 +17,7 @@ defmodule SmeeView.Aspects.Entity do
                entity_attributes: list()
              }
 
+  @derive Jason.Encoder
   defstruct [
     entity_id: nil,
     id: nil,

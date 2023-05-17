@@ -10,6 +10,7 @@ defmodule SmeeView.Aspects.Logo do
                lang: binary(),
              }
 
+  @derive Jason.Encoder
   defstruct [
     url: nil,
     role: nil,

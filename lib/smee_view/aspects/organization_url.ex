@@ -9,6 +9,7 @@ defmodule SmeeView.Aspects.OrganizationURL do
                url: binary()
              }
 
+  @derive Jason.Encoder
   defstruct [
     lang: "en",
     url: nil

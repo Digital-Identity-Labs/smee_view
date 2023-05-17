@@ -9,7 +9,6 @@ defmodule SmeeView.Aspects.RequestInitiator do
                index: integer()
              }
 
-
   defstruct [
     binding: nil,
     location: nil,
@@ -26,4 +25,14 @@ end
 
 defimpl String.Chars, for: SmeeView.Aspects.RequestInitiator do
   def to_string(a), do: a.location
+end
+
+defimpl Jason.Encoder, for: SmeeView.Aspects.RequestInitiator do
+  def encode(value, opts) do
+    Jason.Encode.map(
+      Map.take(value, [:binding, :location, :index])
+      |> Map.merge(%{st: "request_initiator"}),
+      opts
+    )
+  end
 end

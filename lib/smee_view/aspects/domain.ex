@@ -7,7 +7,7 @@ defmodule SmeeView.Aspects.Domain do
                domain: binary()
              }
 
-
+  @derive Jason.Encoder
   defstruct [
     domain: nil
   ]

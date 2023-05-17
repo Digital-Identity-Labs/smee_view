@@ -9,6 +9,7 @@ defmodule SmeeView.Aspects.Scope do
                domain: binary()
              }
 
+  @derive Jason.Encoder
   defstruct [
     regex: false,
     domain: nil

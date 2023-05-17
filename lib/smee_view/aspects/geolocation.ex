@@ -7,6 +7,7 @@ defmodule SmeeView.Aspects.Geolocation do
                geolocation: binary()
              }
 
+  @derive Jason.Encoder
   defstruct [
     geolocation: nil
   ]

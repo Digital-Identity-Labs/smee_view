@@ -9,6 +9,7 @@ defmodule SmeeView.Aspects.EntityAttribute do
              }
 
 
+  @derive Jason.Encoder
   defstruct [
     name: nil,
     values: []

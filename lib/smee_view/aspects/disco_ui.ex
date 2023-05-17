@@ -11,6 +11,8 @@ defmodule SmeeView.Aspects.DiscoUI do
                keywords: list(),
                organization: list(),
              }
+
+  @derive Jason.Encoder
   defstruct [
     displaynames: [],
     names: [],

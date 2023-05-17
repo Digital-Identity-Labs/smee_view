@@ -7,7 +7,8 @@ defmodule SmeeView.Aspects.PrivacyURL do
                lang: binary(),
                url: binary()
              }
-             
+
+  @derive Jason.Encoder
   defstruct [
     lang: "en",
     url: nil

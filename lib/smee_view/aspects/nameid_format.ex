@@ -7,6 +7,7 @@ defmodule SmeeView.Aspects.NameIDFormat do
                uri: binary()
              }
 
+  @derive Jason.Encoder
   defstruct [
     uri: nil
   ]

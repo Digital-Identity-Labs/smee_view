@@ -8,6 +8,7 @@ defmodule SmeeView.Aspects.InformationURL do
                url: binary(),
              }
 
+  @derive Jason.Encoder
   defstruct [
     lang: "en",
     url: nil

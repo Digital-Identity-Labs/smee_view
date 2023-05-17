@@ -6,7 +6,8 @@ defmodule SmeeView.Aspects.Protocol do
                role: atom(),
                uri: binary()
              }
-             
+
+  @derive Jason.Encoder
   defstruct [
     role: nil,
     uri: nil

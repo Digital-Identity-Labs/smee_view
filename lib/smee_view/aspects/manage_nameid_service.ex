@@ -9,7 +9,6 @@ defmodule SmeeView.Aspects.ManageNameidService do
                index: integer()
              }
 
-
   defstruct [
     binding: nil,
     location: nil,
@@ -27,4 +26,14 @@ end
 
 defimpl String.Chars, for: SmeeView.Aspects.ManageNameidService do
   def to_string(a), do: a.location
+end
+
+defimpl Jason.Encoder, for: SmeeView.Aspects.ManageNameidService do
+  def encode(value, opts) do
+    Jason.Encode.map(
+      Map.take(value, [:binding, :location, :index,])
+      |> Map.merge(%{st: "manage_nameid_service"}),
+      opts
+    )
+  end
 end

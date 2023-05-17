@@ -57,6 +57,7 @@ defmodule SmeeView.MixProject do
       {:xmerl_xml_indent, "~> 0.1.0"},
       {:xmlixer, "~> 0.1.1"},
       {:iteraptor, "~> 1.14"},
+      {:jason, "~> 1.4"},
 
       {:apex, "~> 1.2", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.6.7", only: [:dev, :test], runtime: false},

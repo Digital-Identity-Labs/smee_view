@@ -8,7 +8,7 @@ defmodule SmeeView.Aspects.Publication do
                publication_id: binary()
              }
 
-
+  @derive Jason.Encoder
   defstruct [
     publisher: nil,
     publication_id: nil

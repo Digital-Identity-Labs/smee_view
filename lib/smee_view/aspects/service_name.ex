@@ -8,6 +8,7 @@ defmodule SmeeView.Aspects.ServiceName do
                text: binary()
              }
 
+  @derive Jason.Encoder
   defstruct [
     lang: "en",
     text: nil

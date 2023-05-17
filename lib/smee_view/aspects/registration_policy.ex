@@ -9,6 +9,7 @@ defmodule SmeeView.Aspects.RegistrationPolicy do
                url: binary(),
              }
 
+  @derive Jason.Encoder
   defstruct [
     lang: "en",
     url: nil

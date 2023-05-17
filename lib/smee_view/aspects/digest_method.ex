@@ -5,6 +5,8 @@ defmodule SmeeView.Aspects.DigestMethod do
   @type t :: %__MODULE__{
                algorithm: binary()
              }
+
+  @derive Jason.Encoder
   defstruct [
     algorithm: nil
   ]

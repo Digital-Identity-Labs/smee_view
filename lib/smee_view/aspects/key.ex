@@ -14,6 +14,7 @@ defmodule SmeeView.Aspects.Key do
   @pem_header "-----BEGIN CERTIFICATE-----"
   @pem_footer "-----END CERTIFICATE-----"
 
+  @derive Jason.Encoder
   defstruct [
     type: :public,
     pem: nil,

@@ -14,6 +14,7 @@ defmodule SmeeView.Aspects.Contact do
                company: binary()
              }
 
+  @derive Jason.Encoder
   defstruct [
     email: nil,
     phone: nil,

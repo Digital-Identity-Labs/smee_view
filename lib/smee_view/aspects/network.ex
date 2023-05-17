@@ -6,6 +6,7 @@ defmodule SmeeView.Aspects.Network do
                network: binary()
              }
 
+  @derive Jason.Encoder
   defstruct [
     network: nil
   ]

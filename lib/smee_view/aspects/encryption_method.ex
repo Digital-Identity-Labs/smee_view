@@ -6,6 +6,7 @@ defmodule SmeeView.Aspects.EncryptionMethod do
                algorithm: binary()
              }
 
+  @derive Jason.Encoder
   defstruct [
     algorithm: nil
   ]

@@ -9,6 +9,7 @@ defmodule SmeeView.Aspects.Organization do
                urls: list(),
              }
 
+  @derive Jason.Encoder
   defstruct [
     displaynames: [],
     names: [],
