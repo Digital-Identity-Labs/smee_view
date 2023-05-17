@@ -19,8 +19,8 @@ defmodule SmeeView.Aspects.AssertionConsumerService do
 
   use SmeeView.Aspects.AspectCommon, features: [:endpoint]
 
-  @spec prepare_data(data :: map() | keyword(), options :: keyword()) :: map()
-  defp prepare_data(data, _options \\ []) do
+  #@spec is not needed
+ defp prepare_data(data, _options \\ []) do
     Map.merge(data, %{index: Utils.normalize_index(data[:index])})
   end
 

@@ -18,7 +18,7 @@ defmodule SmeeView.Aspects.AssertionIDRequestService do
   use SmeeView.Aspects.AspectCommon, features: [:endpoint]
 
   ## Does not, cannot, have index - just here for indexing consistency
-  @spec prepare_data(data :: map() | keyword(), options :: keyword()) :: map()
+  #@spec is not needed
   defp prepare_data(data, _options \\ []) do
     Map.merge(data, %{index: 0})
   end

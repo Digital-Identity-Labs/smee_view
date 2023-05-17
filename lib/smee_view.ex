@@ -58,7 +58,7 @@ defmodule SmeeView do
   @doc """
   X
   """
-  @spec prism(smee_data :: Smee.Entity.t() | Smee.Metadata.t() | list(), options :: Keyword.t()) :: list()
+  @spec prism(smee_data :: Smee.Entity.t() | Smee.Metadata.t() | list(), options :: Keyword.t()) :: map()
   def prism(smee_data, options \\ []) do
     Entities.prism(smee_data, :all, options)
   end
