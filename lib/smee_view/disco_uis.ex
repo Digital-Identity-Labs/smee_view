@@ -17,13 +17,13 @@ defmodule SmeeView.DiscoUIs do
     Map.merge(
       aspect_data,
       %{
-        displaynames: SmeeView.OrganizationDisplaynames.view(entity, role),
-        names: SmeeView.OrganizationNames.view(entity, role),
+        displaynames: SmeeView.Displaynames.view(entity, role),
+        descriptions: SmeeView.Descriptions.view(entity, role),
         logos: SmeeView.Logos.view(entity, :all),
-        privacy_urls: SmeeView.Domains.view(entity, :all),
-        information_urls: SmeeView.Domains.view(entity, :all),
+        privacy_urls: SmeeView.PrivacyURLs.view(entity, :all),
+        information_urls: SmeeView.InformationURLs.view(entity, :all),
         keywords: SmeeView.Keywords.view(entity, :all),
-        organization: SmeeView.Organization.view(entity, :all)
+        organizations: SmeeView.Organizations.view(entity, :all)
       }
     )
   end
