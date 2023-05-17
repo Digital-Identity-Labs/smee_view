@@ -24,7 +24,7 @@ defmodule SmeeView.Aspects.Keywords do
     aspect.words || []
   end
 
-
+  @spec prepare_data(data :: map() | keyword(), options :: keyword()) :: map()
   defp prepare_data(data, options \\ []) do
     Map.merge(
       data,

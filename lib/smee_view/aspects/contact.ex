@@ -49,6 +49,7 @@ defmodule SmeeView.Aspects.Contact do
 
   #######################################################################################
 
+  @spec prepare_data(data :: map() | keyword(), options :: keyword()) :: map()
   defp prepare_data(data, options \\ []) do
     Map.merge(data, %{email: Utils.normalize_email(data[:email])})
   end

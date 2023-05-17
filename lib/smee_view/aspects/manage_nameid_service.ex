@@ -18,6 +18,7 @@ defmodule SmeeView.Aspects.ManageNameidService do
   use SmeeView.Aspects.AspectCommon, features: [:endpoint]
 
   ## Does not, cannot, have index - just here for indexing consistency
+  @spec prepare_data(data :: map() | keyword(), options :: keyword()) :: map()
   defp prepare_data(data, _options \\ []) do
     Map.merge(data, %{index: 0})
   end

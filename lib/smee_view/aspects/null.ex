@@ -21,9 +21,9 @@ defmodule SmeeView.Aspects.Null do
   end
 
   #######################################################################################
-
+  @spec prepare_data(data :: map() | keyword(), options :: keyword()) :: map()
   defp prepare_data(_data, _options \\ []) do
-    []
+    %{}
   end
 
 
