@@ -1,5 +1,12 @@
 defmodule SmeeView.Aspects.NameidMappingService do
 
+  @moduledoc """
+  Represents and processes <> elements in entity metadata as Aspect structs.
+
+  The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
+  collections of these records please use the matching View module.
+  """
+
   alias __MODULE__
   alias SmeeView.Utils
 
@@ -16,6 +23,9 @@ defmodule SmeeView.Aspects.NameidMappingService do
   ]
 
   use SmeeView.Aspects.AspectCommon, features: [:endpoint]
+
+  #######################################################################################
+
 
   ## Does not, cannot, have index - just here for indexing consistency
   #@spec is not needed

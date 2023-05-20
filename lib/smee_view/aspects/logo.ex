@@ -1,5 +1,12 @@
 defmodule SmeeView.Aspects.Logo do
 
+  @moduledoc """
+  Represents and processes <> elements in entity metadata as Aspect structs.
+
+  The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
+  collections of these records please use the matching View module.
+  """
+
   alias __MODULE__
   alias SmeeView.Utils
   @type t :: %__MODULE__{
@@ -21,6 +28,18 @@ defmodule SmeeView.Aspects.Logo do
 
   use SmeeView.Aspects.AspectCommon, features: [:lang, :url], roles: true
 
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec shape(aspect :: __MODULE__.t()) :: atom()
   def shape(logo) do
     height = logo.height
     width = logo.width
@@ -32,6 +51,18 @@ defmodule SmeeView.Aspects.Logo do
     end
   end
 
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec size(aspect :: __MODULE__.t()) :: atom()
   def size(logo) do
     pixels = pixels(logo)
     cond do
@@ -46,18 +77,66 @@ defmodule SmeeView.Aspects.Logo do
     end
   end
 
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec pixels(aspect :: __MODULE__.t()) :: integer()
   def pixels(logo) do
     logo.width * logo.height
   end
 
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec tls?(aspect :: __MODULE__.t()) :: boolean()
   def tls?(logo) do
     String.starts_with?(String.downcase(logo.url), "https:")
   end
 
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec data?(aspect :: __MODULE__.t()) :: boolean()
   def data?(logo) do
     String.starts_with?(String.downcase(logo.url), "data:")
   end
 
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec format(aspect :: __MODULE__.t()) :: atom()
   def format(logo) do
     case String.downcase(Path.extname(logo.url)) do
       ".jpg" -> :jpeg

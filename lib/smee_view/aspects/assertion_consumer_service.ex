@@ -1,5 +1,12 @@
 defmodule SmeeView.Aspects.AssertionConsumerService do
 
+  @moduledoc """
+  Represents and processes <> elements in entity metadata as Aspect structs.
+
+  The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
+  collections of these records please use the matching View module.
+  """
+
   alias __MODULE__
   alias SmeeView.Utils
 
@@ -19,11 +26,12 @@ defmodule SmeeView.Aspects.AssertionConsumerService do
 
   use SmeeView.Aspects.AspectCommon, features: [:endpoint]
 
+  #######################################################################################
+
   #@spec is not needed
- defp prepare_data(data, _options \\ []) do
+  defp prepare_data(data, _options \\ []) do
     Map.merge(data, %{index: Utils.normalize_index(data[:index])})
   end
-
 
 end
 

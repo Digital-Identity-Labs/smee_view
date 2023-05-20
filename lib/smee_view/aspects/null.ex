@@ -16,11 +16,13 @@ defmodule SmeeView.Aspects.Null do
   use SmeeView.Aspects.AspectCommon
 
   ## Workaround, plan to remove
+  @spec binding(aspect :: __MODULE__.t()) :: nil
   def binding(aspect) do
     nil
   end
 
   #######################################################################################
+
   #@spec is not needed
  defp prepare_data(_data, _options \\ []) do
     %{}

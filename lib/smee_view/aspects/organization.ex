@@ -1,5 +1,12 @@
 defmodule SmeeView.Aspects.Organization do
 
+  @moduledoc """
+  Represents and processes <> elements in entity metadata as Aspect structs.
+
+  The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
+  collections of these records please use the matching View module.
+  """
+
   alias __MODULE__
   alias SmeeView.Utils
 
@@ -17,6 +24,54 @@ defmodule SmeeView.Aspects.Organization do
   ]
 
   use SmeeView.Aspects.AspectCommon
+
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec displaynames(aspect :: __MODULE__.t()) :: list()
+  def displaynames(aspect) do
+    aspect.displaynames
+  end
+
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec names(aspect :: __MODULE__.t()) :: list()
+  def names(aspect) do
+    aspect.names
+  end
+
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec urls(aspect :: __MODULE__.t()) :: list()
+  def urls(aspect) do
+    aspect.urls
+  end
 
   #######################################################################################
 

@@ -1,5 +1,12 @@
 defmodule SmeeView.Aspects.AttributeConsumingService do
 
+  @moduledoc """
+  Represents and processes <> elements in entity metadata as Aspect structs.
+
+  The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
+  collections of these records please use the matching View module.
+  """
+
   alias __MODULE__
   alias SmeeView.Utils
 
@@ -21,8 +28,6 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
 
   use SmeeView.Aspects.AspectCommon, features: []
 
-  ## BESPOKE
-
   @doc "Returns the index type for this endpoint/service"
   @spec index(aspect ::  __MODULE__.t()) :: integer()
   def index(%{index: index}) do
@@ -32,6 +37,56 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
   def index(aspect) do
     0
   end
+
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec requested_attributes(aspect :: __MODULE__.t()) :: list()
+  def requested_attributes(aspect) do
+    aspect.requested_attributes || []
+  end
+
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec service_descriptions(aspect :: __MODULE__.t()) :: list()
+  def service_descriptions(aspect) do
+    aspect.service_descriptions || []
+  end
+
+  @doc """
+  xx
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.xx(aspect)
+  # => xx
+  ```
+  """
+  @spec service_names(aspect :: __MODULE__.t()) :: list()
+  def service_names(aspect) do
+    aspect.service_names || []
+  end
+
+  #################################################################################
 
   #@spec is not needed
  defp prepare_data(data, _options \\ []) do
