@@ -1,7 +1,7 @@
 defmodule SmeeView.ArtifactResolutionServices do
 
   @moduledoc """
-  List all any ArtifactResolutionService elements in entity metadata as ArtifactResolutionService aspects.
+  List all any <ArtifactResolutionService> elements in entity metadata as ArtifactResolutionService aspects.
 
   """
 
