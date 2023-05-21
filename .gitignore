@@ -24,4 +24,4 @@ smee_view-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
-*.xml
+/*.xml
