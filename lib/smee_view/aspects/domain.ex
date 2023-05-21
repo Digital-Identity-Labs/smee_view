@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Domain do
 
   @moduledoc """
-  Represents and processes <> elements in entity metadata as Aspect structs.
+  Represents and processes <Domain> elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
