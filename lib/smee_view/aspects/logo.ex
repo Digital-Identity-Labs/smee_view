@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Logo do
 
   @moduledoc """
-  Represents and processes <Logo> elements in entity metadata as Aspect structs.
+  Represents and processes <mdui:Logo> elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -29,14 +29,16 @@ defmodule SmeeView.Aspects.Logo do
   use SmeeView.Aspects.AspectCommon, features: [:lang, :url], roles: true
 
   @doc """
-  xx
+  Returns the shape of the logo (:square, :portrait or :landscape)
+
+  It's currently rather crude - only *exact* squares will return `:square`
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.shape(aspect)
+  # => :landscape
   ```
   """
   @spec shape(aspect :: __MODULE__.t()) :: atom()
@@ -52,14 +54,16 @@ defmodule SmeeView.Aspects.Logo do
   end
 
   @doc """
-  xx
+  Returns the size of the logo as a word. These words are currently arbitrary, from an old application
+
+  Sizes are: :tiny, :small, :icon, :default, :medium, :large, :huge and :silly
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.size(aspect)
+  # => :large
   ```
   """
   @spec size(aspect :: __MODULE__.t()) :: atom()
@@ -78,14 +82,14 @@ defmodule SmeeView.Aspects.Logo do
   end
 
   @doc """
-  xx
+  Returns the total number of pixels (X x Y)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.pixels(aspect)
+  # => 4096
   ```
   """
   @spec pixels(aspect :: __MODULE__.t()) :: integer()
@@ -94,14 +98,14 @@ defmodule SmeeView.Aspects.Logo do
   end
 
   @doc """
-  xx
+  Does the logo use a HTTPS URL?
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.tls?(aspect)
+  # => false
   ```
   """
   @spec tls?(aspect :: __MODULE__.t()) :: boolean()
@@ -110,14 +114,14 @@ defmodule SmeeView.Aspects.Logo do
   end
 
   @doc """
-  xx
+  Is the URL a `data:` URL containing the actual logo, rather than a normal HTTP address?
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.data?(aspect)
+  # => true
   ```
   """
   @spec data?(aspect :: __MODULE__.t()) :: boolean()
@@ -126,25 +130,42 @@ defmodule SmeeView.Aspects.Logo do
   end
 
   @doc """
-  xx
+  Returns the file format of the image, if known, based on the URL
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.format(aspect)
+  # => :png
   ```
   """
   @spec format(aspect :: __MODULE__.t()) :: atom()
+  def format(%{url: "data:" <> _} = logo) do
+    String.split(logo.url, ";")
+    |> List.first()
+    |> case do
+         "data:image/jpeg" -> :jpeg
+         "data:image/jpg" -> :jpeg
+         "data:image/png" -> :png
+         "data:image/gif" -> :gif
+         "data:image/avif" -> :avif
+         "data:image/svg+xml" -> :svg
+         "data:image/webp" -> :webp
+         _ -> :unknown
+       end
+  end
+
   def format(logo) do
     case String.downcase(Path.extname(logo.url)) do
       ".jpg" -> :jpeg
       ".jpeg" -> :jpeg
       ".png" -> :png
+      ".gif" -> :gif
+      ".svg" -> :svg
       ".avif" -> :avif
       ".webp" -> :webp
-      _ -> :uknown
+      _ -> :unknown
     end
   end
 
