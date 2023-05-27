@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Registration do
 
   @moduledoc """
-  Represents and processes <Registration> elements in entity metadata as Aspect structs.
+  Represents and processes <mdrpi:RegistrationInfo> elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -27,14 +27,14 @@ defmodule SmeeView.Aspects.Registration do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Returns the ID URI of the registrar/registration authority
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.authority(aspect)
+  # => "http://ukfederation.org.uk"
   ```
   """
   @spec authority(aspect :: __MODULE__.t()) :: binary()
@@ -49,8 +49,8 @@ defmodule SmeeView.Aspects.Registration do
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.instant(aspect)
+  # => "2014-11-07T16:35:40Z"
   ```
   """
   @spec instant(aspect :: __MODULE__.t()) :: binary()
@@ -59,14 +59,14 @@ defmodule SmeeView.Aspects.Registration do
   end
 
   @doc """
-  xx
+  Returns a list of any registration policies
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.policies(aspect)
+  # => [%RegistrationPolicy{lang="en"}, %RegistrationPolicy{lang="sco"}]
   ```
   """
   @spec policies(aspect :: __MODULE__.t()) :: list()

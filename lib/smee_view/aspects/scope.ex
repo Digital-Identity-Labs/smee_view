@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Scope do
 
   @moduledoc """
-  Represents and processes <Scope> elements in entity metadata as Aspect structs.
+  Represents and processes <shibmd:Scope> elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -25,14 +25,14 @@ defmodule SmeeView.Aspects.Scope do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Returns the domain of the scope as a string (whether or not it is a regex)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.scope(aspect)
+  # => "example.com"
   ```
   """
   @spec scope(aspect :: __MODULE__.t()) :: binary()
@@ -41,14 +41,14 @@ defmodule SmeeView.Aspects.Scope do
   end
 
   @doc """
-  xx
+  Returns the domain of the scope as a string (whether or not it is a regex)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.text(aspect)
+  # => "example.com"
   ```
   """
   @spec text(aspect :: __MODULE__.t()) :: binary()
@@ -57,14 +57,14 @@ defmodule SmeeView.Aspects.Scope do
   end
 
   @doc """
-  xx
+  Returns the domain of the scope as a string (whether or not it is a regex)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.domain(aspect)
+  # => "example.com"
   ```
   """
   @spec domain(aspect :: __MODULE__.t()) :: binary()
@@ -73,14 +73,14 @@ defmodule SmeeView.Aspects.Scope do
   end
 
   @doc """
-  xx
+  Does the scope ask to be treated as a regular expression? Returns true if scope is a regex.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.regex?(aspect)
+  # => false
   ```
   """
   @spec regex?(aspect :: __MODULE__.t()) :: boolean()
@@ -88,9 +88,7 @@ defmodule SmeeView.Aspects.Scope do
     aspect.domain
   end
 
-
   #######################################################################################
-
 
 end
 

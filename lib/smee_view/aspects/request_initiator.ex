@@ -27,7 +27,7 @@ defmodule SmeeView.Aspects.RequestInitiator do
   #######################################################################################
 
   #@spec is not needed
- defp prepare_data(data, _options \\ []) do
+  defp prepare_data(data, _options \\ []) do
     Map.merge(data, %{index: Utils.normalize_index(data[:index])})
   end
 

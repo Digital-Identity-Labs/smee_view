@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.RegistrationPolicy do
 
   @moduledoc """
-  Represents and processes <RegistrationPolicy> elements in entity metadata as Aspect structs.
+  Represents and processes `<mdrpi:RegistrationPolicy>` elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.

@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Publication do
 
   @moduledoc """
-  Represents and processes <Publication> elements in entity metadata as Aspect structs.
+  Represents and processes  <mdrpi:Publication> elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -24,14 +24,14 @@ defmodule SmeeView.Aspects.Publication do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Returns the URI ID of the publisher as a binary string.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.publisher(aspect)
+  # => "urn:mace:switch.ch:SWITCHaai"
   ```
   """
   @spec publisher(aspect :: __MODULE__.t()) :: binary()
@@ -40,14 +40,14 @@ defmodule SmeeView.Aspects.Publication do
   end
 
   @doc """
-  xx
+  Returns the publication ID as a binary string.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.publication_id(aspect)
+  # => "k3klsoi"
   ```
   """
   @spec publication_id(aspect :: __MODULE__.t()) :: binary()

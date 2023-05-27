@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Protocol do
 
   @moduledoc """
-  Represents and processes <Protocol> elements in entity metadata as Aspect structs.
+  Represents and processes `protocolSupportEnumeration` XML attributes in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -23,14 +23,14 @@ defmodule SmeeView.Aspects.Protocol do
   use SmeeView.Aspects.AspectCommon, features: [:prid], roles: true
 
   @doc """
-  xx
+  Returns the protocol URI as a string binary.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.protocol(aspect)
+  # => ""urn:oasis:names:tc:SAML:2.0:protocol"
   ```
   """
   @spec protocol(aspect :: __MODULE__.t()) :: binary()
@@ -39,14 +39,14 @@ defmodule SmeeView.Aspects.Protocol do
   end
 
   @doc """
-  xx
+  Returns the protocol URI as a string binary.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.text(aspect)
+  # => ""urn:oasis:names:tc:SAML:2.0:protocol"
   ```
   """
   @spec text(aspect :: __MODULE__.t()) :: binary()
