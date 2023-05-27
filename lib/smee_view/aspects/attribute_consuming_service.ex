@@ -107,6 +107,7 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.AttributeConsumingService do
+@moduledoc false
   def to_string(a), do: "Attribute Consuming Service #{a.index}"
 end
 

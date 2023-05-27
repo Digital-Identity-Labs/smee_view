@@ -58,5 +58,6 @@ defmodule SmeeView.Aspects.NameIDFormat do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.NameIDFormat do
+@moduledoc false
   def to_string(a), do: a.uri
 end

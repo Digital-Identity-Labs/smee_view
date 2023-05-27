@@ -32,5 +32,6 @@ defmodule SmeeView.Aspects.Null do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Null do
+@moduledoc false
   def to_string(a), do: ""
 end

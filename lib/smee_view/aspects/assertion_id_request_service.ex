@@ -35,6 +35,7 @@ defmodule SmeeView.Aspects.AssertionIDRequestService do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.AssertionIDRequestService do
+@moduledoc false
   def to_string(a), do: a.location
 end
 

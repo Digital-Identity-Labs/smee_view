@@ -36,6 +36,7 @@ defmodule SmeeView.Aspects.AssertionConsumerService do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.AssertionConsumerService do
+@moduledoc false
   def to_string(a), do: a.location
 end
 

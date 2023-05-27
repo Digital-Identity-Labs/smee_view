@@ -28,5 +28,6 @@ defmodule SmeeView.Aspects.InformationURL do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.InformationURL do
+@moduledoc false
   def to_string(a), do: a.url
 end

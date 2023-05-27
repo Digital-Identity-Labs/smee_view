@@ -58,5 +58,6 @@ defmodule SmeeView.Aspects.Geolocation do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Geolocation do
+@moduledoc false
   def to_string(a), do: a.geolocation
 end

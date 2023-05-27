@@ -28,13 +28,14 @@ defmodule SmeeView.Aspects.ManageNameidService do
 
   ## Does not, cannot, have index - just here for indexing consistency
   #@spec is not needed
- defp prepare_data(data, _options \\ []) do
+  defp prepare_data(data, _options \\ []) do
     Map.merge(data, %{index: 0})
   end
 
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.ManageNameidService do
+  @moduledoc false
   def to_string(a), do: a.location
 end
 

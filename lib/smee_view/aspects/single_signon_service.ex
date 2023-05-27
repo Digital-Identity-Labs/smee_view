@@ -35,6 +35,7 @@ defmodule SmeeView.Aspects.SingleSignonService do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.SingleSignonService do
+@moduledoc false
   def to_string(a), do: a.location
 end
 

@@ -208,5 +208,6 @@ defmodule SmeeView.Aspects.Contact do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Contact do
+@moduledoc false
   def to_string(a), do: SmeeView.Aspects.Contact.name_addr(a)
 end

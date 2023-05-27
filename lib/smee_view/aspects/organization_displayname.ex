@@ -28,5 +28,6 @@ defmodule SmeeView.Aspects.OrganizationDisplayname do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.OrganizationDisplayname do
+@moduledoc false
   def to_string(a), do: a.text
 end

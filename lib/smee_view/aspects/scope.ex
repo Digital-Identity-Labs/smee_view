@@ -93,5 +93,6 @@ defmodule SmeeView.Aspects.Scope do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Scope do
+@moduledoc false
   def to_string(a), do: a.domain
 end

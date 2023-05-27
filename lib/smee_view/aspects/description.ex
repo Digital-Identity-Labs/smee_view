@@ -29,5 +29,6 @@ defmodule SmeeView.Aspects.Description do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Description do
+@moduledoc false
   def to_string(a), do: a.text
 end

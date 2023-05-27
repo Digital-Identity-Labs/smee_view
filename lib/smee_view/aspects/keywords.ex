@@ -71,6 +71,7 @@ defmodule SmeeView.Aspects.Keywords do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Keywords do
+@moduledoc false
   def to_string(a),
       do: a.words
           |> Enum.join(", ")

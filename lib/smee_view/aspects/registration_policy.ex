@@ -29,5 +29,6 @@ defmodule SmeeView.Aspects.RegistrationPolicy do
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.RegistrationPolicy do
+@moduledoc false
   def to_string(a), do: a.url
 end
