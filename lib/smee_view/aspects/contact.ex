@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Contact do
 
   @moduledoc """
-  Represents and processes <Contact> elements in entity metadata as Aspect structs.
+  Represents and processes <ContactPerson> elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -33,6 +33,17 @@ defmodule SmeeView.Aspects.Contact do
 
   use SmeeView.Aspects.AspectCommon
 
+  @doc """
+  Returns the suggested display name of a contact, derived from given name, surname and company.
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.displayname(contact)
+  # => "Ponder Stibbons (Unseen University)"
+  ```
+  """
   @spec displayname(aspect :: __MODULE__.t()) :: binary()
   def displayname(contact) do
     name = [contact.givenname, contact.surname]
@@ -44,14 +55,14 @@ defmodule SmeeView.Aspects.Contact do
   end
 
   @doc """
-  xx
+  Returns the email address and name in RFC5322 name-addr format (name <address@domain>)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.name_addr(contact)
+  # => "Ponder Stibbons <ponders@unseen.edu>"
   ```
   """
   @spec name_addr(aspect :: __MODULE__.t()) :: binary()
@@ -60,14 +71,14 @@ defmodule SmeeView.Aspects.Contact do
   end
 
   @doc """
-  xx
+  Returns the contact's email address as a URL (as it's stored in the metadata, probably)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.email_url(contact)
+  # => "mailto:ponders@unseen.edu"
   ```
   """
   @spec email_url(aspect :: __MODULE__.t()) :: binary() | nil
@@ -76,14 +87,14 @@ defmodule SmeeView.Aspects.Contact do
   end
 
   @doc """
-  xx
+  Returns the phone number of the contact (or nil) as a URL, as it probably isn't stored in the metadata
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.phone_url(contact)
+  # => "tel:01632960808"
   ```
   """
   @spec phone_url(aspect :: __MODULE__.t()) :: binary() | nil
@@ -92,14 +103,14 @@ defmodule SmeeView.Aspects.Contact do
   end
 
   @doc """
-  xx
+  Returns the contact type (technical, support, administrative, billing, or other)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.type(contact)
+  # => "administrative"
   ```
   """
   @spec type(aspect :: __MODULE__.t()) :: binary()
@@ -108,14 +119,14 @@ defmodule SmeeView.Aspects.Contact do
   end
 
   @doc """
-  xx
+  Returns the email address as a bare email address (without name, not a URL)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.email(contact)
+  # => "ponders@unseen.edu"
   ```
   """
   @spec email(aspect :: __MODULE__.t()) :: binary() | nil
@@ -124,14 +135,14 @@ defmodule SmeeView.Aspects.Contact do
   end
 
   @doc """
-  xx
+  Returns the contact's givenname, if present
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.givenname(contact)
+  # => "Ponder"
   ```
   """
   @spec givenname(aspect :: __MODULE__.t()) :: binary() | nil
@@ -140,14 +151,14 @@ defmodule SmeeView.Aspects.Contact do
   end
 
   @doc """
-  xx
+  Returns the surname of the contact, if present.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.surname(contact)
+  # => "Stibbons"
   ```
   """
   @spec surname(aspect :: __MODULE__.t()) :: binary() | nil
@@ -156,14 +167,14 @@ defmodule SmeeView.Aspects.Contact do
   end
 
   @doc """
-  xx
+  Returns the phone number of the contact, if present.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.phone(contact)
+  # => "01632960808"
   ```
   """
   @spec phone(aspect :: __MODULE__.t()) :: binary() | nil
@@ -172,14 +183,14 @@ defmodule SmeeView.Aspects.Contact do
   end
 
   @doc """
-  xx
+  Returns the company name, if present (it probably isn't!)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.company(aspect)
+  # => "Unseen University"
   ```
   """
   @spec company(aspect :: __MODULE__.t()) :: binary() | nil

@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Network do
 
   @moduledoc """
-  Represents and processes <Network> elements in entity metadata as Aspect structs.
+  Represents and processes <mdui:IPHint> elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -21,14 +21,14 @@ defmodule SmeeView.Aspects.Network do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Returns the value of the network/IPHint as a string
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.network(aspect)
+  # => "130.88.0.0/16"
   ```
   """
   @spec network(aspect :: __MODULE__.t()) :: binary()
@@ -37,14 +37,14 @@ defmodule SmeeView.Aspects.Network do
   end
 
   @doc """
-  xx
+  Returns the value of the network/IPHint as a string
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.text(aspect)
+  # => "130.88.0.0/16"
   ```
   """
   @spec text(aspect :: __MODULE__.t()) :: binary()

@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Domain do
 
   @moduledoc """
-  Represents and processes <Domain> elements in entity metadata as Aspect structs.
+  Represents and processes <mdui:DomainHint> elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -22,14 +22,14 @@ defmodule SmeeView.Aspects.Domain do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Returns the domain as a string
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.domain(aspect)
+  # => "unseen.edu"
   ```
   """
   @spec domain(aspect :: __MODULE__.t()) :: binary() | nil
@@ -38,14 +38,14 @@ defmodule SmeeView.Aspects.Domain do
   end
 
   @doc """
-  xx
+  Returns the domain as a string
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.text8(aspect)
+  # => "unseen.edu"
   ```
   """
   @spec text(aspect :: __MODULE__.t()) :: binary() | nil

@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Geolocation do
 
   @moduledoc """
-  Represents and processes <Geolocation> elements in entity metadata as Aspect structs.
+  Represents and processes <mdui:GeolocationHint> elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -22,14 +22,14 @@ defmodule SmeeView.Aspects.Geolocation do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Returns the geolocation as a string
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.geolocation(aspect)
+  # => "geo:47.37328,8.531126"
   ```
   """
   @spec geolocation(aspect :: __MODULE__.t()) :: binary()
@@ -38,14 +38,14 @@ defmodule SmeeView.Aspects.Geolocation do
   end
 
   @doc """
-  xx
+  Returns the geolocation as a string
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.text(aspect)
+  # => "geo:47.37328,8.531126"
   ```
   """
   @spec text(aspect :: __MODULE__.t()) :: binary()

@@ -1,20 +1,12 @@
 defmodule SmeeView.Aspects.Entity do
 
   @moduledoc """
-  This aspect contains a bundle of related Metadata UI ("MDUI") aspects from entity metadata.
+  This aspect contains a bundle of related aspects from entity metadata. It is the top-level structure for SmeeView.
 
-  Since displaynames, descriptions, URLs, etc are often used together this Aspect exists to make
-  gathering them all a little simpler.
+  This is the most complicated *and slowest* Aspect structure in SmeeView, so unless you need everything within this
+    structure, you will probably be better off using other Views to extract only what you need directly.
 
   You can extract and process each of the different types of aspects using their own View modules:
-
-  * `SmeeView.Displaynames`
-  * `SmeeView.Names`
-  * `SmeeView.Logos`
-  * `SmeeView.PrivacyURLs`
-  * `SmeeView.InformationURLs`
-  * `SmeeView.Keywords`
-  * `SmeeView.Organization`
 
   """
 

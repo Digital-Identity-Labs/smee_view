@@ -39,14 +39,14 @@ defmodule SmeeView.Aspects.DiscoHints do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Returns a list of scope aspects used by the entity
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.scopes(aspect)
+  # => [%Scope{regex: false, domain: "unseen.edu"}]
   ```
   """
   @spec scopes(aspect :: __MODULE__.t()) :: list()
@@ -55,14 +55,14 @@ defmodule SmeeView.Aspects.DiscoHints do
   end
 
   @doc """
-  xx
+  Returns a list of network aspects (from <mdui:IPHint> elements)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.networks(aspect)
+  # => [%Network{}. %Network{}]
   ```
   """
   @spec networks(aspect :: __MODULE__.t()) :: list()
@@ -71,14 +71,14 @@ defmodule SmeeView.Aspects.DiscoHints do
   end
 
   @doc """
-  xx
+  Returns a list of geolocation aspects (from <mdui:GeolocationHint> elements)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.geolocations(aspect)
+  # => [%Network{}. %Network{}]
   ```
   """
   @spec geolocations(aspect :: __MODULE__.t()) :: list()
@@ -87,14 +87,14 @@ defmodule SmeeView.Aspects.DiscoHints do
   end
 
   @doc """
-  xx
+  Returns list of keyword aspects (from <mdui:Keywords> elements)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.keywords(aspect)
+  # => [%Keywords{}]
   ```
   """
   @spec keywords(aspect :: __MODULE__.t()) :: list()
@@ -103,14 +103,14 @@ defmodule SmeeView.Aspects.DiscoHints do
   end
 
   @doc """
-  xx
+  Return list of domain asspects (from <mdui:DomainHints> elements)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.domains(aspect)
+  # => [%Domain{}, %Domain{}]
   ```
   """
   @spec domains(aspect :: __MODULE__.t()) :: list()

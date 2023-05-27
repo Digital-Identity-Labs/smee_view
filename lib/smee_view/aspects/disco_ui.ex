@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.DiscoUI do
 
   @moduledoc """
-  This aspect contains a bundle of related Metadata UI ("MDUI") aspects from entity metadata.
+  This aspect contains a bundle of related Metadata UI ("mdui:") aspects from entity metadata.
 
   Since displaynames, descriptions, URLs, etc are often used together this Aspect exists to make
   gathering them all a little simpler.
@@ -9,7 +9,7 @@ defmodule SmeeView.Aspects.DiscoUI do
   You can extract and process each of the different types of aspects using their own View modules:
 
   * `SmeeView.Displaynames`
-  * `SmeeView.Names`
+  * `SmeeView.Descriptions`
   * `SmeeView.Logos`
   * `SmeeView.PrivacyURLs`
   * `SmeeView.InformationURLs`
@@ -22,7 +22,7 @@ defmodule SmeeView.Aspects.DiscoUI do
   alias SmeeView.Utils
   @type t :: %__MODULE__{
                displaynames: list(),
-               names: list(),
+               descriptions: list(),
                logos: list(),
                privacy_urls: list(),
                information_urls: list(),
@@ -33,7 +33,7 @@ defmodule SmeeView.Aspects.DiscoUI do
   @derive Jason.Encoder
   defstruct [
     displaynames: [],
-    names: [],
+    descriptions: [],
     logos: [],
     privacy_urls: [],
     information_urls: [],
@@ -44,14 +44,14 @@ defmodule SmeeView.Aspects.DiscoUI do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Returns list of displaynames aspects (from <mdui:Displayname> elements)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.displaynames(aspect)
+  # => [%Displayname{}, %Displayname{}]
   ```
   """
   @spec displaynames(aspect :: __MODULE__.t()) :: list()
@@ -60,30 +60,30 @@ defmodule SmeeView.Aspects.DiscoUI do
   end
 
   @doc """
-  xx
+  Returns list of description aspects (from <mdui:Description> elements)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.descriptions(aspect)
+  # => [%Description{}, %Description{}]
   ```
   """
-  @spec names(aspect :: __MODULE__.t()) :: list()
-  def names(aspect) do
-    aspect.names || []
+  @spec descriptions(aspect :: __MODULE__.t()) :: list()
+  def descriptions(aspect) do
+    aspect.descriptions || []
   end
 
   @doc """
-  xx
+  Returns list of logo aspects (from <mdui:Logo> elements)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.logos(aspect)
+  # => [%Logo{}, %Logo{}, %Logo{}]
   ```
   """
   @spec logos(aspect :: __MODULE__.t()) :: list()
@@ -92,14 +92,14 @@ defmodule SmeeView.Aspects.DiscoUI do
   end
 
   @doc """
-  xx
+  Returns a list of Privacy URLs (from <mdui:PrivacyStatementURL> elements)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.privacy_urls(aspect)
+  # => [%PrivacyURL{}, %PrivacyURL{}]
   ```
   """
   @spec privacy_urls(aspect :: __MODULE__.t()) :: list()
@@ -108,14 +108,14 @@ defmodule SmeeView.Aspects.DiscoUI do
   end
 
   @doc """
-  xx
+    Returns a list of Information URLs (from <mdui:InformationURL> elements)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.information_urls(aspect)
+  # => [%InformationURL{}, %InformationURL{}]
   ```
   """
   @spec information_urls(aspect :: __MODULE__.t()) :: list()
@@ -124,14 +124,14 @@ defmodule SmeeView.Aspects.DiscoUI do
   end
 
   @doc """
-  xx
+  Returns list of keyword aspects (from <mdui:Keywords> elements)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.keywords(aspect)
+  # => [%Keywords{}]
   ```
   """
   @spec keywords(aspect :: __MODULE__.t()) :: list()
@@ -140,14 +140,14 @@ defmodule SmeeView.Aspects.DiscoUI do
   end
 
   @doc """
-  xx
+  Returns a list of Organizations (probably just one) for use if MDUI information is missing
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.organizations(aspect)
+  # => [%Organization{}]
   ```
   """
   @spec organizations(aspect :: __MODULE__.t()) :: list()
@@ -156,14 +156,15 @@ defmodule SmeeView.Aspects.DiscoUI do
   end
 
   @doc """
-  xx
+  Returns the first Organizations (there is probably just one) for use if MDUI information is missing
+
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.organization(aspect)
+  # => %Organization{}
   ```
   """
   @spec organization(aspect :: __MODULE__.t()) :: struct() | nil

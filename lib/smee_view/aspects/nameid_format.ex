@@ -22,14 +22,14 @@ defmodule SmeeView.Aspects.NameIDFormat do
   use SmeeView.Aspects.AspectCommon, features: [:prid]
 
   @doc """
-  xx
+  Returns the value of the nameid as a string
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.nameid(aspect)
+  # => "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
   ```
   """
   @spec nameid(aspect :: __MODULE__.t()) :: binary()
@@ -38,14 +38,14 @@ defmodule SmeeView.Aspects.NameIDFormat do
   end
 
   @doc """
-  xx
+  Returns the value of the nameid as a string
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.text(aspect)
+  # => "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
   ```
   """
   @spec text(aspect :: __MODULE__.t()) :: binary()

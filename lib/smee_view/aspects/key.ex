@@ -1,7 +1,9 @@
 defmodule SmeeView.Aspects.Key do
 
   @moduledoc """
-  Represents and processes <Key> elements in entity metadata as Aspect structs.
+  Represents and processes <KeyDescriptor> elements in entity metadata as Aspect structs.
+
+  This is information about the keys used by an IdP or SP for signing and encryption and contains the *public key*
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -32,14 +34,14 @@ defmodule SmeeView.Aspects.Key do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Return the key type: signing, encryption or nil. Nil indicates that the key is general-purpose.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.type(aspect)
+  # => "signing"
   ```
   """
   @spec type(aspect :: __MODULE__.t()) :: binary()
@@ -48,14 +50,16 @@ defmodule SmeeView.Aspects.Key do
   end
 
   @doc """
-  xx
+  Is the key suitable for encryption use?
+
+  Not that this is *used for*, not specifically for - a type of nil indicates both signing and encryption use.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.encryption?(aspect)
+  # => true
   ```
   """
   @spec encryption?(aspect :: __MODULE__.t()) :: boolean()
@@ -68,14 +72,16 @@ defmodule SmeeView.Aspects.Key do
   end
 
   @doc """
-  xx
+  Is the key suitable for signing use?
+
+  Not that this is *used for*, not specifically for - a type of nil indicates both signing and encryption use.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.signing?(aspect)
+  # => false
   ```
   """
   @spec signing?(aspect :: __MODULE__.t()) :: boolean()
@@ -88,14 +94,14 @@ defmodule SmeeView.Aspects.Key do
   end
 
   @doc """
-  xx
+  Returns the public key as a PEM string (a BASE64-encoded DER certificate).
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.pem(aspect)
+  # => "-----BEGIN CERTIFICATE-----\n#MIICMzCCAZygAwIBAgIJALiPnVsvq..."
   ```
   """
   @spec pem(aspect :: __MODULE__.t()) :: binary()
@@ -104,14 +110,14 @@ defmodule SmeeView.Aspects.Key do
   end
 
   @doc """
-  xx
+  Returns the raw BASE64 string data of the key, without PEM headers, as stored in the metadata
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.data(aspect)
+  # => "MIICMzCCAZygAwIBAgIJALiPnVsvq..."
   ```
   """
   @spec data(aspect :: __MODULE__.t()) :: binary()
@@ -120,14 +126,14 @@ defmodule SmeeView.Aspects.Key do
   end
 
   @doc """
-  xx
+  Returns the subject CN of the key/certificate
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.subject(aspect)
+  # => "/CN=hex.unseen.edu/OU=Domain Control Validated"
   ```
   """
   @spec subject(aspect :: __MODULE__.t()) :: binary()
@@ -138,14 +144,14 @@ defmodule SmeeView.Aspects.Key do
   end
 
   @doc """
-  xx
+  Returns the issuer CN of the certificate
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.issuer(aspect)
+  # => "CN=Ankh Morpork Post Office"
   ```
   """
   @spec issuer(aspect :: __MODULE__.t()) :: binary() | nil
@@ -156,14 +162,14 @@ defmodule SmeeView.Aspects.Key do
   end
 
   @doc """
-  xx
+  Returns the SHA1 fingerprint of the certificate
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.fingerprint(aspect)
+  # => "A5:9C:E0:47:C1:34:88:9F:16:0B:15:0C:9E:A1:B9:05:6D:8C:37:FE"
   ```
   """
   @spec fingerprint(aspect :: __MODULE__.t()) :: binary()
@@ -174,14 +180,14 @@ defmodule SmeeView.Aspects.Key do
   end
 
   @doc """
-  xx
+  Returns the expiry date (Not After) for the certificate
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.expires_at(aspect)
+  # => ~U[2023-05-21 16:12:05.481701Z]
   ```
   """
   @spec expires_at(aspect :: __MODULE__.t()) :: binary() | nil
@@ -192,14 +198,14 @@ defmodule SmeeView.Aspects.Key do
   end
 
   @doc """
-  xx
+  Returns the serial number for the certificate
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.serial_number(aspect)
+  # => "27ACAE30B9F323"
   ```
   """
   @spec serial_number(aspect :: __MODULE__.t()) :: binary() | nil
@@ -210,14 +216,14 @@ defmodule SmeeView.Aspects.Key do
   end
 
   @doc """
-  xx
+  Return the signature algorithm as a string (not a list!)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.signature_algorithm(aspect)
+  # => "sha, rsa"
   ```
   """
   @spec signature_algorithm(aspect :: __MODULE__.t()) :: binary() | nil

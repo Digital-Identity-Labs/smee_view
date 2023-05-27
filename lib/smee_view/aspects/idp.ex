@@ -95,7 +95,7 @@ defmodule SmeeView.Aspects.IdP do
     String.split("#{__MODULE__}", ".")
     |> List.last()
   }.xx(aspect)
-  # => xx
+  # => [%Scope{regex: false, domain: "unseen.edu"}]
   ```
   """
   @spec scopes(aspect :: __MODULE__.t()) :: list()
