@@ -18,7 +18,7 @@ defmodule SmeeView.Aspects.Entity do
                id: binary(),
                valid_until: binary(),
                cache_duration: binary(),
-               registration: binary(),
+               registration: struct(),
                publications: list(),
                idps: list(),
                sps: list(),
@@ -45,14 +45,16 @@ defmodule SmeeView.Aspects.Entity do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Returns the entity ID (URI) of the entity.
+
+  This is already available in the `Smee.Entity` record and the keys of prism data
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.entity_id(aspect)
+  # => "https://idp.example.com/shibboleth"
   ```
   """
   @spec entity_id(aspect :: __MODULE__.t()) :: binary()
@@ -61,14 +63,17 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns the "ID" of the entity's metadata record *not the entity ID*.
 
+  This field will often be blank, and will differ for the same entity in different federations
+
+  It will often be "_" or nil
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.id(aspect)
+  # => "ex378486"
   ```
   """
   @spec id(aspect :: __MODULE__.t()) :: binary()
@@ -77,14 +82,17 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns the valid until expiry date from the Entity.
+
+  This should already be available in the `Smee.Entity` record, but that may be derived from the default in the parent
+  metadata.
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.valid_until(aspect)
+  # => "2021-12-25T17:33:22.438Z"
   ```
   """
   @spec valid_until(aspect :: __MODULE__.t()) :: binary()
@@ -93,14 +101,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns the cache duration value for the metadata, as a string
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.cache_duration(aspect)
+  # => "PT6H0M0.000S"
   ```
   """
   @spec cache_duration(aspect :: __MODULE__.t()) :: binary()
@@ -109,14 +117,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Registration aspect for the entity
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.registration(aspect)
+  # => %Registration{}
   ```
   """
   @spec registration(aspect :: __MODULE__.t()) :: struct()
@@ -125,14 +133,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  PublicationPath - list of Publications for the entity
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.publications(aspect)
+  # => [%Publication{}]
   ```
   """
   @spec publications(aspect :: __MODULE__.t()) :: list()
@@ -141,14 +149,15 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns a list of all IdP role aspects (there will be zero or one IdPs in the list)
 
+  See `idp/1` too, which returns one or nil
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.idps(aspect)
+  # => [%IdP{}]
   ```
   """
   @spec idps(aspect :: __MODULE__.t()) :: list()
@@ -157,14 +166,15 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns a list of all SP role aspects (there will be zero or one SPs in the list)
 
+  See `sp/1` too, which returns one or nil
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.sps(aspect)
+  # => [%SP{}]
   ```
   """
   @spec sps(aspect :: __MODULE__.t()) :: list()
@@ -173,14 +183,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns a list of Organization aspects in the entity
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.organizations(aspect)
+  # => [%Organization{}]
   ```
   """
   @spec organizations(aspect :: __MODULE__.t()) :: list()
@@ -189,14 +199,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns a list of all contact aspects in the entity
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.contacts(aspect)
+  # => [%Contact{}, %Contact{}, %Contact{}]
   ```
   """
   @spec contacts(aspect :: __MODULE__.t()) :: list()
@@ -205,14 +215,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns a list of all Entity Attribute aspects for the entity
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.entity_attributes(aspect)
+  # => [%EntityAttribute{}, %EntityAttribute{}, %EntityAttribute{}]
   ```
   """
   @spec entity_attributes(aspect :: __MODULE__.t()) :: list()
@@ -221,14 +231,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns the IdP role attribute for the entity, or nil
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.idp(aspect)
+  # => %IdP{}
   ```
   """
   @spec idp(aspect :: __MODULE__.t()) :: struct() | nil
@@ -240,19 +250,30 @@ defmodule SmeeView.Aspects.Entity do
     nil
   end
 
-  def idp?(aspect) do
-    idp(aspect) != nil
-  end
-
   @doc """
-  xx
+  Returns true if an IdP role is present
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.idp?(aspect)
+  # => true
+  ```
+  """
+  def idp?(aspect) do
+    idp(aspect) != nil
+  end
+
+  @doc """
+  Returns the SP role attribute for the entity, or nil
+
+  ```
+  #{
+    String.split("#{__MODULE__}", ".")
+    |> List.last()
+  }.sp(aspect)
+  # => %SP{}
   ```
   """
   @spec sp(aspect :: __MODULE__.t()) :: struct() | nil
@@ -265,14 +286,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns true if an SP role is present
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.sp?(aspect)
+  # => true
   ```
   """
   def sp?(aspect) do
@@ -280,14 +301,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns the top-level organization aspect for the entity, or nil
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.organization(aspect)
+  # => %Organization{}
   ```
   """
   @spec organization(aspect :: __MODULE__.t()) :: struct() | nil
@@ -300,14 +321,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Returns true if an Organization aspect is present
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.organization?(aspect)
+  # => true
   ```
   """
   @spec organization?(aspect :: __MODULE__.t()) :: boolean()
@@ -316,14 +337,14 @@ defmodule SmeeView.Aspects.Entity do
   end
 
   @doc """
-  xx
+  Lists all roles for the Entity (IdPs, SPs, others)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.roles(aspect)
+  # => [%SP{}]
   ```
   """
   @spec roles(aspect :: __MODULE__.t()) :: list()

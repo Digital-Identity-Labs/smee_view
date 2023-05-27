@@ -26,14 +26,14 @@ defmodule SmeeView.Aspects.Organization do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Lists all displaynames for this organization (one for each language)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.displaynames(aspect)
+  # => [OrganizationDisplayname{}, OrganizationDisplayname{}, OrganizationDisplayname{}]
   ```
   """
   @spec displaynames(aspect :: __MODULE__.t()) :: list()
@@ -42,14 +42,14 @@ defmodule SmeeView.Aspects.Organization do
   end
 
   @doc """
-  xx
+  Lists all names for this organization (one for each language)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.names(aspect)
+  # => [OrganizationName{}, OrganizationName{}, OrganizationName{}]
   ```
   """
   @spec names(aspect :: __MODULE__.t()) :: list()
@@ -58,14 +58,14 @@ defmodule SmeeView.Aspects.Organization do
   end
 
   @doc """
-  xx
+  Lists all URLs for this organization (one for each language)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.urls(aspect)
+  # => [OrganizationURL{}, OrganizationURL{}, OrganizationURL{}]
   ```
   """
   @spec urls(aspect :: __MODULE__.t()) :: list()

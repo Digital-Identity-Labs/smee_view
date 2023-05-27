@@ -56,14 +56,14 @@ defmodule SmeeView.Aspects.IdP do
   use SmeeView.Aspects.AspectCommon
 
   @doc """
-  xx
+  Returns a list of protocol aspects for this role
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.protocols(aspect)
+  # => [%Protocol{}, %Protocol{}]
   ```
   """
   @spec protocols(aspect :: __MODULE__.t()) :: list()
@@ -72,14 +72,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  Returns true if the IdP demands Authn requests to be signed
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.want_authn_requests_signed?(aspect)
+  # => false
   ```
   """
   @spec want_authn_requests_signed?(aspect :: __MODULE__.t()) :: boolean()
@@ -88,13 +88,13 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  Lists Shibboleth domain scopes used by the IdP (*not* oauth/OIDC scopes)
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
+  }.scopes(aspect)
   # => [%Scope{regex: false, domain: "unseen.edu"}]
   ```
   """
@@ -104,14 +104,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  Lists MDUI logos used by this role
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.logos(aspect)
+  # => [Logo{}, Logo{}, Logo{}]
   ```
   """
   @spec logos(aspect :: __MODULE__.t()) :: list()
@@ -120,14 +120,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  Lists MDUI displaynames used by this role
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.displaynames(aspect)
+  # => [%Displayname{}, %Displayname{}, %Displayname{}]
   ```
   """
   @spec displaynames(aspect :: __MODULE__.t()) :: list()
@@ -136,14 +136,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  Lists MDDisco IPHints as Network aspects
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.networks(aspect)
+  # => [%Network{}, %Network{}]
   ```
   """
   @spec networks(aspect :: __MODULE__.t()) :: list()
@@ -152,14 +152,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  List MD Disco geolocation hints as geolocation aspects
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.geolocations(aspect)
+  # => [Geolocation{},Geolocation{}]
   ```
   """
   @spec geolocations(aspect :: __MODULE__.t()) :: list()
@@ -168,14 +168,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  Lists MD Disco domain hints as domain aspects
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.domains(aspect)
+  # => [%Domain{}]
   ```
   """
   @spec domains(aspect :: __MODULE__.t()) :: list()
@@ -184,14 +184,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  Lists MD Disco keyword sets as Keywords aspects
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.keywords(aspect)
+  # => [Keywords{}]
   ```
   """
   @spec keywords(aspect :: __MODULE__.t()) :: list()
@@ -200,14 +200,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  Lists public keys for this role
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.keys(aspect)
+  # => [%Key{}, %Key{}]
   ```
   """
   @spec keys(aspect :: __MODULE__.t()) :: list()
@@ -216,14 +216,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  List NameID format URIs as aspects
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.nameid_formats(aspect)
+  # => [%NameID{}]
   ```
   """
   @spec nameid_formats(aspect :: __MODULE__.t()) :: list()
@@ -232,14 +232,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  Lists all types of services for this role
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.services(aspect)
+  # => [%SingleSignOnService{}, %SingleLogoutService{}]
   ```
   """
   @spec services(aspect :: __MODULE__.t()) :: list()
@@ -248,14 +248,14 @@ defmodule SmeeView.Aspects.IdP do
   end
 
   @doc """
-  xx
+  Lists of attributes associated with this role
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.attributes(aspect)
+  # => [%Attribute{}, %Attribute{}]
   ```
   """
   @spec attributes(aspect :: __MODULE__.t()) :: list()
