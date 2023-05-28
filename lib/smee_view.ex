@@ -1,14 +1,12 @@
 defmodule SmeeView do
   @moduledoc """
-  Documentation for `SmeeView`.
-
   SmeeView provides two types of module for extracting information from SAML metadata, loosely based on the concept
-  of data access "lenses". SmeeView extends the [Smee](https://hexdocs.pm/smee/readme.html) library and requires
+  of functional data access "lenses". SmeeView extends the [Smee](https://hexdocs.pm/smee/readme.html) library and requires
     metadata to be contained in individual `Smee.Entity` records.
 
   ## Views
   Views take metadata, or information extracted from metadata, and return a specific type of record from it, known as an
-    aspect. They also allow further filtering and processing of list()s of aspects.
+    aspect. They also allow further filtering and processing of list's of aspects.
 
   For instance `SmeeView.Logos` will extract all logo information from an entity's metadata and filter them so that only
     IdP logos of a particular shape are returned.
@@ -39,7 +37,28 @@ defmodule SmeeView do
   alias SmeeView.Entities
 
   @doc """
-  X
+  Returns a list of `SmeeView.Aspect.Entity` structs extracted from the input data. Each one represents an entire SAML
+    entity, and contains lists of other aspect structs representing each "aspect" of the entity.
+
+  Input data can be a `Smee.Entity` or `Smee.Metadata` struct, or a list containing `Smee.Entity`, `Smee.Metadata` or
+    any aspects. Only appropriate aspect records will be returned.
+
+  `view/2` is useful for extracting specific types of aspects from one Entity, but because it has no entity ID information
+    it's often not the best choice for handling Metadata. When extracting information from entire metadata files it's often
+    better to use `prism/2` which returns the same data in a map, associated with each entity's ID.
+
+  ```
+  SmeeView.view(entity)
+  # => [%Entity{}]
+
+  SmeeView.view(metadata)
+  # => [%Entity{}, %Entity{}, %Entity{}, ...]
+
+  SmeeView.view([metadata, entity1, entity2])
+  # => [%Entity{}, %Entity{}, %Entity{}, ...]
+
+  ```
+
   """
   @spec view(smee_data :: Smee.Entity.t() | Smee.Metadata.t() | list(), options :: Keyword.t()) :: list()
   def view(smee_data, options \\ []) do
@@ -47,7 +66,26 @@ defmodule SmeeView do
   end
 
   @doc """
-  X
+  Returns a single `SmeeView.Aspect.Entity` aspect struct extracted from one record in the input data.
+
+  Input data can be a `Smee.Entity` or `Smee.Metadata` struct, or a list containing `Smee.Entity`, `Smee.Metadata` or
+    any aspects.
+
+  **Only one entity will be processed** and then **only one aspect will be returned**. If you pass one Entity struct as the input, it will be that entity (obviously).
+    If you pass metadata structs or lists one entity will be chosen at random. The first suitable entity will be returned.
+
+  `view_one/2` is *intended* for use with a single entity record and aspects like `SmeeView.Aspect.Entity`,
+  `SmeeView.Aspect.SP' or `SmeeView.Aspect.Organization' but will work with any aspect.
+
+  ```
+  SmeeView.view_one(entity)
+  # => %Entity{}
+
+  SmeeView.view_one(metadata)
+  # => %Entity{}
+
+  ```
+
   """
   @spec view_one(smee_data :: Smee.Entity.t(), options :: Keyword.t()) :: list()
   def view_one(smee_data, options \\ []) do
@@ -56,7 +94,24 @@ defmodule SmeeView do
   end
 
   @doc """
-  X
+  Returns a map of `SmeeView.Aspect.Entity` aspect structs extracted from the input data, with entity IDs as keys.
+   Each entity aspect represents an entire SAML entity, and contains lists of other aspect structs representing each
+   "aspect" of the entity.
+
+  Input data can be a `Smee.Entity` or `Smee.Metadata` struct, or a list containing `Smee.Entity` and/or `Smee.Metadata` structs.
+  Only appropriate aspect records will be returned.
+
+  `prism/2` is useful for extracting specific types of aspects from lists of entity records, or metadata. If you are
+    only interested in one aspect from a single `Smee.Entity` struct then you should probably use `view/2` instead.
+
+  ```
+  SmeeView.prism(entity)
+  # => %{"https://example.com/shibboleth" => [%Entity{}]}
+
+  SmeeView.prism(metadata)
+  # => %{"https://example.com/shibboleth" => [%Entity{}, %Entity{}, ...]}
+  ```
+
   """
   @spec prism(smee_data :: Smee.Entity.t() | Smee.Metadata.t() | list(), options :: Keyword.t()) :: map()
   def prism(smee_data, options \\ []) do

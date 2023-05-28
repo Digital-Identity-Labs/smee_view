@@ -2,7 +2,7 @@ defmodule SmeeView.SPs do
 
   @moduledoc """
   This module can extracts a bundle of aspects from the IdP role in a SAML entity's metadata.
-    
+
   Aspects can be extracted with three functions:
 
   * Views, via `view/2` are lists of aspects
