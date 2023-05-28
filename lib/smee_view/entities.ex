@@ -1,8 +1,9 @@
 defmodule SmeeView.Entities do
 
   @moduledoc """
-  This module can extracts the `<ArtifactResolutionService>` elements in entity metadata as "aspect" structs, and then
-  process and filter the results.
+  This module can extract a bundle of related aspects from entity metadata. It is the top-level structure for SmeeView,
+    and contains all other aspects - as such it is the slowest and least efficient. If you only need a few types of data
+    please use the dedicated modules for each instead of the module.
 
   Aspects can be extracted with three functions:
 

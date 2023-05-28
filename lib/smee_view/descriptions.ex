@@ -1,7 +1,7 @@
 defmodule SmeeView.Descriptions do
 
   @moduledoc """
-  This module can extracts the `<ArtifactResolutionService>` elements in entity metadata as "aspect" structs, and then
+  This module can extracts the `<mdui:Description>` elements in entity metadata as "aspect" structs, and then
   process and filter the results.
 
   Aspects can be extracted with three functions:
