@@ -24,7 +24,27 @@ defmodule SmeeView.ViewCommon do
       alias Smee.Metadata
       alias SmeeView.Utils
 
-      @doc "Docs for view function - do they appear?"
+      @doc """
+      Returns a list of `#{unquote(params[:aspect])}` aspect structs extracted from the input data.
+
+      Input data can be a `Smee.Entity` or `Smee.Metadata` struct, or a list containing `Smee.Entity`, `Smee.Metadata` or
+        any aspects. Only appropriate aspect records will be returned.
+
+      `view/3` is useful for extracting specific types of aspects from one Entity, but because it has no entity ID information
+        it's often not the best choice for handling Metadata. When extracting information from entire metadata it's often
+        better to use `prism/3` which returns the same data in a map, associated with each entity's ID.
+
+       The optional role parameter will optimize the results to only search for either :idp or :sp aspects. The default is :all.
+
+      ```
+      #{
+        String.split("#{__MODULE__}", ".")
+        |> List.last()
+      }.view(entity)
+      # => [%#{unquote(params[:aspect])}{}, %#{unquote(params[:aspect])}{}]
+      ```
+
+      """
       def view(list, role \\ :all, options \\ [])
       def view(%Entity{} = entity, role, options) do
         entity
@@ -64,7 +84,27 @@ defmodule SmeeView.ViewCommon do
       end
 
       @doc """
-      X
+      Returns a single `#{unquote(params[:aspect])}` aspect struct extracted from one record in the input data.
+
+      Input data can be a `Smee.Entity` or `Smee.Metadata` struct, or a list containing `Smee.Entity`, `Smee.Metadata` or
+        any aspects.
+
+      **Only one entity will be processed** and then **only one aspect will be returned**. If you pass one Entity struct as the input, it will be that entity (obviously).
+        If you pass metadata structs or lists one entity will be chosen at random. The first suitable entity will be returned.
+
+      `view_one/3` is *intended* for use with a single entity record and aspects like `SmeeView.Aspect.Entity`,
+      `SmeeView.Aspect.SP' or `SmeeView.Aspect.Organization' but will work with any aspect.
+
+       The optional role parameter will optimize the results to only search for either :idp or :sp aspects. The default is :all.
+
+      ```
+      #{
+        String.split("#{__MODULE__}", ".")
+        |> List.last()
+      }.view_one(entity)
+      # => %#{unquote(params[:aspect])}{}
+      ```
+
       """
       @spec view_one(smee_data :: Smee.Entity.t(), options :: Keyword.t()) :: list()
       def view_one(smee_data, role \\ :all, options \\ [])
@@ -86,6 +126,26 @@ defmodule SmeeView.ViewCommon do
         |> view_one()
       end
 
+      @doc """
+      Returns a map of `#{unquote(params[:aspect])}` aspect structs extracted from the input data, with entity IDs as keys.
+
+      Input data can be a `Smee.Entity` or `Smee.Metadata` struct, or a list containing `Smee.Entity` and/or `Smee.Metadata` structs.
+      Only appropriate aspect records will be returned.
+
+      `prism/3` is useful for extracting specific types of aspects from lists of entity records, or metadata. If you are
+        only interested in one aspect from a single `Smee.Entity` struct then you should probably use `view/3` instead.
+
+       The optional role parameter will optimize the results to only search for either :idp or :sp aspects. The default is :all.
+
+      ```
+      #{
+        String.split("#{__MODULE__}", ".")
+        |> List.last()
+      }.view(entity)
+      # => %{"https://example.com/shibboleth" =>  [%#{unquote(params[:aspect])}{}, %#{unquote(params[:aspect])}{},]}
+      ```
+
+      """
       def prism(various, role \\ :all, options \\ [])
       def prism(various, role, options) when is_list(various) do
         various
@@ -115,7 +175,18 @@ defmodule SmeeView.ViewCommon do
         |> Map.new()
       end
 
-      @doc "Returns only aspects suitable for IdP role (whether or not it exists)"
+      @doc """
+      Removes any non-IdP aspects from a list (view) or map (prism)
+
+      ```
+      #{
+        String.split("#{__MODULE__}", ".")
+        |> List.last()
+      }.idp_filter(view)
+      # => []
+      ```
+
+      """
       def idp_filter(prism) when is_map(prism), do: prismify(prism, &idp_filter/1)
       def idp_filter(view) when is_list(view) do
         view
@@ -126,7 +197,18 @@ defmodule SmeeView.ViewCommon do
            )
       end
 
-      @doc "Returns only aspects suitable for IdP role (whether or not it exists)"
+      @doc """
+      Removes any non-SP aspects from a list (view) or map (prism)
+
+      ```
+      #{
+        String.split("#{__MODULE__}", ".")
+        |> List.last()
+      }.sp_filter(view)
+      # => []
+      ```
+
+      """
       def sp_filter(prism) when is_map(prism), do: prismify(prism, &sp_filter/1)
       def sp_filter(aspects) do
         aspects
@@ -142,7 +224,18 @@ defmodule SmeeView.ViewCommon do
         if Enum.member?(params[:features], :lang) do
           quote do
 
-            @doc "Returns a list of all languages used in the view"
+            @doc """
+            Returns all languages used in the list (view) or map (prism)
+
+            ```
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.langs(aspects)
+            # => ["en", "se", "zu"]
+            ```
+
+            """
             def langs(prism) when is_map(prism), do: prismify(prism, &langs/1)
             def langs(aspects) do
               aspects
@@ -155,7 +248,20 @@ defmodule SmeeView.ViewCommon do
               |> Enum.sort()
             end
 
-            @doc "Returns the first aspect with matching language, or failing that, the default language, or English"
+            @doc """
+            Returns the first aspect with matching language, or failing that, the default language, or English
+
+            This function is useful when showing a UI to users, to select the most appropriate aspect for display
+
+            ```
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.pick(aspects, "no")
+            # => %#{unquote(params[:aspect])}{lang: "no" text: "..." }
+            ```
+
+            """
             def pick(aspects, lang \\ Utils.default_lang())
             def pick(prism, lang) when is_map(prism), do: prismify(prism, lang, &pick/2)
             def pick(aspects, lang) do
@@ -188,7 +294,18 @@ defmodule SmeeView.ViewCommon do
         if Enum.member?(params[:features], :text) do
           quote do
 
-            @doc "Returns maximum width of text in the view, as an integer"
+            @doc """
+            Returns maximum width of text in the view, as an integer
+
+            ```
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.max_size(aspects)
+            # => 42
+            ```
+
+            """
             def max_size(prism) when is_map(prism), do: prismify(prism, &max_size/1)
             def max_size(aspects) do
               aspects
@@ -210,7 +327,20 @@ defmodule SmeeView.ViewCommon do
         if Enum.member?(params[:features], :attr) do
           quote do
 
-            @doc "Returns only SAML1 attributes"
+            @doc """
+            Returns only SAML1 attributes
+
+            Filters the view (list) or prism (map) to only include SAML1 attributes
+
+            ```
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.saml1_filter(aspects)
+            # =>  [%#{unquote(params[:aspect])}{}]
+            ```
+
+            """
             def saml1_filter(prism) when is_map(prism), do: prismify(prism, &saml1_filter/1)
             def saml1_filter(aspects) do
               aspects
@@ -222,6 +352,20 @@ defmodule SmeeView.ViewCommon do
             end
 
             @doc "Returns only SAML2 attributes"
+            @doc """
+            Returns only SAML2 attributes
+
+            Filters the view (list) or prism (map) to only include SAML2 attributes
+
+            ```
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.saml2_filter(aspects)
+            # => [%#{unquote(params[:aspect])}{}]
+            ```
+
+            """
             def saml2_filter(prism) when is_map(prism), do: prismify(prism, &saml2_filter/1)
             def saml2_filter(aspects) do
               aspects
@@ -245,7 +389,20 @@ defmodule SmeeView.ViewCommon do
         if Enum.member?(params[:features], :url) do
           quote do
 
-            @doc "Returns filtered list of only valid URLs"
+            @doc """
+            Returns filtered list of only valid URLs from a view (list) or prism (map)
+
+            It's unlikely that invalid URLs will be in NREN metadata, but this may be useful when producing your own.
+
+            ```
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.valid_filter(aspects)
+            # => [%#{unquote(params[:aspect])}{}]
+            ```
+
+            """
             def valid_filter(prism) when is_map(prism), do: prismify(prism, &valid_filter/1)
             def valid_filter(aspects) do
               aspects
@@ -269,7 +426,20 @@ defmodule SmeeView.ViewCommon do
         if Enum.member?(params[:features], :algo) do
           quote do
 
-            @doc "Shortens algorithms"
+            @doc """
+            Shortens algorithms
+
+            Removes the URI namespacing prefix from algorithms, making them smaller, friendlier, and potentially conflicting.
+
+            ```
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.truncate(aspects)
+            # => ["ecdsa-sha1"]
+            ```
+
+            """
             def truncate(prism) when is_map(prism), do: prismify(prism, &truncate/1)
             def truncate(aspects) do
               aspects
@@ -295,7 +465,18 @@ defmodule SmeeView.ViewCommon do
         if Enum.member?(params[:features], :endpoint) do
           quote do
 
-            @doc "Returns all bindings present in the view"
+            @doc """
+            Returns all bindings present in the view
+
+            ```
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.bindings(aspects)
+            # => []
+            ```
+
+            """
             def bindings(prism) when is_map(prism), do: prismify(prism, &bindings/1)
             def bindings(aspects) do
               aspects
@@ -308,7 +489,18 @@ defmodule SmeeView.ViewCommon do
               |> Enum.sort()
             end
 
-            @doc "Returns all services matching the specified binding"
+            @doc """
+            Returns all services matching the specified binding
+
+            ```
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.binding_filter(aspect)
+            # => []
+            ```
+
+            """
             def binding_filter(prism, binding) when is_map(prism), do: prismify(prism, binding, &binding_filter/2)
             def binding_filter(aspects, binding) do
               aspects
@@ -319,7 +511,18 @@ defmodule SmeeView.ViewCommon do
                  )
             end
 
-            @doc "Sorts the services - only really has an impact if services have an index value set"
+            @doc """
+            Sorts the services - only really has an impact if services have an index value set
+
+            ```
+            #{
+              String.split("#{__MODULE__}", ".")
+              |> List.last()
+            }.sort(aspect)
+            # => [...]
+            ```
+
+            """
             def sort(prism) when is_map(prism), do: prismify(prism, &sort/1)
             def sort(aspects) do
               aspects
