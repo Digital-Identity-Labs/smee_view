@@ -40,6 +40,7 @@ defimpl String.Chars, for: SmeeView.Aspects.AttributeService do
 end
 
 defimpl Jason.Encoder, for: SmeeView.Aspects.AttributeService do
+@moduledoc false
   def encode(value, opts) do
     Jason.Encode.map(
       Map.take(value, [:binding, :location, :index])

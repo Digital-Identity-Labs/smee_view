@@ -112,6 +112,7 @@ defimpl String.Chars, for: SmeeView.Aspects.AttributeConsumingService do
 end
 
 defimpl Jason.Encoder, for: SmeeView.Aspects.AttributeConsumingService do
+@moduledoc false
   def encode(value, opts) do
     Jason.Encode.map(
       Map.take(value, [:service_names, :service_descriptions, :requested_attributes, :index, :default])

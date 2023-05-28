@@ -41,6 +41,7 @@ defimpl String.Chars, for: SmeeView.Aspects.NameidMappingService do
 end
 
 defimpl Jason.Encoder, for: SmeeView.Aspects.NameidMappingService do
+@moduledoc false
   def encode(value, opts) do
     Jason.Encode.map(
       Map.take(value, [:binding, :location, :index])

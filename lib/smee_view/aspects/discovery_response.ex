@@ -39,6 +39,7 @@ defimpl String.Chars, for: SmeeView.Aspects.DiscoveryResponse do
 end
 
 defimpl Jason.Encoder, for: SmeeView.Aspects.DiscoveryResponse do
+@moduledoc false
   def encode(value, opts) do
     Jason.Encode.map(
       Map.take(value, [:binding, :location, :index])
