@@ -1,6 +1,79 @@
 # SmeeView
 
-**TODO: Add description**
+`SmeeView` is a metadata parsing extension to [Smee](https://github.com/Digital-Identity-Labs/smee). SmeeView provides
+easy to use functions for extracting lists of information from SAML metadata as Elixir structs.
+
+[Smee](https://github.com/Digital-Identity-Labs/smee) provides access to entity metadata XML as both strings and parsed
+`xmerl` records but leaves the user to find and extract the information they need. SmeeView aims to fill this gap by 
+providing tools for working with the most commonly information in SAML metadata.
+
+SmeeView is *loosely* based on the concept of functional data access "lenses".
+
+[![Hex pm](http://img.shields.io/hexpm/v/smee_view.svg?style=flat)](https://hex.pm/packages/smee_view)
+[![API Docs](https://img.shields.io/badge/api-docs-yellow.svg?style=flat)](http://hexdocs.pm/smee_view/)
+![Github Elixir CI](https://github.com/Digital-Identity-Labs/smee_view/workflows/Elixir%20CI/badge.svg)
+
+[![Run in Livebook](https://livebook.dev/badge/v1/blue.svg)](https://livebook.dev/run?url=https%3A%2F%2Fraw.githubusercontent.com%2FDigital-Identity-Labs%2Fsmee_view%2Fmain%2Fsmee_view_notebook.livemd)
+
+## Features
+
+* Information in SAML metadata is represented by simple structs known as "aspects"
+* Aspects are extracted as either lists or as maps, associated with entity IDs.
+* Filters and tools are provided for handling aspects such as logos or multilingual text
+
+## Overview
+
+### Views
+Views take metadata, or information extracted from metadata, and return a specific type of record from it, known as an
+aspect. They also allow further filtering and processing of lists of aspects.
+
+For instance `SmeeView.Logos` will extract all logo information from an entity's metadata and filter them so that only
+IdP logos of a particular shape are returned. `SmeeView.Contacts` provides tools for extracting and filtering
+`SmeeView.Aspects.Contact` records.
+
+### Aspects
+
+Each fragment of information extracted from metadata by a View is an *aspect*. Aspects contain most (if not all) of
+the information present in the original metadata. Aspect modules provide ways to view or process that information.
+
+Some aspects contain bundles of other aspects:
+
+* A `SmeeView.Aspects.DiscoUI` struct contains lists of types of aspects useful for metadata discovery
+* `SmeeView.Aspects.IdP` structs contain all aspects related to an entity's IdP role
+
+
+### Convenience functions
+
+The top level `SmeeView` module contains simplified, top level functions for extracting all the information for an entity.
+Other modules in SmeeView contain functions dedicated to specific types of information - one for extracting collections of
+"aspects", the other for working with individual records.
+
+
+## Examples
+
+### 1
+
+```elixir
+a
+```
+
+### 2
+
+```elixir
+
+```
+
+### 3
+
+```elixir
+
+
+```
+### 4
+
+```elixir
+
+```
 
 ## Installation
 
@@ -15,58 +88,39 @@ def deps do
 end
 ```
 
-```elixir
-#entity
-#|> SPDisco.new()
-#|> IdPDisco.logos()
-#|> Logos.pick_login()
-#|> Logos.resize(80, 20)
-#
-#entity
-#|> IdPDisco.new()
-#|> IdPDisco.displayName(lang: "de")
-#
-#OR
-#
-#entity
-#|> SmeeView.idp_logos()
-#|> Logos.pick_login()
-#|> Logos.resize(80, 20)
-#
-#entity
-#|> SmeeView.IDP.logos()
-#|> Logos.pick_login()
-#|> Logos.resize(80, 20)
+SmeeView requires [Smee](https://github.com/Digital-Identity-Labs/smee), which has its own unusual requirements, so
+please make sure you read the documentation for installing Smee before using SmeeView.
+
+## References and further reading
+
+SmeeView does not document SAML Metadata itself - you'll need to read about that elsewhere if you have questions about
+how the information is used. The following resources will be of help:
+
+* [Incommon's Guide to SAML Metadata](https://spaces.at.internet2.edu/display/federation/metadata-saml) - very clear and readable
+* [OASIS Simplified Overview of SAML Metadata](https://www.oasis-open.org/committees/download.php/51890/SAML%20MD%20simplified%20overview.pdf)
+* [Wikipedia: SAML Metadata](https://en.wikipedia.org/wiki/SAML_metadata) Has technical overview, history and protocol walkthrough
 
 
-
-```
-
-Working:
-```elixir
-
-Smee.Metadata.stream_entities(md3)
-|> Stream.map(fn e -> SmeeView.displaynames(e) end)
-|> Enum.to_list() 
-|> List.flatten()
-|> Enum.each(fn d -> IO.puts d.text end)
-
-```
-
-WIP:
-```elixir
-
-entity
-|> SmeeView.entity_attributes()
-|> EntityAttributes.supports?("")
-```
-
-
-## Refs
-
-https://www.oasis-open.org/committees/download.php/51890/SAML%20MD%20simplified%20overview.pdf
-
+## Documentation
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/smee_view>.
+
+## Contributing
+
+You can request new features by creating an [issue](https://github.com/Digital-Identity-Labs/smee_view/issues),
+or submit a [pull request](https://github.com/Digital-Identity-Labs/smee_view/pulls) with your contribution.
+
+If you are comfortable working with Python but Smee's Elixir code is unfamiliar then this blog post may help:
+[Elixir For Humans Who Know Python](https://hibox.live/elixir-for-humans-who-know-python)
+
+## Copyright and License
+
+Copyright (c) 2023 Digital Identity Ltd, UK
+
+SmeeView is Apache 2.0 licensed.
+
+## Disclaimer
+Smee is not endorsed by The Shibboleth Foundation or any of the NREN's described within.
+The API will definitely change considerably in the first few releases after 0.1.0 - it is not stable!
