@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.SP do
 
   @moduledoc """
-  This aspect contains a bundle of related Metadata UI ("MDUI") aspects from entity metadata.
+  This aspect contains a bundle of related aspects for the SP role of an entity.
 
   Since displaynames, descriptions, URLs, etc are often used together this Aspect exists to make
   gathering them all a little simpler.
