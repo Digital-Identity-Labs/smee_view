@@ -1,7 +1,7 @@
 defmodule SmeeView.Aspects.Keywords do
 
   @moduledoc """
-  Represents and processes <Keywords> elements in entity metadata as Aspect structs.
+  Represents and processes <mdui:Keywords> elements in entity metadata as Aspect structs.
 
   The functions in this module are intended to be applied to individual Aspect structs - for extracting and processing
   collections of these records please use the matching View module.
@@ -23,14 +23,14 @@ defmodule SmeeView.Aspects.Keywords do
   use SmeeView.Aspects.AspectCommon, features: [:lang]
 
   @doc """
-  xx
+  Lists all keywords in this set as a single binary string
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.text(aspect)
+  # => "GÉANT geant Terena Dante"
   ```
   """
   @spec text(aspect :: __MODULE__.t()) :: binary()
@@ -40,14 +40,14 @@ defmodule SmeeView.Aspects.Keywords do
   end
 
   @doc """
-  xx
+  Returns the keywords in one keyword set as a list of strings
 
   ```
   #{
     String.split("#{__MODULE__}", ".")
     |> List.last()
-  }.xx(aspect)
-  # => xx
+  }.words(aspect)
+  # => ["GÉANT", "geant", "Terena" "Dante"]
   ```
   """
   @spec words(aspect :: __MODULE__.t()) :: list()

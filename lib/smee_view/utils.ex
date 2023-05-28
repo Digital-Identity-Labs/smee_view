@@ -53,7 +53,7 @@ defmodule SmeeView.Utils do
 
   def parse_keywords(words) when is_binary(words) do
     words
-    |> String.replace(",", " ") # Because some federations don't follow the spec and EduGain doesn't fix it
+    |> String.replace(",", " ") # Because some federations don't follow the spec and others don't fix it
     |> String.split()
     |> Enum.map(fn s -> String.replace(s, "+", " ") end)
   end
