@@ -141,7 +141,7 @@ defmodule SmeeView.ViewCommon do
       #{
         String.split("#{__MODULE__}", ".")
         |> List.last()
-      }.view(entity)
+      }.prism(entity)
       # => %{"https://example.com/shibboleth" =>  [%#{unquote(params[:aspect])}{}, %#{unquote(params[:aspect])}{},]}
       ```
 
