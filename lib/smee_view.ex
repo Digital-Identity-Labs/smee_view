@@ -6,7 +6,7 @@ defmodule SmeeView do
 
   ## Views
   Views take metadata, or information extracted from metadata, and return a specific type of record from it, known as an
-    aspect. They also allow further filtering and processing of list's of aspects.
+    aspect. They also allow further filtering and processing of lists of aspects.
 
   For instance `SmeeView.Logos` will extract all logo information from an entity's metadata and filter them so that only
     IdP logos of a particular shape are returned.
