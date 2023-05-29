@@ -45,11 +45,12 @@ defmodule SmeeView.ViewCommon do
       ```
 
       """
+      @spec view(list :: Entity.t() | Metadata.t() | list(), role :: atom(), options :: keyword()) :: list()
       def view(list, role \\ :all, options \\ [])
       def view(%Entity{} = entity, role, options) do
         entity
         |> Entity.xdoc()
-        |> extract_data_from_xml(xmapper_for_role(role))
+        |> Utils.extract_data_from_xml(xmapper_for_role(role))
         |> Enum.map(
              fn {role, aspects} ->
                Enum.map(
@@ -106,7 +107,9 @@ defmodule SmeeView.ViewCommon do
       ```
 
       """
-      @spec view_one(smee_data :: Smee.Entity.t(), options :: Keyword.t()) :: list()
+      @spec view_one(list :: Entity.t() | Metadata.t() | list(), role :: atom(), options :: keyword()) :: unquote(
+                                                                                                            params[:aspect]
+                                                                                                          ).t()
       def view_one(smee_data, role \\ :all, options \\ [])
       def view_one(%Entity{} = smee_data, role, options) do
         List.wrap(smee_data)
@@ -127,7 +130,9 @@ defmodule SmeeView.ViewCommon do
       end
 
       @doc """
-      Returns a map of `#{unquote(params[:aspect])}` aspect structs extracted from the input data, with entity IDs as keys.
+      Returns a map of `#{
+        unquote(params[:aspect])
+      }` aspect structs extracted from the input data, with entity IDs as keys.
 
       Input data can be a `Smee.Entity` or `Smee.Metadata` struct, or a list containing `Smee.Entity` and/or `Smee.Metadata` structs.
       Only appropriate aspect records will be returned.
@@ -146,6 +151,7 @@ defmodule SmeeView.ViewCommon do
       ```
 
       """
+      @spec prism(various :: Entity.t() | Metadata.t() | list(), role :: atom(), options :: keyword()) :: map()
       def prism(various, role \\ :all, options \\ [])
       def prism(various, role, options) when is_list(various) do
         various
@@ -187,6 +193,7 @@ defmodule SmeeView.ViewCommon do
       ```
 
       """
+      @spec idp_filter(aspects :: map() | list()) :: map() | list()
       def idp_filter(prism) when is_map(prism), do: prismify(prism, &idp_filter/1)
       def idp_filter(view) when is_list(view) do
         view
@@ -209,6 +216,7 @@ defmodule SmeeView.ViewCommon do
       ```
 
       """
+      @spec sp_filter(aspects :: map() | list()) :: map() | list()
       def sp_filter(prism) when is_map(prism), do: prismify(prism, &sp_filter/1)
       def sp_filter(aspects) do
         aspects
@@ -236,6 +244,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
+            @spec langs(aspects :: map() | list()) :: list()
             def langs(prism) when is_map(prism), do: prismify(prism, &langs/1)
             def langs(aspects) do
               aspects
@@ -262,6 +271,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
+            @spec pick(aspects :: map() | list()) :: struct()
             def pick(aspects, lang \\ Utils.default_lang())
             def pick(prism, lang) when is_map(prism), do: prismify(prism, lang, &pick/2)
             def pick(aspects, lang) do
@@ -271,6 +281,7 @@ defmodule SmeeView.ViewCommon do
               ) || List.first(aspects)
             end
 
+            @spec select_by_lang(aspects :: list(), lang :: binary()) :: struct() | nil
             defp select_by_lang(aspects, lang) do
               aspects
               |> Enum.find(
@@ -306,6 +317,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
+            @spec max_size(aspects :: list() | map()) :: integer()
             def max_size(prism) when is_map(prism), do: prismify(prism, &max_size/1)
             def max_size(aspects) do
               aspects
@@ -341,6 +353,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
+            @spec saml1_filter(aspects :: list() | map()) :: list()
             def saml1_filter(prism) when is_map(prism), do: prismify(prism, &saml1_filter/1)
             def saml1_filter(aspects) do
               aspects
@@ -366,6 +379,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
+            @spec saml2_filter(aspects :: list() | map()) :: list()
             def saml2_filter(prism) when is_map(prism), do: prismify(prism, &saml2_filter/1)
             def saml2_filter(aspects) do
               aspects
@@ -403,6 +417,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
+            @spec valid_filter(aspects :: list() | map()) :: list()
             def valid_filter(prism) when is_map(prism), do: prismify(prism, &valid_filter/1)
             def valid_filter(aspects) do
               aspects
@@ -440,6 +455,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
+            @spec truncate(aspects :: list() | map()) :: list()
             def truncate(prism) when is_map(prism), do: prismify(prism, &truncate/1)
             def truncate(aspects) do
               aspects
@@ -477,6 +493,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
+            @spec bindings(aspects :: list() | map()) :: list()
             def bindings(prism) when is_map(prism), do: prismify(prism, &bindings/1)
             def bindings(aspects) do
               aspects
@@ -501,6 +518,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
+            @spec binding_filter(aspects :: list() | map(), binding :: binary()) :: list()
             def binding_filter(prism, binding) when is_map(prism), do: prismify(prism, binding, &binding_filter/2)
             def binding_filter(aspects, binding) do
               aspects
@@ -523,6 +541,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
+            @spec sort(aspects :: list() | map()) :: list()
             def sort(prism) when is_map(prism), do: prismify(prism, &sort/1)
             def sort(aspects) do
               aspects
@@ -539,6 +558,7 @@ defmodule SmeeView.ViewCommon do
 
       #######################################################################################
 
+      @spec is?(thing :: any()) :: boolean()
       defp is?(thing) when is_struct(thing) do
         thing.__struct__ == unquote(params[:aspect])
       end
@@ -547,6 +567,7 @@ defmodule SmeeView.ViewCommon do
         false
       end
 
+      @spec viewable?(thing :: any()) :: boolean()
       defp viewable?(%Entity{}) do
         true
       end
@@ -559,10 +580,12 @@ defmodule SmeeView.ViewCommon do
         false
       end
 
+      @spec prismable?(data :: any()) :: boolean()
       defp prismable?(data) do
         viewable?(data)
       end
 
+      @spec prismify(prism :: map(), f :: function()) :: map()
       defp prismify(prism, f)  do
         prism
         |> Enum.map(fn {e, aspects} -> {e, f.(aspects)} end)
@@ -570,6 +593,7 @@ defmodule SmeeView.ViewCommon do
         |> Map.new()
       end
 
+      @spec prismify(prism :: map(), p1 :: any(), f :: function()) :: map()
       defp prismify(prism, p1, f) do
         prism
         |> Enum.map(fn {e, aspects} -> {e, f.(aspects, p1)} end)
@@ -577,20 +601,12 @@ defmodule SmeeView.ViewCommon do
         |> Map.new()
       end
 
-
-      ## Move to Utils?
-      defp extract_data_from_xml(xdoc, xmap) do
-        if Enum.all?(Keyword.values(xmap), fn v -> is_nil(v) end) do
-          [all: []]
-        else
-          SweetXml.xmap(xdoc, xmap)
-        end
-      end
-
-      defp cascade_views(entity, data, role) do
+      @spec cascade_views(entity :: Entity.t(), data :: map() | keyword(), role :: atom()) :: map() | keyword()
+      defp cascade_views(_entity, data, _role) do
         data
       end
 
+      @spec trim_aspect_data(data :: map() | keyword()) :: map()
       defp trim_aspect_data(data) do
         data
         |> Enum.reject(fn {k, v} -> (v == "") end)
@@ -598,6 +614,7 @@ defmodule SmeeView.ViewCommon do
         |> Map.new()
       end
 
+      @spec to_aspect(data :: map(), role :: atom()) :: map()
       defp to_aspect(data, role) do
         unquote(params[:aspect]).new(Map.merge(data, %{role: role}))
       end
@@ -606,6 +623,7 @@ defmodule SmeeView.ViewCommon do
 
         if params[:roles] do
           quote do
+            @spec xmapper_for_role(role :: atom()) :: keyword()
             defp xmapper_for_role(role) do
               case role do
                 :sp -> [sp: sp_xmap()]
@@ -617,6 +635,7 @@ defmodule SmeeView.ViewCommon do
           end
         else
           quote do
+            @spec xmapper_for_role(role :: atom()) :: keyword()
             defp xmapper_for_role(_role) do
               [all: entity_xmap()]
             end
@@ -625,7 +644,7 @@ defmodule SmeeView.ViewCommon do
 
       end
 
-      @spec services(entity ::Smee.Entity.t() | list(), role :: atom(), options :: Keyword.t()) :: list()
+      @spec services(entity :: Smee.Entity.t() | list(), role :: atom(), options :: Keyword.t()) :: list()
       defp services(entity, role, options \\ []) do
         [
           SmeeView.ArtifactResolutionServices.view(entity, role, options),
@@ -641,14 +660,17 @@ defmodule SmeeView.ViewCommon do
         |> List.flatten()
       end
 
+      @spec idp_xmap() :: keyword()
       defp idp_xmap do
         raise "Undefined idp_xmap()! in #{__MODULE__}"
       end
 
+      @spec sp_xmap() :: keyword()
       defp sp_xmap do
         raise "Undefined sp_xmap()! in #{__MODULE__}"
       end
 
+      @spec entity_xmap() :: keyword()
       defp entity_xmap do
         raise "Undefined entity_xmap()! in #{__MODULE__}"
       end
@@ -668,7 +690,5 @@ defmodule SmeeView.ViewCommon do
   end
 
   #######################################################################################
-
-
 
 end

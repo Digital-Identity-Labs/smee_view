@@ -2,6 +2,7 @@ defmodule SmeeView.Utils do
 
   @moduledoc false
 
+  @spec normalize(value :: any()) :: binary()
   def normalize(value) when is_nil(value) or value == "" do
     nil
   end
@@ -10,6 +11,7 @@ defmodule SmeeView.Utils do
     "#{value}"
   end
 
+  @spec normalize_email(email :: binary()) :: binary()
   def normalize_email("mailto:" <> email) do
     email
   end
@@ -18,6 +20,7 @@ defmodule SmeeView.Utils do
     email
   end
 
+  @spec normalize_index(index :: binary() | atom() | integer()) :: integer()
   def normalize_index(index) when is_nil(index) do
     0
   end
@@ -31,10 +34,12 @@ defmodule SmeeView.Utils do
     int
   end
 
+  @spec default_lang() :: binary()
   def default_lang() do
     Application.get_env(:smee_view, :defaultlang, "en")
   end
 
+  @spec fallback_lang() :: binary()
   def fallback_lang() do
     "en"
   end
@@ -43,6 +48,7 @@ defmodule SmeeView.Utils do
     ""
   end
 
+  @spec parse_keywords(words :: nil | binary() | list()) :: list()
   def parse_keywords(words) when is_nil(words) do
     []
   end
@@ -58,6 +64,7 @@ defmodule SmeeView.Utils do
     |> Enum.map(fn s -> String.replace(s, "+", " ") end)
   end
 
+  @spec parse_protocols(words :: nil | binary() | list()) :: list()
   def parse_protocols(words) when is_nil(words) do
     []
   end
@@ -71,16 +78,29 @@ defmodule SmeeView.Utils do
     |> String.split(" ")
   end
 
+  @spec parse_boolean(value :: binary() | integer() | nil | boolean()) :: boolean()
   def parse_boolean(value) do
     case value do
       "TRUE" -> true
       "true" -> true
       "1" -> true
       1 -> true
+      nil -> false
+      "" -> false
+      false -> false
+      true -> true
       _ -> false
     end
   end
 
+  @spec extract_data_from_xml(xdoc :: any(), xmap :: keyword()) :: map() | keyword()
+  def extract_data_from_xml(xdoc, xmap) do
+    if Enum.all?(Keyword.values(xmap), fn v -> is_nil(v) end) do
+      [all: []]
+    else
+      SweetXml.xmap(xdoc, xmap)
+    end
+  end
 
   #######################################################################################
 
