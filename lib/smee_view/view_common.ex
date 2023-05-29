@@ -601,6 +601,14 @@ defmodule SmeeView.ViewCommon do
         |> Map.new()
       end
 
+      @spec prismify(prism :: map(), p1 :: any(), p2 :: any(), f :: function()) :: map()
+      defp prismify(prism, p1, p2, f) do
+        prism
+        |> Enum.map(fn {e, aspects} -> {e, f.(aspects, p1, p2)} end)
+        |> Enum.reject(fn {k, v} -> is_nil(v) || (is_list(v) && Enum.empty?(v)) end)
+        |> Map.new()
+      end
+
       @spec cascade_views(entity :: Entity.t(), data :: map() | keyword(), role :: atom()) :: map() | keyword()
       defp cascade_views(_entity, data, _role) do
         data
