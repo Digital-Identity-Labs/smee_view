@@ -25,48 +25,104 @@ defmodule SmeeView.EntityAttributes do
     values: ~x"string(saml:AttributeValue)"ls
   ]
 
+  def contain?(aspects, name, value) when is_map(aspects), do: prismify(aspects, name, value, &contain?/3)
   def contain?(aspects, name, value) do
-
+    aspects
+    |> Enum.any?(fn a -> a.name == name && Enum.any?(a.values, fn v -> v == value end) end)
   end
 
+  def values_for(aspects, name) when is_map(aspects), do: prismify(aspects, name, &values_for/2)
   def values_for(aspects, name) do
-
+    aspects
+    |> Enum.filter(fn aspect -> aspect.name == name end)
+    |> Enum.map(
+         fn aspect ->
+           aspect.values
+         end
+       )
+    |> List.flatten()
+    |> Enum.uniq()
+    |> Enum.sort()
   end
 
+  def types(aspects) when is_map(aspects), do: prismify(aspects,&types/1)
   def types(aspects) do
-
+    aspects
+    |> Enum.map(
+         fn aspect ->
+           aspect.name
+         end
+       )
+    |> List.flatten()
+    |> Enum.uniq()
+    |> Enum.sort()
   end
 
+  def names(aspects) when is_map(aspects), do: prismify(aspects, &names/1)
   def names(aspects) do
-
+    types(aspects)
   end
 
-  def categories(aspects) do
-
+  def assurance_certifications(aspects) when is_map(aspects), do: prismify(aspects, &assurance_certifications/1)
+  def assurance_certifications(aspects) do
+    aspects
+    |> values_for("urn:oasis:names:tc:SAML:attribute:assurance-certification")
   end
 
-  def supports(aspects) do
-
+  def entity_categories(aspects) when is_map(aspects), do: prismify(aspects, &entity_categories/1)
+  def entity_categories(aspects) do
+    aspects
+    |> values_for("http://macedir.org/entity-category")
   end
 
-  def category?(aspect, category) do
-
+  def supports_entity_categories(aspects) when is_map(aspects), do: prismify(aspects, &supports_entity_categories/1)
+  def supports_entity_categories(aspects) do
+    aspects
+    |> values_for("http://macedir.org/entity-category-support")
   end
 
-  def supports?(aspect, category) do
-
+  def category?(aspects, category) when is_map(aspects), do: prismify(aspects, category, &category?/2)
+  def category?(aspects, category) do
+    aspects
+    |> entity_categories()
+    |> Enum.member?(category)
   end
 
+  def supports?(aspects, category) when is_map(aspects), do: prismify(aspects, category, &supports?/2)
+  def supports?(aspects, category) do
+    aspects
+    |> supports_entity_categories()
+    |> Enum.member?(category)
+  end
+
+  def ras?(aspects) when is_map(aspects), do: prismify(aspects, &ras?/1)
   def ras?(aspects) do
-
+    aspects
+    |> contain?("http://macedir.org/entity-category", "http://refeds.org/category/research-and-scholarship")
   end
 
+  def sirtfi?(aspects) when is_map(aspects), do: prismify(aspects, &sirtfi?/1)
   def sirtfi?(aspects) do
-
+    aspects
+    |> contain?("urn:oasis:names:tc:SAML:attribute:assurance-certification", "https://refeds.org/sirtfi")
   end
 
+  def coco?(aspects) when is_map(aspects), do: prismify(aspects, &coco?/1)
   def coco?(aspects) do
+    aspects
+    |> contain?("http://macedir.org/entity-category", "https://refeds.org/category/code-of-conduct/v2")
+  end
 
+  def hide?(aspects) when is_map(aspects), do: prismify(aspects, &hide?/1)
+  def hide?(aspects) do
+    aspects
+    |> contain?("http://macedir.org/entity-category", "http://refeds.org/category/hide-from-discovery")
+  end
+
+  def required_subject_ids(aspects) when is_map(aspects), do: prismify(aspects, &required_subject_ids/1)
+  def required_subject_ids(aspects) do
+    aspects
+    |> values_for("urn:oasis:names:tc:SAML:profiles:subject-id:req")
   end
 
   #######################################################################################
