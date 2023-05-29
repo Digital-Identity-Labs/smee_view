@@ -123,12 +123,14 @@ entity
 # => "Université de Rouen Normandie"
 ```
 
-### Find all the tiny square logos for IdPs in PNG format in German (don't ask me why, it's just a very contrived example)
+### Find all the tiny square logos for IdPs in PNG format in German 
+
+(It's a very contrived example)
 
 ```elixir
 Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
 |> Smee.fetch!()
-|> SmeeView.Logos.view()
+|> SmeeView.Logos.view(:idp)
 |> Enum.filter(
      fn logo ->
        SmeeView.Aspects.Logo.size(logo) == :tiny &&
