@@ -112,6 +112,7 @@ Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
 #},
 #...
 ```
+ 
 
 ### Selecting the best service displayname for a French user
 
