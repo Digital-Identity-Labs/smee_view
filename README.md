@@ -4,7 +4,7 @@
 easy to use functions for extracting lists of information from SAML metadata as Elixir structs.
 
 [Smee](https://github.com/Digital-Identity-Labs/smee) provides access to entity metadata XML as both strings and parsed
-`xmerl` records but leaves the user to find and extract the information they need. SmeeView aims to fill this gap by 
+`xmerl` records but leaves the user to find and extract the information they need. SmeeView aims to fill this gap by
 providing tools for working with the most commonly information in SAML metadata.
 
 SmeeView is *loosely* based on the concept of functional data access "lenses".
@@ -17,14 +17,18 @@ SmeeView is *loosely* based on the concept of functional data access "lenses".
 
 ## Features
 
-* Information in SAML metadata is represented by simple structs known as "aspects"
-* Aspects are extracted as either lists or as maps, associated with entity IDs.
+* Relatively low memory usage and decent speed, especially when extracting smaller fragments of information
+* Aspects can be extracted from individual `Smee.Entity` or `Smee.Metadata` structs, lists of them, or even other
+  aspects.
+* Aspects are extracted as either lists or as lists in maps, associated with entity IDs.
 * Filters and tools are provided for handling aspects such as logos or multilingual text
 
 ## Overview
 
 ### Views
-Views take metadata, or information extracted from metadata, and return a specific type of record from it, known as an
+
+Views modules take metadata, or information extracted from metadata, and return a specific type of record from it, known
+as an
 aspect. They also allow further filtering and processing of lists of aspects.
 
 For instance `SmeeView.Logos` will extract all logo information from an entity's metadata and filter them so that only
@@ -41,38 +45,99 @@ Some aspects contain bundles of other aspects:
 * A `SmeeView.Aspects.DiscoUI` struct contains lists of types of aspects useful for metadata discovery
 * `SmeeView.Aspects.IdP` structs contain all aspects related to an entity's IdP role
 
-
 ### Convenience functions
 
-The top level `SmeeView` module contains simplified, top level functions for extracting all the information for an entity.
-Other modules in SmeeView contain functions dedicated to specific types of information - one for extracting collections of
+The top level `SmeeView` module contains simplified, top level functions for extracting all the information for an
+entity.
+Other modules in SmeeView contain functions dedicated to specific types of information - one for extracting collections
+of
 "aspects", the other for working with individual records.
-
 
 ## Examples
 
-### 1
+### Extracting all data for an entity (using Smee's MDQ module)
 
 ```elixir
-a
+alias Smee.MDQ
+
+MDQ.source("http://mdq.ukfederation.org.uk/")
+|> MDQ.lookup!("https://cern.ch/login")
+|> SmeeView.view_one()
+# => %SmeeView.Aspects.Entity{
+#       entity_id: "https://cern.ch/login",
+#       cache_duration: "P0Y0M0DT6H0M0.000S",
+#       registration: [
+#         %SmeeView.Aspects.Registration{
+#           authority: "http://rr.aai.switch.ch/",
+#           instant: "2014-07-29T13:17:52Z",
+#           policies: [
+#             %SmeeView.Aspects.RegistrationPolicy{
+#               lang: "en",
+#               url: "https://www.switch.ch/aai/federation/switchaai/metadata-registration-practice-statement-20110711.txt"
+#            }
+#          ]
+#         }
+#        ],
+#        publications: [],
+#        idps: [
+#          %SmeeView.Aspects.IdP{
+#            protocols: [
+#              %SmeeView.Aspects.Protocol{
+#                role: :idp,
+#                uri: "urn:oasis:names:tc:SAML:2.0:protocol"
+#             }
+# ...
 ```
 
-### 2
+### Viewing all logos in an entire federation
 
 ```elixir
-
+Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
+|> Smee.fetch!()
+|> SmeeView.Logos.view()
+## => [
+#%SmeeView.Aspects.Logo{
+#  url: "https://idp2.iay.org.uk/images/heads_80x80.jpg",
+#  role: :idp,
+#  height: 80,
+#  width: 80,
+#  lang: "en"
+#},
+#%SmeeView.Aspects.Logo{
+#url: "https://idp2.iay.org.uk/images/heads_100x43.jpg",
+#     role: :idp,
+#height: 43,
+#width: 100,
+#lang: "en"
+#},
+#...
 ```
 
-### 3
+### Selecting the best service displayname for a French user
 
 ```elixir
-
-
+entity
+|> SmeeView.Displaynames.view()
+|> SmeeView.Displaynames.pick("fr")
+|> SmeeView.Displaynames.text()
+# => "Université de Rouen Normandie"
 ```
-### 4
+
+### Find all the tiny square logos for IdPs in PNG format in German (don't ask me why, it's just a very contrived example)
 
 ```elixir
-
+Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
+|> Smee.fetch!()
+|> SmeeView.Logos.view()
+|> Enum.filter(
+     fn logo ->
+       SmeeView.Aspects.Logo.size(logo) == :tiny &&
+         SmeeView.Aspects.Logo.shape(logo) == :square &&
+         SmeeView.Aspects.Logo.format(logo) == :png && 
+         SmeeView.Aspects.Logo.lang(logo) == "de"
+     end
+   )
+# => []
 ```
 
 ## Installation
@@ -96,10 +161,11 @@ please make sure you read the documentation for installing Smee before using Sme
 SmeeView does not document SAML Metadata itself - you'll need to read about that elsewhere if you have questions about
 how the information is used. The following resources will be of help:
 
-* [Incommon's Guide to SAML Metadata](https://spaces.at.internet2.edu/display/federation/metadata-saml) - very clear and readable
+* [Incommon's Guide to SAML Metadata](https://spaces.at.internet2.edu/display/federation/metadata-saml) - very clear and
+  readable
 * [OASIS Simplified Overview of SAML Metadata](https://www.oasis-open.org/committees/download.php/51890/SAML%20MD%20simplified%20overview.pdf)
-* [Wikipedia: SAML Metadata](https://en.wikipedia.org/wiki/SAML_metadata) Has technical overview, history and protocol walkthrough
-
+* [Wikipedia: SAML Metadata](https://en.wikipedia.org/wiki/SAML_metadata) Has technical overview, history and protocol
+  walkthrough
 
 ## Documentation
 
@@ -122,5 +188,6 @@ Copyright (c) 2023 Digital Identity Ltd, UK
 SmeeView is Apache 2.0 licensed.
 
 ## Disclaimer
+
 Smee is not endorsed by The Shibboleth Foundation or any of the NREN's described within.
 The API will definitely change considerably in the first few releases after 0.1.0 - it is not stable!
