@@ -143,6 +143,22 @@ Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
 # => []
 ```
 
+### List the assurance certifications of each entity in a federation
+
+This demonstrates the usefulness of prism views 
+
+```elixir
+Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
+|> Smee.fetch!()
+|> SmeeView.EntityAttributes.prism()
+|> SmeeView.EntityAttributes.assurance_certifications()
+# => %{
+#        "https://stanford.dserec.com/sp" => ["https://refeds.org/sirtfi"],
+#        "https://iam.nnfc.re.kr/idp/simplesamlphp" => ["https://refeds.org/sirtfi"],
+#        "http://idp.vr.se/adfs/services/trust" => ["http://www.swamid.se/policy/assurance/al1"],
+#        ...
+```
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed

@@ -89,3 +89,13 @@ federation_metadata
    )
 
 ```
+
+### Extract the assurance certifications of each entity in a federation
+
+This demonstrates the usefulness of prism views
+
+```elixir
+SmeeView.EntityAttributes.prism(federation_metadata)
+|> SmeeView.EntityAttributes.assurance_certifications()
+
+```

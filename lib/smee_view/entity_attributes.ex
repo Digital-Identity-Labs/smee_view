@@ -25,6 +25,12 @@ defmodule SmeeView.EntityAttributes do
     values: ~x"string(saml:AttributeValue)"ls
   ]
 
+  def contain?(aspects, name) when is_map(aspects), do: prismify(aspects, name, &contain?/2)
+  def contain?(aspects, name) do
+    aspects
+    |> Enum.any?(fn a -> a.name == name end)
+  end
+
   def contain?(aspects, name, value) when is_map(aspects), do: prismify(aspects, name, value, &contain?/3)
   def contain?(aspects, name, value) do
     aspects
@@ -45,8 +51,8 @@ defmodule SmeeView.EntityAttributes do
     |> Enum.sort()
   end
 
-  def types(aspects) when is_map(aspects), do: prismify(aspects,&types/1)
-  def types(aspects) do
+  def names(aspects) when is_map(aspects), do: prismify(aspects, &names/1)
+  def names(aspects) do
     aspects
     |> Enum.map(
          fn aspect ->
@@ -58,9 +64,17 @@ defmodule SmeeView.EntityAttributes do
     |> Enum.sort()
   end
 
-  def names(aspects) when is_map(aspects), do: prismify(aspects, &names/1)
-  def names(aspects) do
-    types(aspects)
+  def values(aspects) when is_map(aspects), do: prismify(aspects, &values/1)
+  def values(aspects) do
+    aspects
+    |> Enum.map(
+         fn aspect ->
+           aspect.values
+         end
+       )
+    |> List.flatten()
+    |> Enum.uniq()
+    |> Enum.sort()
   end
 
   def assurance_certifications(aspects) when is_map(aspects), do: prismify(aspects, &assurance_certifications/1)
