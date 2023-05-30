@@ -340,6 +340,104 @@ defmodule SmeeView.ViewCommon do
           quote do
 
             @doc """
+            Returns true if the aspects contain the specified attribute name
+
+            ```
+              #{
+            String.split("#{__MODULE__}", ".")
+            |> List.last()
+               }.contain?(attrs, "urn:oid:1.3.6.1.4.1.5923.1.1.1.6")
+            # => true
+
+
+            ```
+
+            """
+            @spec contain?(aspects :: list() | map(), name :: binary()) :: boolean() | map()
+            def contain?(aspects, name) when is_map(aspects), do: prismify(aspects, name, &contain?/2)
+            def contain?(aspects, name) do
+              aspects
+              |> Enum.any?(fn a -> a.name == name end)
+            end
+
+            @doc """
+            Returns true if the aspects contain the specified attribute friendly name
+
+            ```
+              #{
+                String.split("#{__MODULE__}", ".")
+                |> List.last()
+              }.contain?(attrs, "sn")
+            # => true
+
+
+            ```
+
+            """
+            @spec contain_friendly?(aspects :: list() | map(), name :: binary()) :: boolean() | map()
+            def contain_friendly?(aspects, friendly_name) when is_map(aspects), do: prismify(aspects, friendly_name, &contain_friendly?/2)
+            def contain_friendly?(aspects, friendly_name) do
+              aspects
+              |> Enum.any?(fn a -> a.friendly_name == friendly_name end)
+            end
+
+            @doc """
+            Returns a list of all attribute names (full, technical, URI names).
+
+            The results are sorted and each value is unique.
+
+            ```
+              #{String.split("#{__MODULE__}", ".")
+                            |> List.last()
+                          }.names(attrs)
+            # => ["urn:oid:1.3.6.1.4.1.5923.1.1.1.6", "urn:oid:0.9.2342.19200300.100.1.3", "urn:oid:2.5.4.10"]
+            ```
+
+            """
+            @spec names(aspects :: list() | map()) :: list() | map()
+            def names(aspects) when is_map(aspects), do: prismify(aspects, &names/1)
+            def names(aspects) do
+              aspects
+              |> Enum.map(
+                   fn aspect ->
+                     aspect.name
+                   end
+                 )
+              |> List.flatten()
+              |> Enum.uniq()
+              |> Enum.sort()
+            end
+
+            @doc """
+            Returns a list of all attribute names (full, technical, URI names).
+
+            The results are sorted and each value is unique.
+
+            ```
+              #{String.split("#{__MODULE__}", ".")
+                |> List.last()
+              }.friendly_names(attrs)
+            # => ["eduPersonPrincipalName", "email", "organizationName"]
+            ```
+
+            """
+            @spec friendly_names(aspects :: list() | map()) :: list() | map()
+            def friendly_names(aspects) when is_map(aspects), do: prismify(aspects, &friendly_names/1)
+            def friendly_names(aspects) do
+              aspects
+              |> Enum.map(
+                   fn aspect ->
+                     aspect.friendly_name
+                   end
+                 )
+              |> List.flatten()
+              |> Enum.uniq()
+              |> Enum.sort()
+            end
+
+            ####
+
+            @doc """
             Returns only SAML1 attributes
 
             Filters the view (list) or prism (map) to only include SAML1 attributes
