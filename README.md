@@ -124,6 +124,16 @@ entity
 # => "Université de Rouen Normandie"
 ```
 
+### Get the friendly names of all attributes required by a particular entity
+
+```elixir
+the_entity
+|> SmeeView.RequestedAttributes.view()
+|> SmeeView.RequestedAttributes.required_filter()
+|> SmeeView.RequestedAttributes.friendly_names()
+# => ["email", "eppn"]
+```
+
 ### Find all the tiny square logos for IdPs in PNG format in German 
 
 (It's a very contrived example)

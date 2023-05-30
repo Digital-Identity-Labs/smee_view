@@ -23,11 +23,57 @@ defmodule SmeeView.RequestedAttributes do
     ~x"//md:SPSSODescriptor/AttributeConsumingService/RequestedAttribute"le,
     friendly_name: ~x"string(@FriendlyName)"s,
     name: ~x"string(@Name)"s,
-    name_format: ~x"string(@NameFormat)"s
+    name_format: ~x"string(@NameFormat)"s,
+    required: ~x"string(@isRequired)"s,
+
   ]
 
   defp entity_xmap do
     @entity_xmap
+  end
+
+  @doc """
+  Returns only required attributes
+
+  Filters the view (list) or prism (map) to only include required attributes
+
+  ```
+  SmeeView.RequestedAttributes.required_filter(aspects)
+  # =>  [%SmeeView.Aspect.RequestedAttribute{}, %SmeeView.Aspect.RequestedAttribute{}]
+  ```
+
+  """
+  @spec required_filter(aspects :: list() | map()) :: list()
+  def required_filter(prism) when is_map(prism), do: prismify(prism, &required_filter/1)
+  def required_filter(aspects) do
+    aspects
+    |> Enum.filter(
+         fn aspect ->
+           SmeeView.Aspects.RequestedAttribute.required?(aspect)
+         end
+       )
+  end
+
+  @doc """
+  Returns only optional attributes
+
+  Filters the view (list) or prism (map) to only include required attributes
+
+  ```
+  SmeeView.RequestedAttributes.optional_filter(aspects)
+  # =>  [%SmeeView.Aspect.RequestedAttribute{}, %SmeeView.Aspect.RequestedAttribute{}]
+  ```
+
+  """
+  @spec optional_filter(aspects :: list() | map()) :: list()
+  def optional_filter(prism) when is_map(prism), do: prismify(prism, &optional_filter/1)
+  def optional_filter(aspects) do
+    aspects
+    |> Enum.filter(
+         fn aspect ->
+           SmeeView.Aspects.RequestedAttribute.optional?(aspect)
+         end
+       )
   end
 
   #######################################################################################

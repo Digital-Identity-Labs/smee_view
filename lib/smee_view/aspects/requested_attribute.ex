@@ -13,23 +13,56 @@ defmodule SmeeView.Aspects.RequestedAttribute do
   @type t :: %__MODULE__{
                friendly_name: binary(),
                name: binary(),
-               name_format: binary()
+               name_format: binary(),
+               required: boolean()
              }
 
   @derive Jason.Encoder
   defstruct [
     friendly_name: nil,
     name: nil,
-    name_format: nil
+    name_format: nil,
+    required: false
   ]
 
   use SmeeView.Aspects.AspectCommon, features: [:attr]
 
+  @doc """
+  Returns true if the attribute is required
+
+  ```
+  SmeeView.Aspects.RequestedAttribute.required?(aspect)
+  # => false
+  ```
+  """
+  @spec required?(aspect :: __MODULE__.t()) :: binary()
+  def required?(aspect) do
+    aspect.required
+  end
+
+  @doc """
+  Returns true if the attribute is optional
+
+  ```
+  SmeeView.Aspects.RequestedAttribute.optional?(aspect)
+  # => true
+  ```
+  """
+  @spec optional?(aspect :: __MODULE__.t()) :: binary()
+  def optional?(aspect) do
+    !required?(aspect)
+  end
+
   #######################################################################################
+
+  #@spec is not needed
+  defp prepare_data(data, _options \\ []) do
+    Map.merge(data, %{required: Utils.parse_boolean(data[:required])})
+  end
 
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.RequestedAttribute do
-@moduledoc false
+  @moduledoc false
   def to_string(a), do: a.friendly_name
 end
