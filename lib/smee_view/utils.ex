@@ -7,7 +7,7 @@ defmodule SmeeView.Utils do
     nil
   end
 
-  def normalize(value) when is_atom(value) or is_binary(value) do
+  def normalize(value) when is_atom(value) or is_binary(value) or is_integer(value) do
     "#{value}"
   end
 
