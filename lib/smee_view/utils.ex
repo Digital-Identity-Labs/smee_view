@@ -102,6 +102,14 @@ defmodule SmeeView.Utils do
     end
   end
 
+  @spec parse_attr_values(values :: list()) :: list()
+  def parse_attr_values(values) do
+    values
+    |> List.wrap()
+    |> Enum.reject(fn v -> v == "" || is_nil(v) end)
+    |> List.flatten()
+  end
+
   #######################################################################################
 
 end

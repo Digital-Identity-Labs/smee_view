@@ -23,7 +23,8 @@ defmodule SmeeView.Attributes do
     ~x"//md:IDPSSODescriptor/saml:Attribute"el,
     friendly_name: ~x"string(@FriendlyName)"s,
     name: ~x"string(@Name)"s,
-    name_format: ~x"string(@NameFormat)"s
+    name_format: ~x"string(@NameFormat)"s,
+    values: ~x"string(saml:AttributeValue)"ls
   ]
 
   defp entity_xmap do
