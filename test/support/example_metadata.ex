@@ -2,15 +2,15 @@ defmodule ExampleMetadata do
 
   @moduledoc false
 
-  def oasis_idp1 do
-    Smee.source("test/support/oasis_idp1.xml")
+  def aggregate do
+    Smee.source("test/support/static/aggregate.xml")
     |> Smee.fetch!()
     |> Smee.Metadata.entities()
     |> List.first()
   end
 
-  def oasis_sp1 do
-    Smee.source("test/support/oasis_idp1.xml")
+  def live_ukamf do
+    Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
     |> Smee.fetch!()
     |> Smee.Metadata.entities()
     |> List.first()
