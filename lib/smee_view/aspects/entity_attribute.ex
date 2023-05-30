@@ -25,7 +25,7 @@ defmodule SmeeView.Aspects.EntityAttribute do
   use SmeeView.Aspects.AspectCommon
 
   #######################################################################################
-  
+
   #@spec is not needed
   defp prepare_data(data, _options \\ []) do
     Map.merge(data, %{values: Utils.parse_attr_values(data[:values])})

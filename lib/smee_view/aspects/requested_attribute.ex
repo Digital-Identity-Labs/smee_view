@@ -35,7 +35,7 @@ defmodule SmeeView.Aspects.RequestedAttribute do
   # => false
   ```
   """
-  @spec required?(aspect :: __MODULE__.t()) :: binary()
+  @spec required?(aspect :: __MODULE__.t()) :: boolean()
   def required?(aspect) do
     aspect.required
   end
@@ -48,7 +48,7 @@ defmodule SmeeView.Aspects.RequestedAttribute do
   # => true
   ```
   """
-  @spec optional?(aspect :: __MODULE__.t()) :: binary()
+  @spec optional?(aspect :: __MODULE__.t()) :: boolean()
   def optional?(aspect) do
     !required?(aspect)
   end
