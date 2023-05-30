@@ -1,5 +1,7 @@
 defprotocol SmeeView.Protocols.Aspect do
 
+  @moduledoc false
+
   alias SmeeView.Utils
 
   @doc "idp?"
