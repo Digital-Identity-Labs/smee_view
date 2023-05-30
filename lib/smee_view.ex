@@ -9,7 +9,9 @@ defmodule SmeeView do
     aspect. They also allow further filtering and processing of lists of aspects.
 
   For instance `SmeeView.Logos` will extract all logo information from an entity's metadata and filter them so that only
-    IdP logos of a particular shape are returned.
+    IdP logos of a particular shape are returned. The `SmeeView.EntityAttributes` module has lots of useful tools for
+   gathering information about entities from their entity attributes (particularly if you can never remember any of the
+  URIs like me)
 
   ## Aspects
 
