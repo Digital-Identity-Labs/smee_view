@@ -218,5 +218,5 @@ SmeeView is Apache 2.0 licensed.
 
 ## Disclaimer
 
-Smee is not endorsed by The Shibboleth Foundation or any of the NREN's described within.
+SmeeView is not endorsed by The Shibboleth Foundation or any other organisation described in these docs.
 The API will definitely change considerably in the first few releases after 0.1.0 - it is not stable!
