@@ -58,6 +58,13 @@ defmodule ExampleEntities do
     |> List.first()
   end
 
+  def ukamf_test do
+    Smee.source("test/support/static/ukamf_test.xml", type: :single)
+    |> Smee.fetch!()
+    |> Smee.Metadata.entities()
+    |> List.first()
+  end
+
   def uom do
     Smee.source("test/support/static/uom.xml", type: :single)
     |> Smee.fetch!()
