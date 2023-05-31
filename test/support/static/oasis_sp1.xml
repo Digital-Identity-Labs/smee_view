@@ -4,6 +4,7 @@
                   entityID="https://ServiceProvider.com/SAML">
   <SPSSODescriptor AuthnRequestsSigned="true"
                    protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <!--
     <KeyDescriptor use="signing">
       <ds:KeyInfo>
         <ds:KeyName>ServiceProvider.com SSO Key</ds:KeyName>
@@ -15,6 +16,7 @@
       </ds:KeyInfo>
       <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa1_5"/>
     </KeyDescriptor>
+    -->
     <SingleLogoutService
             Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
             Location="https://ServiceProvider.com/SAML/SLO/SOAP"/>
