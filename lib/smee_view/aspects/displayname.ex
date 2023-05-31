@@ -19,7 +19,7 @@ defmodule SmeeView.Aspects.Displayname do
   defstruct [
     lang: "en",
     text: nil,
-    role: nil
+    role: :all
   ]
 
   use SmeeView.Aspects.AspectCommon, features: [:lang, :text]

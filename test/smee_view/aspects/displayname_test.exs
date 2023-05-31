@@ -4,5 +4,7 @@ defmodule SmeeViewAspectsDisplaynameTest do
 
  # use AspectTextSharedTests, aspect: true
 
+ Apex.ap AspectFixtures.fixtures(SmeeView.Aspects.Displayname, [%{lang: "en", text: "aha"}])
+
 
 end

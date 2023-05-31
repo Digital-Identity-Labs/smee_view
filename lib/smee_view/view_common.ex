@@ -674,13 +674,29 @@ defmodule SmeeView.ViewCommon do
         true
       end
 
+      defp viewable?(%SmeeView.Aspects.Entity{}) do
+        true
+      end
+
       defp viewable?(_) do
         false
       end
 
       @spec prismable?(data :: any()) :: boolean()
-      defp prismable?(data) do
-        viewable?(data)
+      defp prismable?(%Entity{}) do
+       true
+      end
+
+      defp prismable?(%Metadata{}) do
+        true
+      end
+
+      defp prismable?(%SmeeView.Aspects.Entity{}) do
+        true
+      end
+
+      defp prismable?(_) do
+        false
       end
 
       @spec prismify(prism :: map(), f :: function()) :: map()
