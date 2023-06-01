@@ -120,8 +120,8 @@ Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
 entity
 |> SmeeView.Displaynames.view()
 |> SmeeView.Displaynames.pick("fr")
-|> SmeeView.Displaynames.text()
-# => "Université de Rouen Normandie"
+|> SmeeView.Aspects.Displayname.text()
+# => "Plateforme pédagogique de pré-production de l'Université de Rouen Normandie"
 ```
 
 ### Get the friendly names of all attributes required by a particular entity
