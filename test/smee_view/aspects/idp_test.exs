@@ -1,4 +1,4 @@
-defmodule SmeeViewAspectsDisplaynameTest do
+defmodule SmeeViewAspectsIdPTest do
   use ExUnit.Case
 
  # use AspectTextSharedTests, aspect: true

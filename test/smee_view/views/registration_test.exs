@@ -1,4 +1,4 @@
-defmodule SmeeViewXTest do
+defmodule SmeeViewRegistrationTest do
   use ExUnit.Case
 
   alias Smee.Entity
