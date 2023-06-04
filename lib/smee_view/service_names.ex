@@ -17,7 +17,7 @@ defmodule SmeeView.ServiceNames do
     individual aspects, please look at the appropriate Aspect module.
   """
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Displayname, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.ServiceName, roles: false
 
   @entity_xmap [
     ~x"//md:SPSSODescriptor/AttributeConsumingService/ServiceName"le,

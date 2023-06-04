@@ -17,7 +17,7 @@ defmodule SmeeView.ServiceDescriptions do
     individual aspects, please look at the appropriate Aspect module.
   """
 
-  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.Description, roles: false
+  use SmeeView.ViewCommon, aspect: SmeeView.Aspects.ServiceDescription, roles: false
 
   @entity_xmap [
     ~x"//md:SPSSODescriptor/AttributeConsumingService/ServiceDescription"le,
