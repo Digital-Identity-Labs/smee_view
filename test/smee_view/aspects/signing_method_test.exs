@@ -17,5 +17,4 @@ defmodule SmeeViewAspectsSigningMethodTest do
 
   end
 
-
 end
