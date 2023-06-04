@@ -1,9 +1,21 @@
 defmodule SmeeViewAspectsInformationURLTest do
   use ExUnit.Case
 
- # use AspectTextSharedTests, aspect: true
+  alias SmeeView.Aspects.InformationURL, as: ThisAspect
 
- #AspectFixtures.fixtures(SmeeView.Aspects.Displayname, [%{lang: "en", text: "aha"}])
+  describe "new/2" do
 
+    test "parses all data fields as returned by SweetXML's xpath" do
+      assert %ThisAspect{
+               lang: "en",
+               url: "https://example.com/path",
+             } = ThisAspect.new(
+               %{
+                 lang: "en",
+                 url: "https://example.com/path",
+               }
+             )
 
+    end
+  end
 end
