@@ -1,9 +1,21 @@
 defmodule SmeeViewAspectsNameIDFormatTest do
   use ExUnit.Case
+  alias SmeeView.Aspects.NameIDFormat, as: ThisAspect
 
- # use AspectTextSharedTests, aspect: true
+  describe "new/3" do
 
- #AspectFixtures.fixtures(SmeeView.Aspects.Displayname, [%{lang: "en", text: "aha"}])
+    test "parses all data fields as returned by SweetXML's xpath" do
+      assert %ThisAspect{
+               uri: "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+             } = ThisAspect.new(
+               %{
+                 uri: "urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+               }
+             )
+
+    end
+
+  end
 
 
 end
