@@ -90,6 +90,11 @@ defmodule SmeeView.Aspects.Scope do
 
   #######################################################################################
 
+  #@spec is not needed
+  defp prepare_data(data, _options \\ []) do
+    Map.merge(data, %{regex: Utils.parse_boolean(data[:regex])})
+  end
+
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.Scope do

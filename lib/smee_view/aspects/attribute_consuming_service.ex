@@ -101,7 +101,7 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
 
   #@spec is not needed
   defp prepare_data(data, _options \\ []) do
-    Map.merge(data, %{index: Utils.normalize_index(data[:index])})
+    Map.merge(data, %{index: Utils.normalize_index(data[:index]), default: Utils.parse_boolean(data[:default])})
   end
 
 end
