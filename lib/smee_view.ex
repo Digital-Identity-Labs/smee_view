@@ -73,8 +73,9 @@ defmodule SmeeView do
   Input data can be a `Smee.Entity` or `Smee.Metadata` struct, or a list containing `Smee.Entity`, `Smee.Metadata` or
     any aspects.
 
-  **Only one entity will be processed** and then **only one aspect will be returned**. If you pass one Entity struct as the input, it will be that entity (obviously).
-    If you pass metadata structs or lists one entity will be chosen at random. The first suitable entity will be returned.
+   **Only one aspect will be returned**. If you pass one Entity struct as the input, it will be that entity (obviously).
+    If you pass metadata structs or lists the first suitable aspect found will be returned. It may not be from the first
+    entity, if the first entity has no suitable content.
 
   `view_one/2` is *intended* for use with a single entity record and aspects like `SmeeView.Aspect.Entity`,
   `SmeeView.Aspect.SP' or `SmeeView.Aspect.Organization' but will work with any aspect.
@@ -104,7 +105,7 @@ defmodule SmeeView do
   Only appropriate aspect records will be returned.
 
   `prism/2` is useful for extracting specific types of aspects from lists of entity records, or metadata. If you are
-    only interested in one aspect from a single `Smee.Entity` struct then you should probably use `view/2` instead.
+    only interested in one type of aspect from a single `Smee.Entity` struct then you should probably use `view/2` instead.
 
   ```
   SmeeView.prism(entity)
