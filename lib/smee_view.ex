@@ -90,7 +90,7 @@ defmodule SmeeView do
   ```
 
   """
-  @spec view_one(smee_data :: Smee.Entity.t() | Smee.Metadata.t() | list(), options :: Keyword.t()) :: SmeeView.Aspects.Entity.t()
+  @spec view_one(smee_data :: Smee.Entity.t() | Smee.Metadata.t() | list(), options :: Keyword.t()) :: SmeeView.Aspects.Entity.t() | nil
   def view_one(smee_data, options \\ []) do
     smee_data
     |> Entities.view_one(:all, options)

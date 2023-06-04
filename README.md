@@ -27,7 +27,7 @@ SmeeView is *loosely* based on the concept of functional data access "lenses".
 
 ### Views
 
-Views modules take metadata, or information extracted from metadata, and return a specific type of record from it, known
+View modules take metadata, or information extracted from metadata, and return a specific type of record from it, known
 as an
 aspect. They also allow further filtering and processing of lists of aspects.
 

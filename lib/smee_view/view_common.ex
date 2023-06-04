@@ -109,7 +109,7 @@ defmodule SmeeView.ViewCommon do
       """
       @spec view_one(list :: Entity.t() | Metadata.t() | list(), role :: atom(), options :: keyword()) :: unquote(
                                                                                                             params[:aspect]
-                                                                                                          ).t()
+                                                                                                          ).t() | nil
       def view_one(smee_data, role \\ :all, options \\ [])
       def view_one(%Entity{} = smee_data, role, options) do
         List.wrap(smee_data)
