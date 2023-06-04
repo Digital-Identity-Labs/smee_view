@@ -7,8 +7,6 @@ defmodule SmeeViewAspectsAttributeConsumingServiceTest do
 
     test "parses all data fields as returned by SweetXML's xpath" do
 
-      IO.puts "FINISH THIS"
-
       assert %ThisAspect{
                default: true,
                index: 0,
