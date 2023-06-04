@@ -7,16 +7,15 @@ defmodule SmeeViewAspectsAttributeTest do
 
     test "parses all data fields as returned by SweetXML's xpath" do
       assert %ThisAspect{
-               friendly_name: nil,
-               name: nil,
-               name_format: nil,
+               friendly_name: "mail",
+               name: "urn:mace:dir:attribute-def:mail",
+               name_format: "urn:mace:shibboleth:1.0:attributeNamespace:uri",
                values: []
              } = ThisAspect.new(
                %{
-                 friendly_name: nil,
-                 name: nil,
-                 name_format: nil,
-                 values: []
+                 friendly_name: "mail",
+                 name: "urn:mace:dir:attribute-def:mail",
+                 name_format: "urn:mace:shibboleth:1.0:attributeNamespace:uri",
                }
              )
 
