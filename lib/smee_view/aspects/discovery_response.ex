@@ -26,9 +26,8 @@ defmodule SmeeView.Aspects.DiscoveryResponse do
 
   #######################################################################################
 
-  ## Does not, cannot, have index - just here for indexing consistency
   defp prepare_data(data, _options \\ []) do
-    Map.merge(data, %{index: 0})
+    Map.merge(data, %{index: Utils.normalize_index(data[:index])})
   end
 
 end

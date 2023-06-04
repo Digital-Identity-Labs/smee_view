@@ -22,7 +22,8 @@ defmodule SmeeView.DiscoveryResponses do
   @entity_xmap [
     ~x"//md:SPSSODescriptor/Extensions/idpdisc:DiscoveryResponse"le,
     binding: ~x"string(@Binding)"s,
-    location: ~x"string(@Location)"s
+    location: ~x"string(@Location)"s,
+    index: ~x"string(@index)"s,
   ]
 
   defp entity_xmap do
