@@ -119,14 +119,19 @@ defmodule SmeeView.ViewCommon do
 
       def view_one(%Metadata{} = smee_data, role, options) do
         smee_data
-        |> Metadata.random_entity()
-        |> view_one()
+        |> Metadata.stream_entities()
+        |> Stream.map(fn e -> view(e, role, options) end)
+        |> Stream.reject(fn v -> is_nil(v) || Enum.empty?(v) end)
+        |> Stream.take(1)
+        |> Enum.to_list()
+        |> List.flatten()
+        |> List.first
       end
 
       def view_one(smee_data, role, options) when is_list(smee_data) do
         smee_data
-        |> Enum.random()
-        |> view_one()
+        |> view(role, options)
+        |> List.first()
       end
 
       @doc """
@@ -344,9 +349,9 @@ defmodule SmeeView.ViewCommon do
 
             ```
               #{
-            String.split("#{__MODULE__}", ".")
-            |> List.last()
-               }.contain?(attrs, "urn:oid:1.3.6.1.4.1.5923.1.1.1.6")
+                String.split("#{__MODULE__}", ".")
+                |> List.last()
+              }.contain?(attrs, "urn:oid:1.3.6.1.4.1.5923.1.1.1.6")
             # => true
 
 
@@ -375,7 +380,8 @@ defmodule SmeeView.ViewCommon do
 
             """
             @spec contain_friendly?(aspects :: list() | map(), name :: binary()) :: boolean() | map()
-            def contain_friendly?(aspects, friendly_name) when is_map(aspects), do: prismify(aspects, friendly_name, &contain_friendly?/2)
+            def contain_friendly?(aspects, friendly_name) when is_map(aspects),
+                do: prismify(aspects, friendly_name, &contain_friendly?/2)
             def contain_friendly?(aspects, friendly_name) do
               aspects
               |> Enum.any?(fn a -> a.friendly_name == friendly_name end)
@@ -387,9 +393,10 @@ defmodule SmeeView.ViewCommon do
             The results are sorted and each value is unique.
 
             ```
-              #{String.split("#{__MODULE__}", ".")
-                            |> List.last()
-                          }.names(attrs)
+              #{
+                String.split("#{__MODULE__}", ".")
+                |> List.last()
+              }.names(attrs)
             # => ["urn:oid:1.3.6.1.4.1.5923.1.1.1.6", "urn:oid:0.9.2342.19200300.100.1.3", "urn:oid:2.5.4.10"]
             ```
 
@@ -414,7 +421,8 @@ defmodule SmeeView.ViewCommon do
             The results are sorted and each value is unique.
 
             ```
-              #{String.split("#{__MODULE__}", ".")
+              #{
+                String.split("#{__MODULE__}", ".")
                 |> List.last()
               }.friendly_names(attrs)
             # => ["eduPersonPrincipalName", "email", "organizationName"]
@@ -674,9 +682,9 @@ defmodule SmeeView.ViewCommon do
         true
       end
 
-      defp viewable?(%SmeeView.Aspects.Entity{}) do
-        true
-      end
+      #      defp viewable?(%SmeeView.Aspects.Entity{}) do
+      #        true
+      #      end
 
       defp viewable?(_) do
         false
@@ -684,16 +692,16 @@ defmodule SmeeView.ViewCommon do
 
       @spec prismable?(data :: any()) :: boolean()
       defp prismable?(%Entity{}) do
-       true
+        true
       end
 
       defp prismable?(%Metadata{}) do
         true
       end
 
-      defp prismable?(%SmeeView.Aspects.Entity{}) do
-        true
-      end
+      #      defp prismable?(%SmeeView.Aspects.Entity{}) do
+      #        true
+      #      end
 
       defp prismable?(_) do
         false

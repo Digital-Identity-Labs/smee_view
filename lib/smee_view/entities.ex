@@ -28,6 +28,8 @@ defmodule SmeeView.Entities do
     cache_duration: ~x"string(@cacheDuration)"s,
   ]
 
+  #########################################################################
+
   defp entity_xmap do
     @entity_xmap
   end
