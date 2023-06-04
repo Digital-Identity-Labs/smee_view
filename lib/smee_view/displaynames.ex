@@ -6,9 +6,9 @@ defmodule SmeeView.Displaynames do
 
   Aspects can be extracted with three functions:
 
-  * Views, via `view/2` are lists of aspects
-  * Prisms, via `prism/2` are maps of entity IDs to views
-  * There is also `view_one/2` which returns the first aspect of one entity
+  * Views, via `view/3` are lists of aspects
+  * Prisms, via `prism/3` are maps of entity IDs to views
+  * There is also `view_one/3` which returns the first aspect found
 
   Aspects can be extracted from `Smee.Metadata` structs, `Smee.Entity` structs, or lists of aspects, Metadata and Entity
     structs.
