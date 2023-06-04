@@ -171,6 +171,16 @@ defmodule SmeeView.Aspects.Logo do
 
   #######################################################################################
 
+  #@spec is not needed
+  defp prepare_data(data, options \\ []) do
+    Map.merge(
+      data,
+      %{
+        height: Utils.normalize_index(data[:height]),
+        width: Utils.normalize_index(data[:width]),
+      }
+    )
+  end
 
 end
 
