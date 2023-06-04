@@ -1,9 +1,29 @@
 defmodule SmeeViewAspectsAttributeConsumingServiceTest do
   use ExUnit.Case
 
- # use AspectTextSharedTests, aspect: true
+  alias SmeeView.Aspects.AttributeConsumingService, as: ThisAspect
 
- #AspectFixtures.fixtures(SmeeView.Aspects.Displayname, [%{lang: "en", text: "aha"}])
+  describe "new/3" do
 
+    test "parses all data fields as returned by SweetXML's xpath" do
+
+      IO.puts "FINISH THIS"
+
+      assert %ThisAspect{
+               default: true,
+               index: 0,
+               requested_attributes: [],
+               service_descriptions: [],
+               service_names: []
+             } = ThisAspect.new(
+               %{
+                 default: "true",
+                 index: "0"
+               }
+             )
+
+    end
+
+  end
 
 end
