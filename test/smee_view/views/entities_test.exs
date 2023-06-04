@@ -1,6 +1,5 @@
 defmodule SmeeViewEntitiesTest do
   use ExUnit.Case
-  doctest SmeeView
 
   alias Smee.Entity
   alias Smee.Metadata
