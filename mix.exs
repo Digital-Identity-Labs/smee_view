@@ -6,7 +6,7 @@ defmodule SmeeView.MixProject do
       app: :smee_view,
       version: "0.1.0",
       elixir: "~> 1.14",
-      description: "Metadata parsing extension for Smee",
+      description: "SAML metadata parsing extension for Smee",
       package: package(),
       name: "SmeeView",
       source_url: "https://github.com/Digital-Identity-Labs/smee_view",
@@ -50,7 +50,6 @@ defmodule SmeeView.MixProject do
   defp deps do
     [
       {:smee, "~> 0.2.0"},
-      #{:smee, path: "/Users/pete/Projects/smee"},
       {:sweet_xml, "~> 0.7.3"},
       {:briefly, "~> 0.4.0"},
       {:easy_ssl, "~> 1.3"},
