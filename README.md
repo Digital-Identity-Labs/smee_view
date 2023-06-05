@@ -14,7 +14,6 @@ SmeeView is *loosely* based on the concept of functional data access "lenses".
 ![Github Elixir CI](https://github.com/Digital-Identity-Labs/smee_view/workflows/Elixir%20CI/badge.svg)
 
 [![Run in Livebook](https://livebook.dev/badge/v1/blue.svg)](https://livebook.dev/run?url=https%3A%2F%2Fraw.githubusercontent.com%2FDigital-Identity-Labs%2Fsmee_view%2Fmain%2Fsmee_view_notebook.livemd)
-
 ## Features
 
 * Relatively low memory usage and decent speed, especially when extracting smaller fragments of information
