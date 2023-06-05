@@ -68,7 +68,7 @@ SmeeView.Logos.prism(federation_metadata)
 entity
 |> SmeeView.Displaynames.view()
 |> SmeeView.Displaynames.pick("en")
-|> SmeeView.Displaynames.text()
+|> SmeeView.Aspects.Displayname.text()
 ```
 
 ### Find all the tiny square logos for IdPs in PNG format in German
