@@ -5,7 +5,7 @@ easy to use functions for extracting lists of information from SAML metadata as 
 
 [Smee](https://github.com/Digital-Identity-Labs/smee) provides access to entity metadata XML as both strings and parsed
 `xmerl` records but leaves the user to find and extract the information they need. SmeeView aims to fill this gap by
-providing tools for working with the most commonly information in SAML metadata.
+providing tools for working with the most commonly used information in SAML metadata.
 
 SmeeView is *loosely* based on the concept of functional data access "lenses".
 
@@ -21,7 +21,8 @@ SmeeView is *loosely* based on the concept of functional data access "lenses".
 * Aspects can be extracted from individual `Smee.Entity` or `Smee.Metadata` structs, lists of them, or even other
   aspects.
 * Aspects are extracted as either lists or as lists in maps, associated with entity IDs.
-* Filters and tools are provided for handling aspects such as logos or multilingual text
+* Filters and tools are provided for handling aspects such as logos or multilingual text, and for checking commonly used
+  entity attributes.
 
 ## Overview
 
@@ -31,7 +32,7 @@ View modules take metadata, or information extracted from metadata, and return a
 as an
 aspect. They also allow further filtering and processing of lists of aspects.
 
-For instance `SmeeView.Logos` will extract all logo information from an entity's metadata and filter them so that only
+For instance `SmeeView.Logos` can extract all logo information from an entity's metadata and filter them so that only
 IdP logos of a particular shape are returned. `SmeeView.Contacts` provides tools for extracting and filtering
 `SmeeView.Aspects.Contact` records.
 
