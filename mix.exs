@@ -73,7 +73,7 @@ defmodule SmeeView.MixProject do
     [
       licenses: ["Apache-2.0"],
       links: %{
-        "GitHub" => "https://github.com/Digital-Identity-Labs/smee"
+        "GitHub" => "https://github.com/Digital-Identity-Labs/smee_view"
       }
     ]
   end
