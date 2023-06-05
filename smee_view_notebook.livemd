@@ -1,11 +1,10 @@
-<!-- livebook:{"app_settings":{"slug":"smee"}} -->
+<!-- livebook:{"app_settings":{"slug":"smee_view"}} -->
 
 # SmeeView Workbook
 
 ```elixir
 Mix.install([{:smee_view, ">= 0.1.0"}, {:rambo, "~> 0.3.4"}])
 alias Smee.{Metadata, Entity, Source, MDQ}
-alias SmeeFeds.Federation
 ```
 
 ## Requirements - Please Read!
