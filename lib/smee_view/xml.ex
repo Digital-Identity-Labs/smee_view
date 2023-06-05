@@ -6,7 +6,7 @@ defmodule SmeeView.XML do
 
   # no spec needed
   def sigil_x(str, opts) do
-    for {k,v} <- Smee.XmlCfg.namespaces(), reduce: SweetXml.sigil_x(str, opts) do
+    for {k, v} <- Smee.XmlCfg.namespaces(), reduce: SweetXml.sigil_x(str, opts) do
       acc ->
       SweetXml.add_namespace(acc, k, v)
     end
