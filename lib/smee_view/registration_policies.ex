@@ -15,6 +15,9 @@ defmodule SmeeView.RegistrationPolicies do
 
   The other functions in this module are intended to be applied to collections of aspect structs - for working with
     individual aspects, please look at the appropriate Aspect module.
+
+  * [SAML V2.0 Metadata Extensions for Registration and Publication Information](http://docs.oasis-open.org/security/saml/Post2.0/saml-metadata-rpi/v1.0/cs01/saml-metadata-rpi-v1.0-cs01.html)
+
   """
 
   use SmeeView.ViewCommon, aspect: SmeeView.Aspects.RegistrationPolicy, roles: false
