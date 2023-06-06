@@ -3,9 +3,24 @@
 # SmeeView Workbook
 
 ```elixir
-Mix.install([{:smee_view, ">= 0.1.0"}, {:rambo, "~> 0.3.4"}])
+Mix.install(
+  [{:smee_view, ">= 0.1.0"}, {:rambo, "~> 0.3.4"}, {:kino, "~>0.9.4"}]
+)
 alias Smee.{Metadata, Entity, Source, MDQ}
 ```
+
+
+## What is SmeeView?
+
+SmeeView is a metadata parsing extension to Smee. SmeeView provides easy to use functions for extracting lists of
+information from SAML metadata as Elixir structs.
+
+Smee provides access to entity metadata XML as both strings and parsed xmerl records but leaves the user to find and
+extract the information they need. SmeeView aims to fill this gap by providing tools for working with the most commonly
+used information in SAML metadata.
+
+SmeeView is loosely based on the concept of functional data access "lenses".
+
 
 ## Requirements - Please Read!
 
@@ -22,13 +37,9 @@ On Debian: `sudo apt-get install xmlsec1 libxml2-utils xsltproc`
 On RedHat: `sudo yum install xmlsec1 libxml2 libxslt`
 On Macs: `brew install xmlsec1 libxml2 libxslt`
 
-## First let's grab some federation metadata
-```elixir
-federation_metadata = Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
-|> Smee.fetch!()
-```
+### First let's get one entity via MDQ
 
-## Also let's get one entity via MDQ
+We'll reuse this entity data a few times later
 
 ```elixir
 
@@ -39,7 +50,9 @@ entity = Smee.MDQ.source("http://mdq.ukfederation.org.uk/")
 
 ### Extracting all data for an entity
 
-The top-level `view_one/2` function will return one entity struct.
+The top-level `view_one/2` function will return one entity "aspect" struct. You can see how the data in a
+`SmeeView.Aspects.Entity` struct is very different to the `Smee.Entity` struct - it has much more detail in an easier
+format.
 
 ```elixir
 
@@ -49,20 +62,27 @@ SmeeView.view_one(entity)
 
 ### Viewing all logos in an entire federation
 
-You can view all logos as a list:
+You can view all logos as a list...
 
 ```elixir
-SmeeView.Logos.view(federation_metadata)
-
-```
-But it might be more useful to have a list of all logos for each entity:
-
-```elixir
-SmeeView.Logos.prism(federation_metadata)
+Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
+|> Smee.fetch!()
+|> SmeeView.Logos.view()
 
 ```
 
-### Selecting the most appropriate service displayname 
+... but it might be more useful to have a list of all logos for each entity:
+
+```elixir
+Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
+|> Smee.fetch!()
+|> SmeeView.Logos.prism()
+
+```
+
+### Selecting the most appropriate service displayname
+
+Entity metadata often contains information in various languages so that UIs can be localised.
 
 ```elixir
 entity
@@ -76,7 +96,8 @@ entity
 (It's a very contrived example)
 
 ```elixir
-federation_metadata
+Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
+|> Smee.fetch!()
 |> SmeeView.Logos.view(:idp)
 |> Enum.filter(
      fn logo ->
@@ -88,13 +109,24 @@ federation_metadata
    )
 
 ```
+There might not actually be any of course.
 
 ### Extract the assurance certifications of each entity in a federation
 
-This demonstrates the usefulness of prism views
+This demonstrates the usefulness of prism views. A map of entityID => assurance certifications is returned.
 
 ```elixir
-SmeeView.EntityAttributes.prism(federation_metadata)
-|> SmeeView.EntityAttributes.assurance_certifications()
+certifications = Smee.source("http://metadata.ukfederation.org.uk/ukfederation-metadata.xml")
+                 |> Smee.fetch!()
+                 |> SmeeView.EntityAttributes.prism()
+                 |> SmeeView.EntityAttributes.assurance_certifications()
 
+```
+
+The same data again, restructured into a list of maps so Kino can show it easily:
+
+```elixir
+certifications
+|> Enum.map(fn {k, v} -> %{entity: k, certifications: v} end)
+|> Kino.DataTable.new(name: "Certifications", keys: [:entity, :certifications])
 ```
