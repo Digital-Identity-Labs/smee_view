@@ -1,0 +1,19 @@
+# List of all SP logos in the Federation
+
+{% for entity in logo_data %}
+
+{% if entity.logos.size > 0 %}
+
+## {{ entity.id }}
+
+{% for logo in entity.logos %}
+
+![]({{ logo.url }})
+
+{% endfor %}
+
+---
+
+{% endif %}
+
+{% endfor %}
