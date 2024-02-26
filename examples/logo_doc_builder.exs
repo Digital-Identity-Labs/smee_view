@@ -1,5 +1,5 @@
 ## Run with `elixir examples/logo_doc_builder.exs > out.md`
-## theh `pandoc -f markdown --toc out.md  > out.html`
+## then `pandoc -f markdown --toc out.md  > out.html`
 
 Mix.install([{:solid, "~> 0.14.1"}, {:smee_view, "~> 0.1.0"}])
 

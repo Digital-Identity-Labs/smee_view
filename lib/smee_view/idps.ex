@@ -49,6 +49,4 @@ defmodule SmeeView.IdPs do
     )
   end
 
-
-
 end
