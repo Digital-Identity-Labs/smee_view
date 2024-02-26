@@ -113,8 +113,8 @@ defmodule SmeeViewMiscUtilsTest do
 
     test "should respond to a valid SweetXML xmap by applying it to the parsed xdoc" do
 
-      import SmeeView.XML
-      import SweetXml, except: [sigil_x: 2, parse: 1]
+      import SweetXml, except: [sigil_x: 2]
+      import Smee.Sigils
 
       assert  %{idp: [], sp: [%{uri: "urn:oasis:names:tc:SAML:2.0:protocol"}]} = Utils.extract_data_from_xml(
                 Entity.xdoc(ExampleEntities.oasis_sp1),

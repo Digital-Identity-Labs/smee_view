@@ -17,8 +17,8 @@ defmodule SmeeView.ViewCommon do
 
     quote do
 
-      import SmeeView.XML
-      import SweetXml, except: [sigil_x: 2, parse: 1]
+      import SweetXml, except: [sigil_x: 2]
+      import Smee.Sigils
 
       alias Smee.Entity
       alias Smee.Metadata
