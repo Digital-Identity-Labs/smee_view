@@ -4,7 +4,7 @@ defmodule SmeeView.MixProject do
   def project do
     [
       app: :smee_view,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 1.14",
       description: "SAML metadata parsing extension for Smee",
       package: package(),
@@ -32,7 +32,7 @@ defmodule SmeeView.MixProject do
         ]
       ],
       deps: deps(),
-      compilers: Mix.compilers(),
+      compilers: Mix.compilers() ++ [:rambo], # Needed until issue fixed in Rambo
       elixirc_paths: elixirc_paths(Mix.env)
     ]
   end
@@ -49,23 +49,21 @@ defmodule SmeeView.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:smee, "~> 0.2.0"},
-      {:sweet_xml, "~> 0.7.3"},
-      {:briefly, "~> 0.4.0"},
-      {:easy_ssl, "~> 1.3"},
-      {:xmerl_xml_indent, "~> 0.1.0"},
-      {:xmlixer, "~> 0.1.1"},
+      {:smee, "~> 0.4"},
+      {:sweet_xml, "~> 0.7"},
       {:iteraptor, "~> 1.14"},
       {:jason, "~> 1.4"},
+      {:rambo, "~> 0.3.4"}, # temporary fix
 
       {:apex, "~> 1.2", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.6.7", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.14 and >= 0.14.4", only: [:dev, :test]},
-      {:benchee, "~> 1.0.1", only: [:dev, :test]},
-      {:ex_doc, "~> 0.23.0", only: :dev, runtime: false},
-      {:earmark, "~> 1.3", only: :dev, runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.4", only: [:dev], runtime: false},
-      {:doctor, "~> 0.17.0", only: :dev, runtime: false}
+      {:benchee, "~> 1.3", only: [:dev, :test]},
+      {:ex_doc, "~> 0.31", only: :dev, runtime: false},
+      {:earmark, "~> 1.4", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev], runtime: false},
+      {:doctor, "~> 0.21", only: :dev, runtime: false},
+      {:table_rex, "~> 4.0"}
     ]
   end
 

@@ -177,7 +177,7 @@ by adding `smee_view` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:smee_view, "~> 0.1.0"}
+    {:smee_view, "~> 0.2.0"}
   ]
 end
 ```
