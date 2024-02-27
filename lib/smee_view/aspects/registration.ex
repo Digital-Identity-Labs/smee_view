@@ -73,8 +73,3 @@ defmodule SmeeView.Aspects.Registration do
   #######################################################################################
 
 end
-
-defimpl String.Chars, for: SmeeView.Aspects.Registration do
-@moduledoc false
-  def to_string(a), do: a.authority
-end

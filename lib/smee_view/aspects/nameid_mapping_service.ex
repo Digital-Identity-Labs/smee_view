@@ -32,9 +32,6 @@ defmodule SmeeView.Aspects.NameidMappingService do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.NameidMappingService do
-@moduledoc false
-  def to_string(a), do: a.location
-end
+
 
 

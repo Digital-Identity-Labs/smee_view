@@ -23,8 +23,3 @@ defmodule SmeeView.Aspects.OrganizationURL do
   #######################################################################################
 
 end
-
-defimpl String.Chars, for: SmeeView.Aspects.OrganizationURL do
-@moduledoc false
-  def to_string(a), do: a.url
-end

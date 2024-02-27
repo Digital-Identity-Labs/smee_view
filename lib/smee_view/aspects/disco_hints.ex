@@ -119,7 +119,4 @@ defmodule SmeeView.Aspects.DiscoHints do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.Organization do
-@moduledoc false
-  def to_string(_a), do: "Disco Hints"
-end
+

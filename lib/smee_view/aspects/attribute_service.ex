@@ -31,9 +31,4 @@ defmodule SmeeView.Aspects.AttributeService do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.AttributeService do
-@moduledoc false
-  def to_string(a), do: a.location
-end
-
 

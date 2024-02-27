@@ -54,7 +54,3 @@ defmodule SmeeView.Aspects.Network do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.Network do
-@moduledoc false
-  def to_string(a), do: a.network
-end

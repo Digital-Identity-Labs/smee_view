@@ -175,7 +175,3 @@ defmodule SmeeView.Aspects.DiscoUI do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.DiscoUI do
-@moduledoc false
-  def to_string(_a), do: "Disco UI"
-end

@@ -74,7 +74,3 @@ defmodule SmeeView.Aspects.Organization do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.DiscoHints do
-@moduledoc false
-  def to_string(_a), do: "Organization"
-end

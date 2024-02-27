@@ -22,7 +22,3 @@ defmodule SmeeView.Aspects.DigestMethod do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.DigestMethod do
-@moduledoc false
-  def to_string(a), do: a.algorithm
-end

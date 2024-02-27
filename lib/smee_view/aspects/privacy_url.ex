@@ -24,7 +24,3 @@ defmodule SmeeView.Aspects.PrivacyURL do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.PrivacyURL do
-@moduledoc false
-  def to_string(a), do: a.url
-end

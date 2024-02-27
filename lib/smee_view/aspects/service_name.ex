@@ -24,7 +24,3 @@ defmodule SmeeView.Aspects.ServiceName do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.ServiceName do
-@moduledoc false
-  def to_string(a), do: a.text
-end

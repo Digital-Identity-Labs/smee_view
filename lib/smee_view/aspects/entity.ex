@@ -352,8 +352,3 @@ defmodule SmeeView.Aspects.Entity do
   #######################################################################################
 
 end
-
-defimpl String.Chars, for: SmeeView.Aspects.Entity do
-@moduledoc false
-  def to_string(a), do: a.entity_id
-end

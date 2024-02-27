@@ -54,7 +54,4 @@ defmodule SmeeView.Aspects.Domain do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.Domain do
-@moduledoc false
-  def to_string(a), do: a.domain
-end
+

@@ -338,8 +338,3 @@ defmodule SmeeView.Aspects.Key do
 
 end
 
-
-defimpl String.Chars, for: SmeeView.Aspects.Key do
-@moduledoc false
-  def to_string(a), do: SmeeView.Aspects.Key.pem(a)
-end

@@ -33,9 +33,5 @@ defmodule SmeeView.Aspects.RequestInitiator do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.RequestInitiator do
-@moduledoc false
-  def to_string(a), do: a.location
-end
 
 

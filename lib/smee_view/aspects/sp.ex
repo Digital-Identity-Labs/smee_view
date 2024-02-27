@@ -190,7 +190,4 @@ defmodule SmeeView.Aspects.SP do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.SP do
-@moduledoc false
-  def to_string(_a), do: "SP"
-end
+

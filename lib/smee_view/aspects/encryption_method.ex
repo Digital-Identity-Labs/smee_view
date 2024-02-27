@@ -22,7 +22,3 @@ defmodule SmeeView.Aspects.EncryptionMethod do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.EncryptionMethod do
-@moduledoc false
-  def to_string(a), do: a.algorithm
-end

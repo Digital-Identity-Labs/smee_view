@@ -62,7 +62,3 @@ defmodule SmeeView.Aspects.RequestedAttribute do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.RequestedAttribute do
-  @moduledoc false
-  def to_string(a), do: a.friendly_name
-end

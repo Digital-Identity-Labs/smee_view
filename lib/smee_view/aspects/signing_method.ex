@@ -22,7 +22,3 @@ defmodule SmeeView.Aspects.SigningMethod do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.SigningMethod do
-@moduledoc false
-  def to_string(a), do: a.algorithm
-end
