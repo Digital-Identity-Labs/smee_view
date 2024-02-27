@@ -111,13 +111,3 @@ defimpl String.Chars, for: SmeeView.Aspects.AttributeConsumingService do
   def to_string(a), do: "Attribute Consuming Service #{a.index}"
 end
 
-defimpl Jason.Encoder, for: SmeeView.Aspects.AttributeConsumingService do
-@moduledoc false
-  def encode(value, opts) do
-    Jason.Encode.map(
-      Map.take(value, [:service_names, :service_descriptions, :requested_attributes, :index, :default])
-      |> Map.merge(%{st: "attribute_consuming_service"}),
-      opts
-    )
-  end
-end

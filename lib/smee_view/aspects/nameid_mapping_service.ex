@@ -37,13 +37,4 @@ defimpl String.Chars, for: SmeeView.Aspects.NameidMappingService do
   def to_string(a), do: a.location
 end
 
-defimpl Jason.Encoder, for: SmeeView.Aspects.NameidMappingService do
-@moduledoc false
-  def encode(value, opts) do
-    Jason.Encode.map(
-      Map.take(value, [:binding, :location, :index])
-      |> Map.merge(%{st: "nameid_mapping_service"}),
-      opts
-    )
-  end
-end
+

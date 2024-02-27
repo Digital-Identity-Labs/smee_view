@@ -36,13 +36,4 @@ defimpl String.Chars, for: SmeeView.Aspects.AttributeService do
   def to_string(a), do: a.location
 end
 
-defimpl Jason.Encoder, for: SmeeView.Aspects.AttributeService do
-@moduledoc false
-  def encode(value, opts) do
-    Jason.Encode.map(
-      Map.take(value, [:binding, :location, :index])
-      |> Map.merge(%{st: "AttributeService"}),
-      opts
-    )
-  end
-end
+

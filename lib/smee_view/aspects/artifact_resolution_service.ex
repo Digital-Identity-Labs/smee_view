@@ -33,18 +33,6 @@ defmodule SmeeView.Aspects.ArtifactResolutionService do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.ArtifactResolutionService do
-@moduledoc false
-  def to_string(a), do: a.location
-end
 
-defimpl Jason.Encoder, for: SmeeView.Aspects.ArtifactResolutionService do
-@moduledoc false
-  def encode(value, opts) do
-    Jason.Encode.map(
-      Map.take(value, [:binding, :location, :index])
-      |> Map.merge(%{st: "artifact_resolution_service"}),
-      opts
-    )
-  end
-end
+
+

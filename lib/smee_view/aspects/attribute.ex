@@ -62,7 +62,4 @@ defmodule SmeeView.Aspects.Attribute do
 
 end
 
-defimpl String.Chars, for: SmeeView.Aspects.Attribute do
-  @moduledoc false
-  def to_string(a), do: a.friendly_name
-end
+

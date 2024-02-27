@@ -1,6 +1,6 @@
 defmodule SmeeViewViewCommonTest do
   use ExUnit.Case
-  
+
   alias SmeeView.RequestedAttributes, as: ThisView
   alias SmeeView.Aspects.RequestedAttribute, as: ThisAspect
 

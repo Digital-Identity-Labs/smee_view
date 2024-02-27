@@ -40,13 +40,4 @@ defimpl String.Chars, for: SmeeView.Aspects.AssertionConsumerService do
   def to_string(a), do: a.location
 end
 
-defimpl Jason.Encoder, for: SmeeView.Aspects.AssertionConsumerService do
-@moduledoc false
-  def encode(value, opts) do
-    Jason.Encode.map(
-      Map.take(value, [:binding, :location, :index, :default])
-      |> Map.merge(%{st: "assertion_consumer_service"}),
-      opts
-    )
-  end
-end
+
