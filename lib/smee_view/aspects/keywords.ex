@@ -7,7 +7,7 @@ defmodule SmeeView.Aspects.Keywords do
   collections of these records please use the matching View module.
   """
 
-  alias __MODULE__
+
   alias SmeeView.Utils
   @type t :: %__MODULE__{
                lang: binary(),
@@ -58,7 +58,7 @@ defmodule SmeeView.Aspects.Keywords do
   ############################################################
 
   #@spec is not needed
- defp prepare_data(data, options \\ []) do
+ defp prepare_data(data) do
     Map.merge(
       data,
       %{

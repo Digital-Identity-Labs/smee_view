@@ -2,15 +2,13 @@ defmodule SmeeViewTest do
   use ExUnit.Case
   doctest SmeeView
 
-  alias Smee.Entity
-  alias Smee.Metadata
   alias SmeeView.Aspects
 
   @src_entity ExampleEntities.ukamf_test()
   @src_entity_id @src_entity.uri
 
   @src_md ExampleMetadata.aggregate()
-  @src_md_ids Metadata.entity_ids(@src_md)
+  #@src_md_ids Metadata.entity_ids(@src_md)
 
   describe "view/2" do
 

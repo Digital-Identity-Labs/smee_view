@@ -2,7 +2,7 @@ defmodule SmeeViewCompatibilityUoMTest do
   use ExUnit.Case
 
   alias ExampleEntities
-  alias Smee.Entity
+
   alias SmeeView.Aspects
 
   @src_entity ExampleEntities.uom()

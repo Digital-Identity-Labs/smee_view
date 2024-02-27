@@ -1,8 +1,6 @@
 defmodule SmeeViewEntitiesTest do
   use ExUnit.Case
 
-  alias Smee.Entity
-  alias Smee.Metadata
   alias SmeeView.Aspects
   alias SmeeView.Entities, as: ThisView
 
@@ -10,7 +8,7 @@ defmodule SmeeViewEntitiesTest do
   @src_entity_id @src_entity.uri
 
   @src_md ExampleMetadata.aggregate()
-  @src_md_ids Metadata.entity_ids(@src_md)
+  #@src_md_ids Metadata.entity_ids(@src_md)
 
   describe "view/2" do
 

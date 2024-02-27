@@ -1,16 +1,16 @@
 defmodule SmeeViewEncryptionMethodsTest do
   use ExUnit.Case
 
-  alias Smee.Entity
-  alias Smee.Metadata
-  alias SmeeView.EncryptionMethods, as: ThisView
-  alias SmeeView.Aspects.EncryptionMethod, as: ThisAspect
 
-  @src_entity ExampleEntities.ukamf_test()
-  @src_entity_id @src_entity.uri
 
-  @src_md ExampleMetadata.live_ukamf()
-  @src_md_ids Metadata.entity_ids(@src_md)
+  #alias SmeeView.EncryptionMethods, as: ThisView
+  #alias SmeeView.Aspects.EncryptionMethod, as: ThisAspect
+
+  #@src_entity ExampleEntities.ukamf_test()
+   #@src_entity_id @src_entity.uri
+
+ # @src_md ExampleMetadata.live_ukamf()
+  #@src_md_ids Metadata.entity_ids(@src_md)
 
 #  describe "Metadata aspect extraction smoketest" do
 #

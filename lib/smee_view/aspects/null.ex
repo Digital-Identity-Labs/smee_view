@@ -2,7 +2,7 @@ defmodule SmeeView.Aspects.Null do
 
   @moduledoc false
 
-  alias __MODULE__
+
 
   @type t :: %__MODULE__{
                text: binary()
@@ -17,14 +17,14 @@ defmodule SmeeView.Aspects.Null do
 
   ## Workaround, plan to remove
   @spec binding(aspect :: __MODULE__.t()) :: nil
-  def binding(aspect) do
+  def binding(_aspect) do
     nil
   end
 
   #######################################################################################
 
   #@spec is not needed
- defp prepare_data(_data, _options \\ []) do
+ defp prepare_data(_data) do
     %{}
   end
 
@@ -33,5 +33,5 @@ end
 
 defimpl String.Chars, for: SmeeView.Aspects.Null do
 @moduledoc false
-  def to_string(a), do: ""
+  def to_string(_a), do: ""
 end

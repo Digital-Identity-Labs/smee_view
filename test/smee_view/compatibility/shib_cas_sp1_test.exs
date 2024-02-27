@@ -2,7 +2,7 @@ defmodule SmeeViewCompatibilityShibCASSP1Test do
   use ExUnit.Case
 
   alias ExampleEntities
-  alias Smee.Entity
+
   alias SmeeView.Aspects
 
   @src_entity ExampleEntities.shib_cas_sp1()

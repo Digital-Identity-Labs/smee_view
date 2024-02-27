@@ -9,7 +9,7 @@ defmodule SmeeView.Aspects.Key do
   collections of these records please use the matching View module.
   """
 
-  alias __MODULE__
+
   alias SmeeView.Utils
 
   @type t :: %__MODULE__{
@@ -139,7 +139,7 @@ defmodule SmeeView.Aspects.Key do
   @spec subject(aspect :: __MODULE__.t()) :: binary()
   def subject(cert) do
     cert.pem
-    |> EasySSL.parse_pem()
+    |> Smee.EasySSL.parse_pem()
     |> extract_subject()
   end
 
@@ -157,7 +157,7 @@ defmodule SmeeView.Aspects.Key do
   @spec issuer(aspect :: __MODULE__.t()) :: binary() | nil
   def issuer(cert) do
     cert.pem
-    |> EasySSL.parse_pem()
+    |> Smee.EasySSL.parse_pem()
     |> extract_issuer()
   end
 
@@ -175,7 +175,7 @@ defmodule SmeeView.Aspects.Key do
   @spec fingerprint(aspect :: __MODULE__.t()) :: binary()
   def fingerprint(cert) do
     cert.pem
-    |> EasySSL.parse_pem()
+    |> Smee.EasySSL.parse_pem()
     |> extract_fingerprint()
   end
 
@@ -193,7 +193,7 @@ defmodule SmeeView.Aspects.Key do
   @spec expires_at(aspect :: __MODULE__.t()) :: binary() | nil
   def expires_at(cert) do
     cert.pem
-    |> EasySSL.parse_pem()
+    |> Smee.EasySSL.parse_pem()
     |> extract_expires_at()
   end
 
@@ -211,7 +211,7 @@ defmodule SmeeView.Aspects.Key do
   @spec serial_number(aspect :: __MODULE__.t()) :: binary() | nil
   def serial_number(cert) do
     cert.pem
-    |> EasySSL.parse_pem()
+    |> Smee.EasySSL.parse_pem()
     |> extract_serial_number()
   end
 
@@ -229,14 +229,14 @@ defmodule SmeeView.Aspects.Key do
   @spec signature_algorithm(aspect :: __MODULE__.t()) :: binary() | nil
   def signature_algorithm(cert) do
     cert.pem
-    |> EasySSL.parse_pem()
+    |> Smee.EasySSL.parse_pem()
     |> extract_signature_algorithm()
   end
 
   #######################################################################################
 
   #@spec is not needed
- defp prepare_data(data, options \\ []) do
+ defp prepare_data(data) do
     Map.merge(
       data,
       %{
@@ -257,7 +257,7 @@ defmodule SmeeView.Aspects.Key do
     value
   end
 
-  defp extract_subject(easy_ssl) do
+  defp extract_subject(_easy_ssl) do
     nil
   end
 
@@ -271,7 +271,7 @@ defmodule SmeeView.Aspects.Key do
     value
   end
 
-  defp extract_issuer(easy_ssl) do
+  defp extract_issuer(_easy_ssl) do
     nil
   end
 
@@ -279,7 +279,7 @@ defmodule SmeeView.Aspects.Key do
     value
   end
 
-  defp extract_fingerprint(easy_ssl) do
+  defp extract_fingerprint(_easy_ssl) do
     nil
   end
 
@@ -287,7 +287,7 @@ defmodule SmeeView.Aspects.Key do
     DateTime.from_unix!(value)
   end
 
-  defp extract_expires_at(easy_ssl) do
+  defp extract_expires_at(_easy_ssl) do
     nil
   end
 
@@ -295,7 +295,7 @@ defmodule SmeeView.Aspects.Key do
     value
   end
 
-  defp extract_serial_number(easy_ssl) do
+  defp extract_serial_number(_easy_ssl) do
     nil
   end
 
@@ -303,7 +303,7 @@ defmodule SmeeView.Aspects.Key do
     value
   end
 
-  defp extract_signature_algorithm(easy_ssl) do
+  defp extract_signature_algorithm(_easy_ssl) do
     nil
   end
 

@@ -27,7 +27,7 @@ defmodule SmeeView.IdPs do
     @entity_xmap
   end
 
-  defp cascade_views(entity, aspect_data, role) do
+  defp cascade_views(entity, aspect_data, _role) do
     Map.merge(
       aspect_data,
       %{

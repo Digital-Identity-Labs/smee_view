@@ -7,7 +7,7 @@ defmodule SmeeView.Aspects.RequestedAttribute do
   collections of these records please use the matching View module.
   """
 
-  alias __MODULE__
+
   alias SmeeView.Utils
 
   @type t :: %__MODULE__{
@@ -56,7 +56,7 @@ defmodule SmeeView.Aspects.RequestedAttribute do
   #######################################################################################
 
   #@spec is not needed
-  defp prepare_data(data, _options \\ []) do
+  defp prepare_data(data) do
     Map.merge(data, %{required: Utils.parse_boolean(data[:required])})
   end
 

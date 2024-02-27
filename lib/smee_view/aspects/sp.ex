@@ -18,7 +18,7 @@ defmodule SmeeView.Aspects.SP do
 
   """
 
-  alias __MODULE__
+
   alias SmeeView.Utils
 
   @type t :: %__MODULE__{
@@ -178,7 +178,7 @@ defmodule SmeeView.Aspects.SP do
   #######################################################################################
 
   #@spec is not needed
-  defp prepare_data(data, options \\ []) do
+  defp prepare_data(data) do
     Map.merge(
       data,
       %{
@@ -192,5 +192,5 @@ end
 
 defimpl String.Chars, for: SmeeView.Aspects.SP do
 @moduledoc false
-  def to_string(a), do: "SP"
+  def to_string(_a), do: "SP"
 end

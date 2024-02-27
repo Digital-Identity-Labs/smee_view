@@ -7,9 +7,6 @@ defmodule SmeeView.Aspects.NameidMappingService do
   collections of these records please use the matching View module.
   """
 
-  alias __MODULE__
-  alias SmeeView.Utils
-
   @type t :: %__MODULE__{
                binding: binary(),
                location: binary(),
@@ -29,7 +26,7 @@ defmodule SmeeView.Aspects.NameidMappingService do
 
   ## Does not, cannot, have index - just here for indexing consistency
   #@spec is not needed
- defp prepare_data(data, _options \\ []) do
+ defp prepare_data(data) do
     Map.merge(data, %{index: 0})
   end
 

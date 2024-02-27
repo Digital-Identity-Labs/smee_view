@@ -7,10 +7,10 @@ defmodule SmeeView.Aspects.Contact do
   collections of these records please use the matching View module.
   """
 
-  alias __MODULE__
+
   alias SmeeView.Utils
 
-  @types ~w(technical support administrative billing other)
+  #@types ~w(technical support administrative billing other)
 
   @type t :: %__MODULE__{
                email: binary(),
@@ -201,7 +201,7 @@ defmodule SmeeView.Aspects.Contact do
   #######################################################################################
 
   #@spec is not needed
- defp prepare_data(data, options \\ []) do
+ defp prepare_data(data) do
     Map.merge(data, %{email: Utils.normalize_email(data[:email])})
   end
 

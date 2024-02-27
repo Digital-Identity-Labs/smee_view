@@ -16,9 +16,6 @@ defmodule SmeeView.Aspects.DiscoHints do
 
   """
 
-  alias __MODULE__
-  alias SmeeView.Utils
-
   @type t :: %__MODULE__{
                scopes: list(),
                networks: list(),
@@ -124,5 +121,5 @@ end
 
 defimpl String.Chars, for: SmeeView.Aspects.Organization do
 @moduledoc false
-  def to_string(a), do: "Disco Hints"
+  def to_string(_a), do: "Disco Hints"
 end

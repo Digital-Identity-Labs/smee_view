@@ -18,8 +18,6 @@ defmodule SmeeView.Aspects.DiscoUI do
 
   """
 
-  alias __MODULE__
-  alias SmeeView.Utils
   @type t :: %__MODULE__{
                displaynames: list(),
                descriptions: list(),
@@ -179,5 +177,5 @@ end
 
 defimpl String.Chars, for: SmeeView.Aspects.DiscoUI do
 @moduledoc false
-  def to_string(a), do: "Disco UI"
+  def to_string(_a), do: "Disco UI"
 end

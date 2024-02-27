@@ -7,7 +7,7 @@ defmodule SmeeView.Aspects.DiscoveryResponse do
   collections of these records please use the matching View module.
   """
 
-  alias __MODULE__
+
   alias SmeeView.Utils
 
   @type t :: %__MODULE__{
@@ -26,19 +26,19 @@ defmodule SmeeView.Aspects.DiscoveryResponse do
 
   #######################################################################################
 
-  defp prepare_data(data, _options \\ []) do
+  defp prepare_data(data) do
     Map.merge(data, %{index: Utils.normalize_index(data[:index])})
   end
 
 end
 
 defimpl String.Chars, for: SmeeView.Aspects.DiscoveryResponse do
-@moduledoc false
+  @moduledoc false
   def to_string(a), do: a.location
 end
 
 defimpl Jason.Encoder, for: SmeeView.Aspects.DiscoveryResponse do
-@moduledoc false
+  @moduledoc false
   def encode(value, opts) do
     Jason.Encode.map(
       Map.take(value, [:binding, :location, :index])

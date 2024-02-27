@@ -8,7 +8,7 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
     contained inside this one.
   """
 
-  alias __MODULE__
+
   alias SmeeView.Utils
 
   @type t :: %__MODULE__{
@@ -45,7 +45,7 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
     index
   end
 
-  def index(aspect) do
+  def index(_) do
     1
   end
 
@@ -100,7 +100,7 @@ defmodule SmeeView.Aspects.AttributeConsumingService do
   #################################################################################
 
   #@spec is not needed
-  defp prepare_data(data, _options \\ []) do
+  defp prepare_data(data) do
     Map.merge(data, %{index: Utils.normalize_index(data[:index]), default: Utils.parse_boolean(data[:default])})
   end
 

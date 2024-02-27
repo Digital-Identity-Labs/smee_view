@@ -18,7 +18,7 @@ defmodule SmeeView.Aspects.IdP do
 
   """
 
-  alias __MODULE__
+
   alias SmeeView.Utils
   @type t :: %__MODULE__{
                protocols: list(),
@@ -266,7 +266,7 @@ defmodule SmeeView.Aspects.IdP do
   #######################################################################################
 
   #@spec is not needed
- defp prepare_data(data, options \\ []) do
+ defp prepare_data(data) do
     Map.merge(
       data,
       %{
@@ -279,5 +279,5 @@ end
 
 defimpl String.Chars, for: SmeeView.Aspects.IdP do
 @moduledoc false
-  def to_string(a), do: "IdP"
+  def to_string(_a), do: "IdP"
 end

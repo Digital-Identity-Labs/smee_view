@@ -2,7 +2,7 @@ defmodule SmeeViewCompatibilityADFSTest do
   use ExUnit.Case
 
   alias ExampleEntities
-  alias Smee.Entity
+
   alias SmeeView.Aspects
 
   @src_entity ExampleEntities.adfs()

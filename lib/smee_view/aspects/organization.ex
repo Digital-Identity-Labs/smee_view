@@ -7,9 +7,6 @@ defmodule SmeeView.Aspects.Organization do
   collections of these records please use the matching View module.
   """
 
-  alias __MODULE__
-  alias SmeeView.Utils
-
   @type t :: %__MODULE__{
                displaynames: list(),
                names: list(),
@@ -79,5 +76,5 @@ end
 
 defimpl String.Chars, for: SmeeView.Aspects.DiscoHints do
 @moduledoc false
-  def to_string(a), do: "Organization"
+  def to_string(_a), do: "Organization"
 end

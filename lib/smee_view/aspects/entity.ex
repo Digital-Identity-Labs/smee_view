@@ -10,9 +10,6 @@ defmodule SmeeView.Aspects.Entity do
 
   """
 
-  alias __MODULE__
-  alias SmeeView.Utils
-
   @type t :: %__MODULE__{
                entity_id: binary(),
                id: binary(),

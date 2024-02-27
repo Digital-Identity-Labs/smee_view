@@ -2,9 +2,6 @@ defmodule SmeeView.Aspects.AspectCommon do
 
   @moduledoc false
 
-  alias __MODULE__
-  alias SmeeView.Utils
-
   defmacro __using__(params) do
 
     params = Keyword.merge(
@@ -20,8 +17,8 @@ defmodule SmeeView.Aspects.AspectCommon do
 
       @doc false
       @spec new(data :: map(), options :: keyword()) :: __MODULE__.t()
-      def new(data, options \\ []) do
-        struct(%__MODULE__{}, prepare_data(data, options))
+      def new(data, _options \\ []) do
+        struct(%__MODULE__{}, prepare_data(data))
       end
 
       @doc false
@@ -591,13 +588,13 @@ defmodule SmeeView.Aspects.AspectCommon do
 
       #######################################################################################
 
-      @spec prepare_data(data :: map() | keyword(), options :: keyword()) :: map()
-      defp prepare_data(data, options \\ []) do
+      @spec prepare_data(data :: map() | keyword()) :: map()
+      defp prepare_data(data) do
         Map.new(data)
       end
 
 
-      defoverridable [composite?: 0, new: 2, prepare_data: 2]
+      defoverridable [composite?: 0, new: 2, prepare_data: 1]
 
     end
 

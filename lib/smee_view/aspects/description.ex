@@ -7,8 +7,6 @@ defmodule SmeeView.Aspects.Description do
   collections of these records please use the matching View module.
   """
 
-  alias __MODULE__
-  alias SmeeView.Utils
   @type t :: %__MODULE__{
                lang: binary(),
                text: binary(),

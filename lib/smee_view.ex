@@ -34,8 +34,6 @@ defmodule SmeeView do
 
   """
 
-  alias Smee.Entity
-  alias Smee.Metadata
   alias SmeeView.Entities
 
   @doc """

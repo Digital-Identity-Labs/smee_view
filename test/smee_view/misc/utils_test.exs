@@ -1,9 +1,10 @@
 defmodule SmeeViewMiscUtilsTest do
   use ExUnit.Case
 
+  alias Smee.Entity
   alias SmeeView.Utils
   alias ExampleEntities
-  alias Smee.Entity
+
 
   describe "normalize/1" do
 
@@ -113,7 +114,7 @@ defmodule SmeeViewMiscUtilsTest do
 
     test "should respond to a valid SweetXML xmap by applying it to the parsed xdoc" do
 
-      import SweetXml, except: [sigil_x: 2]
+      #import SweetXml, except: [sigil_x: 2]
       import Smee.Sigils
 
       assert  %{idp: [], sp: [%{uri: "urn:oasis:names:tc:SAML:2.0:protocol"}]} = Utils.extract_data_from_xml(

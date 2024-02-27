@@ -2,10 +2,9 @@ defmodule SmeeViewReadmeExamplesTest do
 
   use ExUnit.Case
 
-  alias Smee.Entity
+
   alias Smee.Metadata
-  alias SmeeView.Aspects
-  alias SmeeView.Entities, as: ThisView
+  #alias SmeeView.Entities, as: ThisView
 
 
   ##
