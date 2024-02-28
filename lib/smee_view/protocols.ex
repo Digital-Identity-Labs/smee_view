@@ -37,7 +37,24 @@ defmodule SmeeView.Protocols do
     @sp_xmap
   end
 
-
   #######################################################################################
+
+  defp preprocess(role, combined_protocols) do
+    new_protocols = combined_protocols
+                    |> Enum.map(fn cp -> split_protocols(cp) end)
+                    |> List.flatten()
+    {role, new_protocols}
+  end
+
+  @spec split_protocols(data :: map()) :: map()
+  defp split_protocols(%{uri: joined_protocols}) do
+    joined_protocols
+    |> String.split()
+    |> Enum.map(fn protocol -> %{uri: protocol} end)
+  end
+
+  defp split_protocols(whatever) do
+    whatever
+  end
 
 end

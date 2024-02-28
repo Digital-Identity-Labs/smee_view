@@ -51,6 +51,7 @@ defmodule SmeeView.ViewCommon do
         entity
         |> Entity.xdoc()
         |> Utils.extract_data_from_xml(xmapper_for_role(role))
+        |> Enum.map(fn {role, aspects} -> preprocess(role, aspects) end)
         |> Enum.map(
              fn {role, aspects} ->
                Enum.map(
@@ -736,6 +737,11 @@ defmodule SmeeView.ViewCommon do
         data
       end
 
+      @spec preprocess(role :: atom(), aspects :: map()) :: {atom(), map()}
+      defp preprocess(role, aspects) do
+        {role, aspects}
+      end
+
       @spec trim_aspect_data(data :: map() | keyword()) :: map()
       defp trim_aspect_data(data) do
         data
@@ -813,7 +819,8 @@ defmodule SmeeView.ViewCommon do
         entity_xmap: 0,
         cascade_views: 3,
         idp_filter: 1,
-        sp_filter: 1
+        sp_filter: 1,
+        preprocess: 2
       ]
 
     end
