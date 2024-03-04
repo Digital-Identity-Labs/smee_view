@@ -12,9 +12,16 @@ defmodule SmeeView.Aspects.Entity do
 
   @type t :: %__MODULE__{
                entity_id: binary(),
+               entity_id_hash: binary(),
                id: binary(),
-               valid_until: binary(),
+               valid_until: nil | DateTime.t(),
                cache_duration: binary(),
+               modified_at: nil | DateTime.t(),
+               downloaded_at: nil | DateTime.t(),
+               priority: integer(),
+               trustiness: float(),
+               tags: list(binary()),
+               label: nil | binary(),
                registration: struct(),
                publications: list(),
                idps: list(),
@@ -27,9 +34,16 @@ defmodule SmeeView.Aspects.Entity do
   @derive Jason.Encoder
   defstruct [
     entity_id: nil,
+    entity_id_hash: nil,
     id: nil,
     valid_until: nil,
     cache_duration: nil,
+    modified_at: nil,
+    downloaded_at: nil,
+    priority: 5,
+    trustiness: 0.5,
+    tags: [],
+    label: nil,
     registration: nil,
     publications: [],
     idps: [],
@@ -346,7 +360,8 @@ defmodule SmeeView.Aspects.Entity do
   """
   @spec roles(aspect :: __MODULE__.t()) :: list()
   def roles(aspect) do
-    [idp(aspect), sp(aspect)] |> Enum.filter(& &1)
+    [idp(aspect), sp(aspect)]
+    |> Enum.filter(& &1)
   end
 
   #######################################################################################

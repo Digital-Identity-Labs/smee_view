@@ -36,6 +36,8 @@ defmodule SmeeView.Entities do
 
   defp cascade_views(entity, aspect_data, _role) do
 
+    if entity.uri != aspect_data[:entity_id], do: raise "Entity ID mismatch!"
+
     Map.merge(
       aspect_data,
       %{
@@ -48,6 +50,19 @@ defmodule SmeeView.Entities do
         contacts: SmeeView.Contacts.view(entity, :all),
       }
     )
+    |> Map.merge(
+         %{
+           entity_id_hash: entity.uri_hash,
+           valid_until: entity.valid_until,
+           modified_at: entity.modified_at,
+           downloaded_at: entity.downloaded_at,
+           priority: entity.priority,
+           trustiness: entity.trustiness,
+           tags: entity.tags,
+           label: entity.label,
+           id: entity.id
+         }
+       )
   end
 
 end
