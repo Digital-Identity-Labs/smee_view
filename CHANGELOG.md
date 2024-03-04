@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixes
 - Protocols are now split up properly into aspects, and not one long string of URIs
+- IdP and SP roles will no longer share combined lists of services on entities that are both SPs and IdPs
 - Compiler warnings have been fixed. 
 
 ### Other Changes
