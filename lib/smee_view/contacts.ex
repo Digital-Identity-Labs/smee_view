@@ -22,6 +22,7 @@ defmodule SmeeView.Contacts do
   @entity_xmap [
     ~x"//md:ContactPerson"l,
     type: ~x"string(@contactType)"s,
+    rtype: ~x"string(@remd:contactType)"s,
     givenname: ~x"string(//md:GivenName[1])"s,
     surname: ~x"string(//md:SurName[1])"s,
     email: ~x"string(//md:EmailAddress[1])"s,

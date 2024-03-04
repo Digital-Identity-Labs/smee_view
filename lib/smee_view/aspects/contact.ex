@@ -16,6 +16,7 @@ defmodule SmeeView.Aspects.Contact do
                email: binary(),
                phone: binary(),
                type: binary(),
+               rtype: binary(),
                givenname: binary(),
                surname: binary(),
                company: binary()
@@ -26,6 +27,7 @@ defmodule SmeeView.Aspects.Contact do
     email: nil,
     phone: nil,
     type: nil,
+    rtype: nil,
     givenname: nil,
     surname: nil,
     company: nil
@@ -115,7 +117,15 @@ defmodule SmeeView.Aspects.Contact do
   """
   @spec type(aspect :: __MODULE__.t()) :: binary()
   def type(contact) do
-    contact.type
+    if contact.rtype do
+      if contact.rtype == "http://refeds.org/metadata/contactType/security" do
+        "#{contact.type}/security (Sirtfi)"
+      else
+        "#{contact.type}/#{contact.rtype}"
+      end
+    else
+      contact.type
+    end
   end
 
   @doc """
@@ -201,7 +211,7 @@ defmodule SmeeView.Aspects.Contact do
   #######################################################################################
 
   #@spec is not needed
- defp prepare_data(data) do
+  defp prepare_data(data) do
     Map.merge(data, %{email: Utils.normalize_email(data[:email])})
   end
 

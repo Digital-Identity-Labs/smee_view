@@ -31,4 +31,15 @@ defmodule SmeeView.Attributes do
     @entity_xmap
   end
 
+#  defp preprocess(role, attributes) do
+#
+#    attrs = attributes
+#            |> Enum.map(fn m -> {m[:name], m[:values] || []} end)
+#            |> Enum.reduce(%{}, fn {k, v}, acc -> Map.put(acc, k, Map.get(acc, k, []) ++ v) end)
+#            |> Enum.map(fn {k, v} -> %{name: k, values: Enum.uniq(v)} end)
+#            |> Apex.ap()
+#
+#    {role, attrs}
+#  end
+
 end

@@ -277,7 +277,7 @@ defmodule SmeeView.ViewCommon do
             ```
 
             """
-            @spec pick(aspects :: map() | list()) :: struct()
+            @spec pick(aspects :: map() | list() | nil) :: struct()
             def pick(aspects, lang \\ Utils.default_lang())
             def pick(prism, lang) when is_map(prism), do: prismify(prism, lang, &pick/2)
             def pick(aspects, lang) do
