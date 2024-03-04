@@ -212,7 +212,7 @@ If you are comfortable working with Python but Smee's Elixir code is unfamiliar 
 
 ## Copyright and License
 
-Copyright (c) 2023 Digital Identity Ltd, UK
+Copyright (c) 2023, 2024 Digital Identity Ltd, UK
 
 SmeeView is Apache 2.0 licensed.
 
