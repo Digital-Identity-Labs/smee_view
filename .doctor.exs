@@ -1,6 +1,6 @@
 %Doctor.Config{
   ignore_modules: [
-    Jason.Encoder
+    Jason.Encoder, SmeeView.Protocols.Aspect, SmeeView.Utils, SmeeView.Aspects.Null
   ],
   ignore_paths: [],
   min_module_doc_coverage: 40,
