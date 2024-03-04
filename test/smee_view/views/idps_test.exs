@@ -23,6 +23,10 @@ defmodule SmeeViewIdPsTest do
       assert %ThisAspect{attributes: []} = ThisView.view_one(@proxy_entity)
     end
 
+    test "return the errorURL for the role" do
+      assert %ThisAspect{error_url: nil} = ThisView.view_one(@proxy_entity)
+    end
+
   end
 
 

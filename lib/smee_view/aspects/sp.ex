@@ -30,6 +30,7 @@ defmodule SmeeView.Aspects.SP do
                keywords: list(),
                keys: list(),
                services: list(),
+               error_url: nil | binary()
              }
 
   @derive Jason.Encoder
@@ -41,7 +42,8 @@ defmodule SmeeView.Aspects.SP do
     displaynames: [],
     keywords: [],
     keys: [],
-    services: []
+    services: [],
+    error_url: nil
   ]
 
   use SmeeView.Aspects.AspectCommon

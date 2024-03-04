@@ -21,6 +21,7 @@ defmodule SmeeView.IdPs do
   @entity_xmap [
     ~x"//md:IDPSSODescriptor"l,
     want_authn_requests_signed: ~x"string(@WantAuthnRequestsSigned)"s,
+    error_url: ~x"string(@errorURL)"s,
   ]
 
   defp entity_xmap do

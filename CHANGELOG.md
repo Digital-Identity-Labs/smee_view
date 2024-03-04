@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### New Features
 - Entity Aspects now contain the extra data from Smee Entities, not just XML-derived data, so tags, download times, etc
   can be accessed all from the same aspect struct. 
+- The errorURL of roles is now included in role aspects
 
 ### Improvements
 - Now uses the improved XML processing in Smee v0.4.0, doubling the speed

@@ -22,6 +22,7 @@ defmodule SmeeView.SPs do
     ~x"//md:SPSSODescriptor"l,
     authn_requests_signed: ~x"string(@AuthnRequestsSigned)"s,
     want_assertions_signed: ~x"string(@WantAssertionsSigned)"s,
+    error_url: ~x"string(@errorURL)"s,
   ]
 
   defp entity_xmap do

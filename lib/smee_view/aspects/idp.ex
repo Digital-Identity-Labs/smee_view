@@ -34,6 +34,7 @@ defmodule SmeeView.Aspects.IdP do
                nameid_formats: list(),
                services: list(),
                attributes: list(),
+               error_url: nil | binary()
              }
 
   @derive Jason.Encoder
@@ -50,7 +51,8 @@ defmodule SmeeView.Aspects.IdP do
     keys: [],
     nameid_formats: [],
     services: [],
-    attributes: []
+    attributes: [],
+    error_url: nil
   ]
 
   use SmeeView.Aspects.AspectCommon
@@ -266,7 +268,7 @@ defmodule SmeeView.Aspects.IdP do
   #######################################################################################
 
   #@spec is not needed
- defp prepare_data(data) do
+  defp prepare_data(data) do
     Map.merge(
       data,
       %{
