@@ -60,7 +60,7 @@ defmodule SmeeView.Entities do
            trustiness: entity.trustiness,
            tags: entity.tags,
            label: entity.label,
-           id: entity.id
+          # id: entity.id
          }
        )
   end

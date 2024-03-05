@@ -13,7 +13,7 @@ defmodule SmeeView.Aspects.Entity do
   @type t :: %__MODULE__{
                entity_id: binary(),
                entity_id_hash: binary(),
-               id: binary(),
+               id: nil | binary(),
                valid_until: nil | DateTime.t(),
                cache_duration: binary(),
                modified_at: nil | DateTime.t(),
