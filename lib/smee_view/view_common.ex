@@ -732,12 +732,12 @@ defmodule SmeeView.ViewCommon do
         |> Map.new()
       end
 
-      @spec cascade_views(entity :: Entity.t(), data :: map() | keyword(), role :: atom()) :: map() | keyword()
+      @spec cascade_views(entity :: Entity.t(), data :: map(), role :: atom()) :: map()
       defp cascade_views(_entity, data, _role) do
         data
       end
 
-      @spec preprocess(role :: atom(), aspects :: map()) :: {atom(), map()}
+      @spec preprocess(role :: atom(), aspects :: map()) :: {atom(), list()}
       defp preprocess(role, aspects) do
         {role, aspects}
       end
@@ -780,28 +780,26 @@ defmodule SmeeView.ViewCommon do
 
       end
 
-      @spec services(entity :: Smee.Entity.t() | list(), role :: atom(), options :: Keyword.t()) :: list()
-      defp services(entity, role, options \\ [])
-      defp services(entity, :idp, options) do
-        [
-          SmeeView.NameidMappingServices.view(entity, :idp, options),
-          SmeeView.SingleSignonServices.view(entity, :idp, options),
-          SmeeView.AssertionIDRequestServices.view(entity, :idp, options),
-          SmeeView.SingleLogoutServices.view(entity, :idp, options),
-          SmeeView.AttributeServices.view(entity, :idp, options)
-        ]
-        |> List.flatten()
-      end
-
-      defp services(entity, :sp, options) do
-        [
-          SmeeView.ArtifactResolutionServices.view(entity, :sp, options),
-          SmeeView.AttributeConsumingServices.view(entity, :sp, options),
-          SmeeView.AssertionConsumerServices.view(entity, :sp, options),
-          SmeeView.ManageNameidServices.view(entity, :sp, options)
-        ]
-        |> List.flatten()
-      end
+#      @spec services(entity :: Smee.Entity.t() | list(), role :: atom(), options :: Keyword.t()) :: list()
+#      defp services(entity, role, options \\ []) do
+#        case role do
+#          :idp -> [
+#                    SmeeView.NameidMappingServices.view(entity, :idp, options),
+#                    SmeeView.SingleSignonServices.view(entity, :idp, options),
+#                    SmeeView.AssertionIDRequestServices.view(entity, :idp, options),
+#                    SmeeView.SingleLogoutServices.view(entity, :idp, options),
+#                    SmeeView.AttributeServices.view(entity, :idp, options)
+#                  ]
+#          :sp -> [
+#                   SmeeView.ArtifactResolutionServices.view(entity, :sp, options),
+#                   SmeeView.AttributeConsumingServices.view(entity, :sp, options),
+#                   SmeeView.AssertionConsumerServices.view(entity, :sp, options),
+#                   SmeeView.ManageNameidServices.view(entity, :sp, options)
+#                 ]
+#          _ -> []
+#        end
+#        |> List.flatten()
+#      end
 
       @spec idp_xmap() :: keyword()
       defp idp_xmap do

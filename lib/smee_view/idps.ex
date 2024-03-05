@@ -44,10 +44,22 @@ defmodule SmeeView.IdPs do
         keys: SmeeView.Keys.view(entity, :idp),
         nameid_formats: SmeeView.NameIDFormats.view(entity, :idp),
         protocols: SmeeView.Protocols.view(entity, :idp),
-        services:  services(entity, :idp),
-        attributes:  SmeeView.Attributes.view(entity, :idp),
+        services: services(entity, :idp),
+        attributes: SmeeView.Attributes.view(entity, :idp),
       }
     )
+  end
+
+  @spec services(entity :: Smee.Entity.t() | list(), role :: atom(), options :: Keyword.t()) :: list()
+  defp services(entity, _role, options \\ []) do
+    [
+      SmeeView.NameidMappingServices.view(entity, :idp, options),
+      SmeeView.SingleSignonServices.view(entity, :idp, options),
+      SmeeView.AssertionIDRequestServices.view(entity, :idp, options),
+      SmeeView.SingleLogoutServices.view(entity, :idp, options),
+      SmeeView.AttributeServices.view(entity, :idp, options)
+    ]
+    |> List.flatten()
   end
 
 end

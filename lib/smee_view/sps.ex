@@ -47,4 +47,15 @@ defmodule SmeeView.SPs do
     )
   end
 
+  @spec services(entity :: Smee.Entity.t() | list(), role :: atom(), options :: Keyword.t()) :: list()
+  defp services(entity, _role, options \\ []) do
+    [
+      SmeeView.ArtifactResolutionServices.view(entity, :sp, options),
+      SmeeView.AttributeConsumingServices.view(entity, :sp, options),
+      SmeeView.AssertionConsumerServices.view(entity, :sp, options),
+      SmeeView.ManageNameidServices.view(entity, :sp, options)
+    ]
+    |> List.flatten()
+  end
+
 end
