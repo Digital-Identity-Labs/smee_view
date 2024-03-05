@@ -28,8 +28,7 @@ SmeeView is *loosely* based on the concept of functional data access "lenses".
 ### Views
 
 View modules take metadata, or information extracted from metadata, and return a specific type of record from it, known
-as an
-aspect. They also allow further filtering and processing of lists of aspects.
+as an aspect. They also allow further filtering and processing of lists of aspects.
 
 For instance `SmeeView.Logos` can extract all logo information from an entity's metadata and filter them so that only
 IdP logos of a particular shape are returned. `SmeeView.Contacts` provides tools for extracting and filtering
