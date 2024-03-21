@@ -313,6 +313,10 @@ defmodule SmeeView.Aspects.Key do
     |> String.replace(~r/\s+/, "")
   end
 
+  defp unflatten_pem(nil) do
+    ""
+  end
+
   defp unflatten_pem(pem_text) do
     pem_text
     |> String.replace(~r/\s+/, "")
