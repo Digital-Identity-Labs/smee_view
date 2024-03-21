@@ -22,16 +22,16 @@ defmodule SmeeView.Logos do
   @idp_xmap [
     ~x"//md:IDPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,
     url: ~x"./text()"s,
-    height: ~x"string(/*/@height)"i,
-    width: ~x"string(/*/@width)"i,
+    height: ~x"string(/*/@height)"s,
+    width: ~x"string(/*/@width)"s,
     lang: ~x"@xml:lang"s
   ]
 
   @sp_xmap [
     ~x"//md:SPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo"el,
     url: ~x"./text()"s,
-    height: ~x"string(/*/@height)"i,
-    width: ~x"string(/*/@width)"i,
+    height: ~x"string(/*/@height)"s,
+    width: ~x"string(/*/@width)"s,
     lang: ~x"@xml:lang"s
   ]
 
