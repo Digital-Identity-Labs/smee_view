@@ -4,7 +4,7 @@ defmodule SmeeView.MixProject do
   def project do
     [
       app: :smee_view,
-      version: "0.2.0",
+      version: "0.2.1",
       elixir: "~> 1.14",
       description: "SAML metadata parsing extension for Smee",
       package: package(),
