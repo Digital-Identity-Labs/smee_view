@@ -48,23 +48,28 @@ defmodule SmeeView.ViewCommon do
       @spec view(list :: Entity.t() | Metadata.t() | list(), role :: atom(), options :: keyword()) :: list()
       def view(list, role \\ :all, options \\ [])
       def view(%Entity{} = entity, role, options) do
-        entity
-        |> Entity.xdoc()
-        |> Utils.extract_data_from_xml(xmapper_for_role(role))
-        |> Enum.map(fn {role, aspects} -> preprocess(role, aspects) end)
-        |> Enum.map(
-             fn {role, aspects} ->
-               Enum.map(
-                 aspects,
-                 fn aspect_data ->
-                   cascade_views(entity, aspect_data, role)
-                   |> trim_aspect_data()
-                   |> to_aspect(role)
-                 end
-               )
-             end
-           )
-        |> List.flatten()
+        try do
+          entity
+          |> Entity.xdoc()
+          |> Utils.extract_data_from_xml(xmapper_for_role(role))
+          |> Enum.map(fn {role, aspects} -> preprocess(role, aspects) end)
+          |> Enum.map(
+               fn {role, aspects} ->
+                 Enum.map(
+                   aspects,
+                   fn aspect_data ->
+                     cascade_views(entity, aspect_data, role)
+                     |> trim_aspect_data()
+                     |> to_aspect(role)
+                   end
+                 )
+               end
+             )
+          |> List.flatten()
+        rescue
+          oops -> IO.warn(oops.message)
+            raise "Failed to extract data from #{entity}"
+        end
       end
 
       def view(%Metadata{} = metadata, role, options) do
@@ -780,26 +785,26 @@ defmodule SmeeView.ViewCommon do
 
       end
 
-#      @spec services(entity :: Smee.Entity.t() | list(), role :: atom(), options :: Keyword.t()) :: list()
-#      defp services(entity, role, options \\ []) do
-#        case role do
-#          :idp -> [
-#                    SmeeView.NameidMappingServices.view(entity, :idp, options),
-#                    SmeeView.SingleSignonServices.view(entity, :idp, options),
-#                    SmeeView.AssertionIDRequestServices.view(entity, :idp, options),
-#                    SmeeView.SingleLogoutServices.view(entity, :idp, options),
-#                    SmeeView.AttributeServices.view(entity, :idp, options)
-#                  ]
-#          :sp -> [
-#                   SmeeView.ArtifactResolutionServices.view(entity, :sp, options),
-#                   SmeeView.AttributeConsumingServices.view(entity, :sp, options),
-#                   SmeeView.AssertionConsumerServices.view(entity, :sp, options),
-#                   SmeeView.ManageNameidServices.view(entity, :sp, options)
-#                 ]
-#          _ -> []
-#        end
-#        |> List.flatten()
-#      end
+      #      @spec services(entity :: Smee.Entity.t() | list(), role :: atom(), options :: Keyword.t()) :: list()
+      #      defp services(entity, role, options \\ []) do
+      #        case role do
+      #          :idp -> [
+      #                    SmeeView.NameidMappingServices.view(entity, :idp, options),
+      #                    SmeeView.SingleSignonServices.view(entity, :idp, options),
+      #                    SmeeView.AssertionIDRequestServices.view(entity, :idp, options),
+      #                    SmeeView.SingleLogoutServices.view(entity, :idp, options),
+      #                    SmeeView.AttributeServices.view(entity, :idp, options)
+      #                  ]
+      #          :sp -> [
+      #                   SmeeView.ArtifactResolutionServices.view(entity, :sp, options),
+      #                   SmeeView.AttributeConsumingServices.view(entity, :sp, options),
+      #                   SmeeView.AssertionConsumerServices.view(entity, :sp, options),
+      #                   SmeeView.ManageNameidServices.view(entity, :sp, options)
+      #                 ]
+      #          _ -> []
+      #        end
+      #        |> List.flatten()
+      #      end
 
       @spec idp_xmap() :: keyword()
       defp idp_xmap do
